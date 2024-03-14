@@ -1,7 +1,7 @@
 // import { findAllUser } from "../model/users";
 
 const { GraphQLError } = require("graphql");
-const { findAllUser, addUser, getCollection } = require("../models/users");
+const { findAllUser, addUser, getCollection, getOneUserById } = require("../models/users");
 const { generateToken } = require("../utils/jwt");
 const { comparePassword } = require("../utils/bcrypt");
 // const { comparePassword } = require("../bcrypt");
@@ -17,6 +17,8 @@ type User {
     password: String
     role: String
     status: String!
+    coachId: ID
+    Coach: Coach
 
 }
 
@@ -34,7 +36,7 @@ type LoginOutput {
 
 type Query {
   getAllUsers: [User]
-
+  getUserById(userId: ID!):User
 }
 
 type Mutation {
@@ -52,6 +54,12 @@ const resolvers = {
 
       return users;
     },
+
+    getUserById: async (_parents, args) => {
+      const users = await getOneUserById(args.userId)
+
+      return users
+    }
   },
 
   Mutation: {

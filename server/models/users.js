@@ -62,6 +62,13 @@ const getOneUserById = async (userId) => {
       $match: {
         _id: new ObjectId(userId)
       }
+    },{
+      $lookup: {
+        from: "Coachs",
+        localField: "coachId",
+        foreignField: "_id",
+        as: "Coach",
+    }
     }
   ]
 
@@ -69,5 +76,6 @@ const getOneUserById = async (userId) => {
 
   return users[0]
 }
+
 
 module.exports = { findAllUser, addUser, getCollection, searchUserByName , getOneUserById};

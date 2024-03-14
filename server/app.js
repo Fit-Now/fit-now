@@ -3,12 +3,13 @@ const { startStandaloneServer } = require("@apollo/server/standalone");
 const { mongoConnect } = require("./config/mongoConnection");
 const { userTypeDefs, userResolvers } = require("./schemas/users");
 const authentication = require("./utils/auth");
+const { coachTypeDefs, coachResolvers } = require("./schemas/coachs");
 
 const PORT = 3000;
 
 const server = new ApolloServer({
-  typeDefs: [userTypeDefs],
-  resolvers: [userResolvers],
+  typeDefs: [userTypeDefs, coachTypeDefs],
+  resolvers: [userResolvers, coachResolvers],
   introspection: true,
 });
 
