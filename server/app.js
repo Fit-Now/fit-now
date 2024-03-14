@@ -2,6 +2,7 @@ const { ApolloServer } = require("@apollo/server");
 const { startStandaloneServer } = require("@apollo/server/standalone");
 const { mongoConnect } = require("./config/mongoConnection");
 const { userTypeDefs, userResolvers } = require("./schemas/users");
+const authentication = require("./utils/auth");
 
 const PORT = 3000;
 
@@ -19,11 +20,11 @@ const server = new ApolloServer({
         port: PORT,
       },
       context: async ({ req, res }) => {
-        //   return
-        console.log("ini kata-kata");
-        // auth: async () => {
-        //   return await authentication(req);
-        // },
+        return {
+          auth: async () => {
+            return await authentication(req);
+          },
+        };
       },
     });
 

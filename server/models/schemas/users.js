@@ -2,10 +2,8 @@
 
 const { GraphQLError } = require("graphql");
 const { findAllUser, addUser, getCollection } = require("../models/users");
-const { generateToken } = require("../utils/jwt");
-const { comparePassword } = require("../utils/bcrypt");
-// const { comparePassword } = require("../bcrypt");
-// const { verifyToken } = require("../jwt");
+const { comparePassword } = require("../bcrypt");
+const { verifyToken } = require("../jwt");
 
 const typeDefs = `#graphql
 
@@ -160,7 +158,7 @@ const resolvers = {
         email: users.email,
       };
 
-      const token = generateToken(payload);
+      const token = verifyToken(payload);
 
       return { token };
     },
