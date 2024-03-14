@@ -1,3 +1,4 @@
+const { findALlCategories } = require("../models/categories");
 
 
 const typeDefs = `#graphql
@@ -8,6 +9,23 @@ type Category {
     
 }
 
-
+type Query {
+    getAllCategory: [Category]
+}
 
 `;
+
+const resolvers ={
+    Query: {
+        getAllCategory: async () => {
+            const categories = await findALlCategories()
+            console.log(categories, "ini categories");
+            return categories
+        }
+    }
+}
+
+module.exports ={
+    CategoriesTypeDefs: typeDefs,
+    categoriesResolvers: resolvers
+}

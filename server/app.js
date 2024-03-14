@@ -4,12 +4,13 @@ const { mongoConnect } = require("./config/mongoConnection");
 const { userTypeDefs, userResolvers } = require("./schemas/users");
 const authentication = require("./utils/auth");
 const { coachTypeDefs, coachResolvers } = require("./schemas/coachs");
+const { CategoriesTypeDefs, categoriesResolvers } = require("./schemas/categories");
 
 const PORT = 3000;
 
 const server = new ApolloServer({
-  typeDefs: [userTypeDefs, coachTypeDefs],
-  resolvers: [userResolvers, coachResolvers],
+  typeDefs: [userTypeDefs, coachTypeDefs, CategoriesTypeDefs],
+  resolvers: [userResolvers, coachResolvers, categoriesResolvers],
   introspection: true,
 });
 

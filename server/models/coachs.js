@@ -1,3 +1,4 @@
+const { ObjectId } = require("bson");
 const { getDatabase } = require("../config/mongoConnection");
 
 const getCoachsCollection = () => {
@@ -24,4 +25,14 @@ const findAllCoachs = async () => {
   return coachs;
 };
 
-module.exports = {getCoachsCollection, findAllCoachs}
+const AddNewCoachs = async (payload) => {
+  const coachCollection = await getCoachsCollection();
+  const newCoach = await coachCollection.insertOne(payload);
+
+  const coachs = await coachCollection.findOne({
+    _id: new ObjectId(newCoach.insertedId),
+  });
+  return coachs;
+};
+
+module.exports = { getCoachsCollection, findAllCoachs, AddNewCoachs };

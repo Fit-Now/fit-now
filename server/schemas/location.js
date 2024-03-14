@@ -5,7 +5,7 @@ type Location {
     name: String
     coach: [Coach]
     categoryId: ID
-
+    Category: Category
     
 }
 
