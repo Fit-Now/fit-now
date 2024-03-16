@@ -13,8 +13,8 @@ const findAllCoachs = async () => {
     {
       $lookup: {
         from: "Users",
-        localField: "_id",
-        foreignField: "coachId",
+        localField: "UserId",
+        foreignField: "_id",
         as: "Users",
       },
     },

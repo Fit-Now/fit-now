@@ -3,10 +3,9 @@ const { findALlCategories } = require("../models/categories");
 
 const typeDefs = `#graphql
 
-type Category {
+type Category {  
     _id : ID
     name: String
-    
 }
 
 type Query {
@@ -19,7 +18,7 @@ const resolvers ={
     Query: {
         getAllCategory: async () => {
             const categories = await findALlCategories()
-            console.log(categories, "ini categories");
+            // console.log(categories, "ini categories");
             return categories
         }
     }

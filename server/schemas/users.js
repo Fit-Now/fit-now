@@ -17,8 +17,8 @@ type User {
     password: String
     role: String
     status: String!
-    coachId: ID
-    Coach: Coach
+    CoachId: ID
+    Coach: [Coach]
 
 }
 

@@ -6,6 +6,7 @@ type Coach {
     _id : ID
     name: String
     sport: String
+    UserId: ID
     Users: [User]
     locationId: ID
 }
