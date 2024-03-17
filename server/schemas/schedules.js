@@ -7,6 +7,5 @@ type Schedule {
     name: String
     range: Number
     decription: String
-    CoachId: [Coach]
 }
 `

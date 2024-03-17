@@ -13,9 +13,9 @@ const findAllCoachs = async () => {
     {
       $lookup: {
         from: "Users",
-        localField: "UserId",
-        foreignField: "_id",
-        as: "Users",
+        localField: "_id",
+        foreignField: "CoachId",
+        as: "Users"
       },
     },
   ];
@@ -26,13 +26,18 @@ const findAllCoachs = async () => {
 };
 
 const AddNewCoachs = async (payload) => {
+
   const coachCollection = await getCoachsCollection();
   const newCoach = await coachCollection.insertOne(payload);
+  
 
   const coachs = await coachCollection.findOne({
     _id: new ObjectId(newCoach.insertedId),
   });
   return coachs;
 };
+
+
+
 
 module.exports = { getCoachsCollection, findAllCoachs, AddNewCoachs };

@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const { findAllCoachs, AddNewCoachs } = require("../models/coachs");
 
 const typeDefs = `#graphql
@@ -6,14 +7,16 @@ type Coach {
     _id : ID
     name: String
     sport: String
-    UserId: ID
     Users: [User]
     locationId: ID
+    email: String
 }
 
 input AddNewCoach {
     name: String
     sport: String
+    email: String
+    locationId: ID
 }
 
 type Query {
@@ -38,6 +41,8 @@ const resolvers = {
   Mutation: {
     AddCoachs: async (_parents, args, contextValue) => {
       const { payload } = args;
+
+      payload.locationId = new ObjectId(payload.locationId)
 
       const posts = await AddNewCoachs(payload);
       return posts;

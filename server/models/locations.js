@@ -12,25 +12,20 @@ const findAllLocations = async () => {
     {
       $lookup: {
         from: "Coachs",
-        localField: "Coach",
-        foreignField: "_id",
+        localField: "_id",
+        foreignField: "locationId",
         as: "Coach",
       },
     },
-    {
-      $lookup: {
-        from: "Categories",
-        localField: "categoryId",
-        foreignField: "_id",
-        as: "CategoryId",
-      },
-    },
+  
   ];
 
   const locations = await getLocationCollection().aggregate(agg).toArray();
 
   return locations;
 };
+
+
 
 module.exports = {
   getLocationCollection,

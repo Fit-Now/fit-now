@@ -13,4 +13,6 @@ type UserSchedule {
     LocationId: ID
     CategoryId: ID
 }
+
+
 `

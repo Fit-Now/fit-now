@@ -1,7 +1,14 @@
 // import { findAllUser } from "../model/users";
 
 const { GraphQLError } = require("graphql");
-const { findAllUser, addUser, getCollection, getOneUserById } = require("../models/users");
+const {
+  findAllUser,
+  addUser,
+  getCollection,
+  getOneUserById,
+  addCoach,
+  findAllUserCoach,
+} = require("../models/users");
 const { generateToken } = require("../utils/jwt");
 const { comparePassword } = require("../utils/bcrypt");
 // const { comparePassword } = require("../bcrypt");
@@ -17,9 +24,18 @@ type User {
     password: String
     role: String
     status: String!
-    CoachId: ID
     Coach: [Coach]
+}
 
+type UserCoach {
+    _id : ID
+    name: String!
+    imageUrl: String
+    email: String!
+    password: String
+    role: String
+    status: String!
+    Description: Coach
 }
 
 input RegisterInput {
@@ -37,10 +53,12 @@ type LoginOutput {
 type Query {
   getAllUsers: [User]
   getUserById(userId: ID!):User
+  getAllUserCoach: [UserCoach]
 }
 
 type Mutation {
   Register(payload: RegisterInput ): User
+  RegisterCoach(payload: RegisterInput ): UserCoach
   Login(email: String!, password: String!): LoginOutput
 }
 
@@ -56,9 +74,15 @@ const resolvers = {
     },
 
     getUserById: async (_parents, args) => {
-      const users = await getOneUserById(args.userId)
+      const users = await getOneUserById(args.userId);
 
-      return users
+      return users;
+    },
+
+    getAllUserCoach: async () => {
+      const userCoach = await findAllUserCoach()
+
+      return userCoach
     }
   },
 
@@ -134,6 +158,81 @@ const resolvers = {
       }
 
       const newUser = await addUser(payload);
+
+      return newUser;
+    },
+
+    RegisterCoach: async (_parents, args) => {
+      const { payload } = args;
+      const { name, email, password, status, imageUrl } = payload;
+
+      if (!name) {
+        throw new GraphQLError("Name is required", {
+          extensions: {
+            code: "Bad Request",
+            http: { status: 400 },
+          },
+        });
+      }
+
+      if (!email) {
+        throw new GraphQLError("Email is required", {
+          extensions: {
+            code: "Bad Request",
+            http: { status: 400 },
+          },
+        });
+      }
+
+      const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/.test(
+        email
+      );
+
+      if (regex === false) {
+        throw new GraphQLError("Email address is not valid", {
+          extensions: {
+            code: "Bad Request",
+            http: { status: 400 },
+          },
+        });
+      }
+
+      if (!password) {
+        throw new GraphQLError("Password is required", {
+          extensions: {
+            code: "Bad Request",
+            http: { status: 400 },
+          },
+        });
+      } else if (password.length < 5) {
+        throw new GraphQLError("Password must contanit at least 5 character", {
+          extensions: {
+            code: "Bad Request",
+            http: { status: 400 },
+          },
+        });
+      }
+
+      const duplicateMail = await getCollection().findOne({ email });
+      if (duplicateMail) {
+        throw new GraphQLError("Email has been taken", {
+          extensions: {
+            code: "Bad Request",
+            http: { status: 400 },
+          },
+        });
+      }
+
+      if (!status) {
+        throw new GraphQLError("Password is required", {
+          extensions: {
+            code: "Bad Request",
+            http: { status: 400 },
+          },
+        });
+      }
+
+      const newUser = await addCoach(payload);
 
       return newUser;
     },
