@@ -1,4 +1,4 @@
-const { findAllSchedules } = require("../models/UserScheduled")
+const {  findUserScheduleById, findAllUserSchedules } = require("../models/UserScheduled")
 
 
 const typeDefs = `#graphql
@@ -26,10 +26,14 @@ type Query {
 const resolvers = {
     Query: {
         getAllUserSchedule: async () => {
-            const schedules = await findAllSchedules()
+            const schedules = await findAllUserSchedules()
             return schedules
         },
-        
+        getUserScheduleById: async (_parents, args) => {
+            const schedules = await findUserScheduleById(args.userScheduleId)
+
+            return schedules
+        }
     }
 }
 
