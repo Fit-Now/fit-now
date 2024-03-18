@@ -1,4 +1,4 @@
-const { findAllSchedules } = require("../models/schedules")
+const { findAllSchedules, AddSchedules } = require("../models/schedules")
 
 
 const typeDefs = `#graphql
@@ -6,10 +6,9 @@ const typeDefs = `#graphql
 type Schedule {
     _id: ID
     name: String
-    range: String
+    duration: String
     decription: String
-    startDate: String
-    endDate: String
+    Coachs: [Coach]
 }
 
 type Query {
@@ -18,7 +17,7 @@ type Query {
 
 input ScheduleInput {
     name: String
-    range: String
+    duration: String
 }
 
 type Mutation {
@@ -33,6 +32,15 @@ const resolvers = {
             const schedules = await findAllSchedules()
 
             return schedules
+        }
+    },
+    Mutation: {
+        AddSchedules: async (_parents, args) => {
+            const {payload} = args
+
+            const newSchedule = await AddSchedules(payload)
+
+            return newSchedule
         }
     }
 }

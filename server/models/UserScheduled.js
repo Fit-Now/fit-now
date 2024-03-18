@@ -36,6 +36,18 @@ const findUserScheduleById = async (userScheduleId) => {
   return schedules[0];
 };
 
+const AddUserSchedule = async (payload) => {
+  payload.startDate = new Date()
+
+  if(payload.schedules.duration === "30 days"){
+    payload.endDate = payload.startDate.setDate(payload.startDate.getDate() + 1)
+
+    
+  }
+  // payload.endDate = new Date ().add
+
+}
+
 module.exports = {
   getUserScheduleCollection,
   findAllUserSchedules,

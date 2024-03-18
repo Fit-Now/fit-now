@@ -1,20 +1,41 @@
-const { getDatabase } = require("../config/mongoConnection")
-
+const { getDatabase } = require("../config/mongoConnection");
 
 const getScheduleCollection = () => {
-    const db = getDatabase()
-    const schedulesCollection = db.collection("Schedules")
+  const db = getDatabase();
+  const schedulesCollection = db.collection("Schedules");
 
-    return schedulesCollection
-}
+  return schedulesCollection;
+};
 
 const findAllSchedules = async () => {
-    const schedules  = await getScheduleCollection().find().toArray()
+  const agg = [
+    {
+      $lookup: {
+        from: "Coachs",
+        localField: "name",
+        foreignField: "sport",
+        as: "Coachs",
+      },
+    },
+  ];
 
-    return schedules
-}
+  const schedules = await getScheduleCollection().aggregate(agg).toArray();
+
+  return schedules
+};
+
+const AddSchedules = async (payload) => {
+  const scheduleColletion = await getScheduleCollection();
+  const newSchedule = await scheduleColletion.insertOne(payload);
+  const schedules = await scheduleColletion.findOne({
+    _id: newSchedule.insertedId,
+  });
+
+  return schedules;
+};
 
 module.exports = {
-    getScheduleCollection,
-    findAllSchedules
-}
+  getScheduleCollection,
+  findAllSchedules,
+  AddSchedules,
+};

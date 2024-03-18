@@ -23,7 +23,6 @@ type User {
     email: String!
     password: String
     role: String
-    status: String!
     Coach: [Coach]
 }
 
@@ -34,7 +33,6 @@ type UserCoach {
     email: String!
     password: String
     role: String
-    status: String!
     Description: Coach
 }
 
@@ -42,7 +40,6 @@ input RegisterInput {
   name: String!
   email: String!
   password: String!
-  status: String!
   imageUrl: String
 }
 
@@ -80,16 +77,16 @@ const resolvers = {
     },
 
     getAllUserCoach: async () => {
-      const userCoach = await findAllUserCoach()
+      const userCoach = await findAllUserCoach();
 
-      return userCoach
-    }
+      return userCoach;
+    },
   },
 
   Mutation: {
     Register: async (_parents, args) => {
       const { payload } = args;
-      const { name, email, password, status, imageUrl } = payload;
+      const { name, email, password, imageUrl } = payload;
 
       if (!name) {
         throw new GraphQLError("Name is required", {
@@ -141,15 +138,6 @@ const resolvers = {
       const duplicateMail = await getCollection().findOne({ email });
       if (duplicateMail) {
         throw new GraphQLError("Email has been taken", {
-          extensions: {
-            code: "Bad Request",
-            http: { status: 400 },
-          },
-        });
-      }
-
-      if (!status) {
-        throw new GraphQLError("Password is required", {
           extensions: {
             code: "Bad Request",
             http: { status: 400 },
@@ -164,7 +152,7 @@ const resolvers = {
 
     RegisterCoach: async (_parents, args) => {
       const { payload } = args;
-      const { name, email, password, status, imageUrl } = payload;
+      const { name, email, password, imageUrl } = payload;
 
       if (!name) {
         throw new GraphQLError("Name is required", {
@@ -222,16 +210,6 @@ const resolvers = {
           },
         });
       }
-
-      if (!status) {
-        throw new GraphQLError("Password is required", {
-          extensions: {
-            code: "Bad Request",
-            http: { status: 400 },
-          },
-        });
-      }
-
       const newUser = await addCoach(payload);
 
       return newUser;
