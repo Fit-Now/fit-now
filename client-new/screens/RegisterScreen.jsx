@@ -8,7 +8,6 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-import CobaRadioButton from "../components/CobaRadioButton";
 import { useState } from "react";
 import ModalAvatar from "../components/ModalAvatar";
 import { useMutation } from "@apollo/client";
