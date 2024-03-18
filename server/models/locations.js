@@ -30,9 +30,7 @@ const findAllLocations = async () => {
 
   const locations = await getLocationCollection().aggregate(agg).toArray();
 
-  console.log(locations, "ini locations");
-
-  return locations
+  return locations;
 };
 
 const addLocation = async (payload) => {

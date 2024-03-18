@@ -6,7 +6,7 @@ const typeDefs = `#graphql
 type Schedule {
     _id: ID
     name: String
-    duration: String
+    duration: Int
     decription: String
     Coachs: [Coach]
     CategoryId:  ID
@@ -18,7 +18,7 @@ type Query {
 
 input ScheduleInput {
     name: String
-    duration: String
+    duration: Int
 }
 
 type Mutation {

@@ -36,20 +36,39 @@ const findUserScheduleById = async (userScheduleId) => {
   return schedules[0];
 };
 
-const AddUserSchedule = async (payload) => {
-  payload.startDate = new Date()
-
-  if(payload.schedules.duration === "30 days"){
-    payload.endDate = payload.startDate.setDate(payload.startDate.getDate() + 1)
-
-    
-  }
-  // payload.endDate = new Date ().add
-
+function settingEndDate(n) {
+  let endDate = new Date();
+  let endDateWeek = endDate.getDate() + n;
+  return new Date(endDate.setDate(endDateWeek));
 }
+
+const AddUserSchedule = async (payload) => {
+  payload.startDate = new Date();
+  
+  if (payload.schedules.duration = 7) {
+    payload.endDate = settingEndDate(7);
+  } else if (payload.schedules.duration = 14) {
+    payload.endDate = settingEndDate(14);
+  } else if (payload.schedules.duration = 21) {
+    payload.endDate = settingEndDate(21);
+  }
+  console.log(payload, "ini payload");
+  
+  const userScheduleCollection = await getUserScheduleCollection();
+  const newUserSchedules = await userScheduleCollection.insertOne(payload);
+
+  const UserSchedule = await userScheduleCollection.findOne({
+    _id: newUserSchedules.insertedId,
+  });
+
+  console.log(UserSchedule, "ini userschedule");
+
+  return UserSchedule;
+};
 
 module.exports = {
   getUserScheduleCollection,
   findAllUserSchedules,
   findUserScheduleById,
+  AddUserSchedule
 };
