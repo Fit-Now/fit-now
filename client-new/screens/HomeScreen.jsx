@@ -14,8 +14,8 @@ import ModalCategory from "../components/ModalCategory";
 import { NavigationProp } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("screen");
-const HomeScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
-  const [showModal, setShowModal] = useState<boolean>(false);
+const HomeScreen = ({ navigation }) => {
+  const [showModal, setShowModal] = useState(false);
 
   const handleShowModal = () => {
     setShowModal(!showModal);

@@ -18,7 +18,7 @@ export default function MainTab() {
           shadowOpacity: 0.09,
         },
         tabBarIcon: ({ focused, color, size }) => {
-          let iconName: any = "";
+          let iconName = "";
 
           if (route.name === "Home") {
             iconName = focused ? "home" : "home-outline";

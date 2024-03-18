@@ -20,6 +20,7 @@ const HomeStack = () => {
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
+        options={{ title: "Home" }}
         // options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -32,6 +33,7 @@ const HomeStack = () => {
         component={SummarizeScreen}
         // options={{ headerShown: false }}
       />
+      <Stack.Screen name="Chat" component={ChatRoomScreen} />
     </Stack.Navigator>
   );
 };

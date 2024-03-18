@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { NavigationProp } from "@react-navigation/native";
 
-const LandingPage = ({ navigation }: { navigation: NavigationProp<any> }) => {
+const LandingPage = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
