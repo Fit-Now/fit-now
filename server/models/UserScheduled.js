@@ -43,15 +43,21 @@ function settingEndDate(n) {
 }
 
 const AddUserSchedule = async (payload) => {
+  payload.UserId = new ObjectId(payload.UserId)
+  payload.CoachId = new ObjectId(payload.CoachId)
+  payload.ScheduleId = new ObjectId(payload.ScheduleId)
+  payload.LocationId = new ObjectId(payload.LocationId)
+
   payload.startDate = new Date();
   
-  if (payload.schedules.duration = 7) {
+  if (payload.duration === 7) {
     payload.endDate = settingEndDate(7);
-  } else if (payload.schedules.duration = 14) {
+  } else if (payload.duration === 14) {
     payload.endDate = settingEndDate(14);
-  } else if (payload.schedules.duration = 21) {
+  } else if (payload.duration === 21) {
     payload.endDate = settingEndDate(21);
   }
+  delete payload.duration
   console.log(payload, "ini payload");
   
   const userScheduleCollection = await getUserScheduleCollection();

@@ -23,6 +23,7 @@ input AddUserSchedule {
     CoachId: ID
     ScheduleId: ID
     LocationId: ID
+    duration: Int
 }
 
 
