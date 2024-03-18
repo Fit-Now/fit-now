@@ -1,3 +1,4 @@
+const { findAllSchedules } = require("../models/UserScheduled")
 
 
 const typeDefs = `#graphql
@@ -15,4 +16,24 @@ type UserSchedule {
 }
 
 
+type Query {
+    getAllUserSchedule: [UserSchedule]
+    getUserScheduleById(userScheduleId: ID): UserSchedule
+}
+
 `
+
+const resolvers = {
+    Query: {
+        getAllUserSchedule: async () => {
+            const schedules = await findAllSchedules()
+            return schedules
+        },
+        
+    }
+}
+
+module.exports = {
+    UserSchedulesTypeDefs: typeDefs,
+    UserSchedulesResolvers: resolvers
+}

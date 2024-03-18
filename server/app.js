@@ -6,12 +6,13 @@ const authentication = require("./utils/auth");
 const { coachTypeDefs, coachResolvers } = require("./schemas/coachs");
 const { CategoriesTypeDefs, categoriesResolvers } = require("./schemas/categories");
 const { locationTypeDefs, locationResolvers } = require("./schemas/location");
+const { UserSchedulesTypeDefs, UserSchedulesResolvers } = require("./schemas/UserScheduled");
 
 const PORT = 3000;
 
 const server = new ApolloServer({
-  typeDefs: [userTypeDefs, coachTypeDefs, CategoriesTypeDefs, locationTypeDefs],
-  resolvers: [userResolvers, coachResolvers, categoriesResolvers, locationResolvers],
+  typeDefs: [userTypeDefs, coachTypeDefs, CategoriesTypeDefs, locationTypeDefs, UserSchedulesTypeDefs],
+  resolvers: [userResolvers, coachResolvers, categoriesResolvers, locationResolvers, UserSchedulesResolvers],
   introspection: true,
 });
 
