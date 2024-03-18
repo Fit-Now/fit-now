@@ -9,14 +9,28 @@ type Location {
     CategoryId: ID
     Category: Category
     imageUrl: [Image]
+    longitude: Float
+    latitude: Float
 }
 
 type Image {
     imgurl : String
 }
 
+input AddNewLocation{
+  name: String
+  CategoryId: ID
+  imageUrl: String
+  longitude: Float
+  latitude: Float
+}
+
 type Query {
     getAllLocation: [Location]
+}
+
+type Mutation {
+  addLocation(payload: AddNewLocation): Location
 }
 
 
@@ -30,6 +44,11 @@ const resolvers = {
       return locations;
     },
   },
+  Mutation: {
+    addLocation: async (_parents, args) => {
+      
+    }
+  }
 };
 
 module.exports = {

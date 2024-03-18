@@ -9,6 +9,7 @@ type Schedule {
     duration: String
     decription: String
     Coachs: [Coach]
+    CategoryId:  ID
 }
 
 type Query {

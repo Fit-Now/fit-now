@@ -25,9 +25,23 @@ const findAllLocations = async () => {
   return locations;
 };
 
+const addLocation = async (payload) => {
+  const locationCollection = await getLocationCollection()
+  const newLocation = await locationCollection.insertOne(payload)
+
+  const locations = await locationCollection.findOne(
+    {
+      _id: newLocation.insertedId
+    }
+  )
+
+  return locations
+}
+
 
 
 module.exports = {
   getLocationCollection,
   findAllLocations,
+  addLocation
 };

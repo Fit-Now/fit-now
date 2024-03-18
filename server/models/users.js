@@ -59,22 +59,23 @@ const addCoach = async (payload) => {
   return users;
 };
 
-const searchUserByName = async (name) => {
-  let regex = new RegExp(name);
+const searchUserByEmail = async (email) => {
 
+  
   const users = await getCollection()
-    .find(
+    .findOne(
       {
-        name: { $regex: regex },
+        email
       },
       {
         projection: {
           password: 0,
         },
       }
-    )
-    .toArray();
+      )
 
+      console.log(users, "ini users");
+      
   return users;
 };
 
@@ -113,7 +114,7 @@ module.exports = {
   findAllUser,
   addUser,
   getCollection,
-  searchUserByName,
+  searchUserByEmail,
   getOneUserById,
   addCoach,
   findAllUserCoach
