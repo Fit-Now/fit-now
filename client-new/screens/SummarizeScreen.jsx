@@ -7,20 +7,38 @@ import {
   View,
 } from "react-native";
 import summaryAi from "../utils/summaryAi";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ModalAfterSchedule from "../components/ModalAfterSchedule";
+import { LoginContext } from "../contexts/LoginContext";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../connection/fireBaseConfig";
 
 const { width, height } = Dimensions.get("screen");
 const SummarizeScreen = ({ route, navigation }) => {
+  const { user } = useContext(LoginContext);
   const { month, category } = route.params;
   const [summary, setSummary] = useState("");
   const [showModalEnd, setShowModalEnd] = useState(false);
+  const coachId = "65f6ff8fd0549fae23244c2b";
+  const handleJoin = async () => {
+    //check whether the group(chats in firestore) exists, if not create
+    const combinedId = user + coachId
+    try {
+      const res = await getDoc(doc(db, "chats", combinedId));
 
+      if (!res.exists()) {
+        //create a chat in chats collection
+        await setDoc(doc(db, "chats", combinedId), { messages: [] });
+      }
+    } catch (err) {}
+  };
   const handleNavigateToChat = () => {
     console.log("ini handleNavgiation to chat di summarize screen");
+    handleJoin()
     navigation.navigate("Chat");
   };
   const handleNavigateToHome = () => {
+    
     navigation.navigate("HomeScreen");
   };
 

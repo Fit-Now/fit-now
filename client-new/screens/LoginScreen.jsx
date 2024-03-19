@@ -7,6 +7,10 @@ import {
   TouchableOpacity,
   View,
   Dimensions,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { LoginContext } from "../contexts/LoginContext";
 
@@ -23,9 +27,9 @@ const LoginScreen = ({ navigation }) => {
     onCompleted: async (item) => {
       const access_token = item.Login.token;
       await SecureStore.setItemAsync("role", item.Login.role);
-      setRole(item.Login.role) 
+      setRole(item.Login.role);
       await SecureStore.setItemAsync("access_token", access_token);
-      setUser(item.Login.userId)
+      setUser(item.Login.userId);
       await SecureStore.setItemAsync("user_id", item.Login.userId);
       setIsLoggedIn(true);
     },
@@ -45,41 +49,47 @@ const LoginScreen = ({ navigation }) => {
   return (
     <>
       <View style={styles.container}>
-        <View
-          style={{
-            marginTop: 145,
-            marginBottom: 80,
-            alignItems: "center",
-            // backgroundColor: "gray",
-          }}
+        <KeyboardAvoidingView
+          style={styles.keyboardViewContainer}
+          behavior={Platform.OS === "ios" ? "padding" : null}
         >
-          <Text
-            style={{
-              fontSize: 80,
-              fontWeight: "bold",
-              color: "#67C6E3",
-            }}
-          >
-            FitNow
-          </Text>
-        </View>
+          <View>
+            <View
+              style={{
+                marginTop: 145,
+                marginBottom: 80,
+                alignItems: "center",
+                // backgroundColor: "gray",
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 80,
+                  fontWeight: "bold",
+                  color: "#67C6E3",
+                }}
+              >
+                FitNow
+              </Text>
+            </View>
 
-        <View style={{ alignItems: "center" }}>
-          <TextInput
-            onChangeText={setEmail}
-            style={styles.inputLabel}
-            placeholder="Email"
-          />
-          <TextInput
-            onChangeText={setPassword}
-            style={styles.inputLabel}
-            secureTextEntry
-            placeholder="Password"
-          />
-        </View>
+            <View style={{ alignItems: "center" }}>
+              <TextInput
+                onChangeText={setEmail}
+                style={styles.inputLabel}
+                placeholder="Email"
+              />
+              <TextInput
+                onChangeText={setPassword}
+                style={styles.inputLabel}
+                secureTextEntry
+                placeholder="Password"
+              />
+            </View>
+          </View>
+        </KeyboardAvoidingView>
         <TouchableOpacity
-
-          onPress={ async() => await handleLogin()}
+          onPress={async () => await handleLogin()}
           style={{ alignItems: "center" }}
         >
           <View style={styles.buttom}>
@@ -142,4 +152,3 @@ const styles = StyleSheet.create({
     color: "#0765ff",
   },
 });
-
