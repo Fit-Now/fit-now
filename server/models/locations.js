@@ -28,7 +28,7 @@ const findAllLocations = async () => {
     },
     {
       $unwind: {
-        path: "$Categories",
+        path: "$Category",
         preserveNullAndEmptyArrays: true,
       },
     },

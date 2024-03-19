@@ -15,7 +15,7 @@ const findAllCoachs = async () => {
         from: "Users",
         localField: "_id",
         foreignField: "CoachId",
-        as: "Users"
+        as: "Users",
       },
     },
   ];
@@ -26,18 +26,13 @@ const findAllCoachs = async () => {
 };
 
 const AddNewCoachs = async (payload) => {
-
   const coachCollection = await getCoachsCollection();
   const newCoach = await coachCollection.insertOne(payload);
-  
 
   const coachs = await coachCollection.findOne({
     _id: new ObjectId(newCoach.insertedId),
   });
   return coachs;
 };
-
-
-
 
 module.exports = { getCoachsCollection, findAllCoachs, AddNewCoachs };
