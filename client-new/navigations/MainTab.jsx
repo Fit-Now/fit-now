@@ -1,6 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
 import { Ionicons } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
+
 import ProfileScreen from "../screens/ProfileScreen";
 
 import ChatListScreen from "../screens/ChatListScreen";
@@ -30,6 +32,7 @@ export default function MainTab() {
             iconName = focused ? "person" : "person-outline";
           }
           return <Ionicons name={iconName} size={size} color={color} />;
+
         },
         headerShown: false,
       })}

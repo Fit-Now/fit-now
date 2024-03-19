@@ -1,3 +1,6 @@
+
+const { ObjectId } = require("mongodb");
+
 const { getDatabase } = require("../config/mongoConnection");
 
 const getLocationCollection = () => {
@@ -14,10 +17,23 @@ const findAllLocations = async () => {
         from: "Coachs",
         localField: "_id",
         foreignField: "locationId",
-        as: "Coach",
+        as: "Coachs",
       },
     },
-  
+    {
+      '$lookup': {
+        'from': 'Categories', 
+        'localField': 'CategoryId', 
+        'foreignField': '_id', 
+        'as': 'Category'
+      }
+    }, {
+      '$unwind': {
+        'path': '$Category', 
+        'preserveNullAndEmptyArrays': true
+      }
+    }
+
   ];
 
   const locations = await getLocationCollection().aggregate(agg).toArray();
@@ -25,9 +41,23 @@ const findAllLocations = async () => {
   return locations;
 };
 
+const addLocation = async (payload) => {
+  payload.CategoryId = new ObjectId(payload.CategoryId);
+
+  const locationCollection = await getLocationCollection();
+  const newLocation = await locationCollection.insertOne(payload);
+
+  const locations = await locationCollection.findOne({
+    _id: new ObjectId(newLocation.insertedId),
+  });
+
+  return locations[0];
+};
 
 
 module.exports = {
   getLocationCollection,
   findAllLocations,
+  addLocation,
+
 };

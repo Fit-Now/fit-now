@@ -1,3 +1,4 @@
+
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 import { createHttpLink } from "@apollo/client";
@@ -30,3 +31,4 @@ const client = new ApolloClient({
 });
 
 export default client;
+

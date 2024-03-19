@@ -1,4 +1,6 @@
+
 import React, { useContext, useEffect, useState } from "react";
+
 import {
   View,
   Text,
@@ -25,6 +27,7 @@ import { db } from "../connection/fireBaseConfig";
 import { useFocusEffect } from "@react-navigation/native";
 import { LoginContext } from "../contexts/LoginContext";
 import { v4 as uuid } from "uuid";
+
 
 const { height, width } = Dimensions.get("screen");
 // DIBIKIN ANY DULU, NANTI DIGANTI
@@ -132,11 +135,47 @@ export default function ChatRoomScreen({ route }) {
           paddingTop: 5,
         }}
       >
+
         {chats?.map((chat, idx) => (
           <View>
             <Text>{chat.text}</Text>
           </View>
         ))}
+
+//         {chats?.map((el, idx) => {
+//           return idx % 2 != 0 ? (
+//             <View
+//               style={{ alignSelf: "flex-start", paddingHorizontal: 10 }}
+//               key={idx}
+//             >
+//               <Text style={styles.chatName}>Nama</Text>
+//               <Text
+//                 style={{
+//                   ...styles.chatContainer,
+//                   alignSelf: "flex-start",
+//                   borderColor: "green",
+//                 }}
+//               >
+//                 {el}
+//               </Text>
+//             </View>
+//           ) : (
+//             <View style={{ alignSelf: "flex-end", paddingHorizontal: 10 }}>
+//               <Text style={{ ...styles.chatName, alignSelf: "flex-end" }}>
+//                 Nama
+//               </Text>
+//               <Text
+//                 style={{
+//                   ...styles.chatContainer,
+
+//                   borderColor: "blue",
+//                 }}
+//               >
+//                 {el}
+//               </Text>
+//             </View>
+//           );
+//         })}
       </ScrollView>
 
       <View
@@ -175,7 +214,9 @@ export default function ChatRoomScreen({ route }) {
             onChangeText={(v) => setChat(v)}
           />
           <TouchableOpacity
+
             onPress={() => onSendMessage()}
+
             style={{ marginTop: 20, margin: 1 }}
           >
             {/* <Text>O</Text> */}

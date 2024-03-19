@@ -58,6 +58,7 @@ const RegisterScreen = ({ navigation }) => {
   //   // console.log(selectedId, "<< di register");
   // };
   console.log(error);
+
   const handleShowAvatar = () => {
     setShowModalAvatar(!showModalAvatar);
   };
@@ -186,3 +187,4 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+

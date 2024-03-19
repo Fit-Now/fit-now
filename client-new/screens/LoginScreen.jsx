@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from "react-native";
 import { LoginContext } from "../contexts/LoginContext";
+
 import { useMutation } from "@apollo/client";
 import * as SecureStore from "expo-secure-store";
 import { LOGIN } from "../queries";
@@ -77,6 +78,7 @@ const LoginScreen = ({ navigation }) => {
           />
         </View>
         <TouchableOpacity
+
           onPress={ async() => await handleLogin()}
           style={{ alignItems: "center" }}
         >
@@ -140,3 +142,4 @@ const styles = StyleSheet.create({
     color: "#0765ff",
   },
 });
+
