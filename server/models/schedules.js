@@ -12,7 +12,8 @@ const findAllSchedules = async () => {
     {
       $lookup: {
         from: "Coachs",
-        localField: "name",
+        localField: "sport",
+
         foreignField: "sport",
         as: "Coachs",
       },
@@ -21,7 +22,13 @@ const findAllSchedules = async () => {
 
   const schedules = await getScheduleCollection().aggregate(agg).toArray();
 
-  return schedules
+  return schedules;
+};
+
+const findScheduleBySport = async (sport) => {
+  const schedules = await getScheduleCollection().findOne({ sport });
+  return schedules;
+
 };
 
 const AddSchedules = async (payload) => {
@@ -38,4 +45,6 @@ module.exports = {
   getScheduleCollection,
   findAllSchedules,
   AddSchedules,
+  findScheduleBySport,
+
 };

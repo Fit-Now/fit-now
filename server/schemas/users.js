@@ -161,7 +161,6 @@ const resolvers = {
         });
       }
 
-
       const newUser = await addUser(payload);
 
       return newUser;

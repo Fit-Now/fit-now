@@ -60,22 +60,19 @@ const addCoach = async (payload) => {
 };
 
 const searchUserByEmail = async (email) => {
-
-  
-  const users = await getCollection()
-    .findOne(
-      {
-        email
+  const users = await getCollection().findOne(
+    {
+      email,
+    },
+    {
+      projection: {
+        password: 0,
       },
-      {
-        projection: {
-          password: 0,
-        },
-      }
-      )
+    }
+  );
 
-      console.log(users, "ini users");
-      
+  console.log(users, "ini users");
+
 
   return users;
 };
@@ -103,22 +100,22 @@ const getOneUserById = async (userId) => {
 };
 
 const findAllUserCoach = async () => {
+  const users = await getCollection()
+    .find({
+      role: "Coach",
+    })
+    .toArray();
 
-  const users = await getCollection().find({
-    role: "Coach"
-  }).toArray();
-
-  return users
-}
+  return users;
+};
 
 module.exports = {
   findAllUser,
   addUser,
   getCollection,
-
   searchUserByEmail,
 
   getOneUserById,
   addCoach,
-  findAllUserCoach
+  findAllUserCoach,
 };

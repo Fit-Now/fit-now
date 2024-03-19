@@ -1,4 +1,4 @@
-const { findAllSchedules, AddSchedules } = require("../models/schedules")
+const { findAllSchedules, AddSchedules, findScheduleBySport } = require("../models/schedules");
 
 
 
@@ -6,49 +6,59 @@ const typeDefs = `#graphql
 
 type Schedule {
     _id: ID
-    name: String
+    sport: String
     duration: Int
-    decription: String
+    decription: [String]
     Coachs: [Coach]
-    CategoryId:  ID
+    CategoryId: ID
+
 }
 
 type Query {
     getAllSchedules: [Schedule]
+    getScheduleBySport(sport: String): Schedule
 }
 
 input ScheduleInput {
-    name: String
+    sport: String
     duration: Int
+    decription: [String]
 }
 
 type Mutation {
     AddSchedules(payload: ScheduleInput): Schedule
 }
 
-`
+`;
 
 const resolvers = {
-    Query: {
-        getAllSchedules: async () => {
-            const schedules = await findAllSchedules()
+  Query: {
+    getAllSchedules: async () => {
+      const schedules = await findAllSchedules();
 
-            return schedules
-        }
+      return schedules;
     },
-    Mutation: {
-        AddSchedules: async (_parents, args) => {
-            const {payload} = args
+    getScheduleBySport: async (_parents, args) => {
+      const { sport } = args;
+      const schedules = await findScheduleBySport(sport);
 
-            const newSchedule = await AddSchedules(payload)
-
-            return newSchedule
-        }
+      return schedules;
     }
-}
+  },
+  Mutation: {
+    AddSchedules: async (_parents, args, contextValue) => {
+      await contextValue.auth();
+
+      const { payload } = args;
+      const newSchedule = await AddSchedules(payload);
+
+      return newSchedule;
+    },
+  },
+};
 
 module.exports = {
-    SchdulesTypeDefs: typeDefs,
-    SchdulesResolvers: resolvers
-}
+  SchdulesTypeDefs: typeDefs,
+  SchdulesResolvers: resolvers,
+};
 
