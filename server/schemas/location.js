@@ -11,6 +11,7 @@ type Location {
     imageUrl: [String]
     longitude: Float
     latitude: Float
+    address: String
 }
 
 input AddNewLocation{
@@ -19,6 +20,7 @@ input AddNewLocation{
   imageUrl: [String]
   longitude: Float
   latitude: Float
+  address: String
 }
 
 type Query {

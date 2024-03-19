@@ -26,6 +26,12 @@ const findAllLocations = async () => {
         as: "Category",
       },
     },
+    {
+      $unwind: {
+        path: "$Categories",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
   ];
 
   const locations = await getLocationCollection().aggregate(agg).toArray();
