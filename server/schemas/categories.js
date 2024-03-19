@@ -32,6 +32,7 @@ const resolvers = {
   },
   Mutation: {
     AddNewCategory: async (_parents, args) => {
+      const userLogin = await contextValue.auth();
       const { payload } = args;
       const newCategory = await addCategory(payload);
 

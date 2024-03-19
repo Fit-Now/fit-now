@@ -41,6 +41,7 @@ const resolvers = {
   },
   Mutation: {
     AddCoachs: async (_parents, args, contextValue) => {
+      const userLogin = await contextValue.auth();
       const { payload } = args;
 
       payload.locationId = new ObjectId(payload.locationId)

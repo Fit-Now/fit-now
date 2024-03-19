@@ -43,7 +43,6 @@ function settingEndDate(n) {
 }
 
 const AddUserSchedule = async (payload) => {
-  payload.UserId = new ObjectId(payload.UserId)
   payload.CoachId = new ObjectId(payload.CoachId)
   payload.ScheduleId = new ObjectId(payload.ScheduleId)
   payload.LocationId = new ObjectId(payload.LocationId)
@@ -58,7 +57,6 @@ const AddUserSchedule = async (payload) => {
     payload.endDate = settingEndDate(21);
   }
   delete payload.duration
-  console.log(payload, "ini payload");
   
   const userScheduleCollection = await getUserScheduleCollection();
   const newUserSchedules = await userScheduleCollection.insertOne(payload);

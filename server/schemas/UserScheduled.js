@@ -19,7 +19,6 @@ type UserSchedule {
 }
 
 input AddUserSchedule {
-    UserId: ID
     CoachId: ID
     ScheduleId: ID
     LocationId: ID
@@ -51,8 +50,12 @@ const resolvers = {
     },
   },
   Mutation: {
-    AddNewUserSchedule: async (_parents, args) => {
+    AddNewUserSchedule: async (_parents, args, contextValue) => {
+      const {userId} = await contextValue.auth()
       const { payload } = args;
+      
+      payload.UserId = userId
+
       const newUserSchedules = await AddUserSchedule(payload);
 
       return newUserSchedules;

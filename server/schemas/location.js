@@ -43,7 +43,8 @@ const resolvers = {
     },
   },
   Mutation: {
-    addLocation: async (_parents, args) => {
+    addLocation: async (_parents, args, contextValue) => {
+      const userLogin = await contextValue.auth();
       const { payload } = args;
       const locations = await addLocation(payload);
 
