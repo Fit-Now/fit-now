@@ -17,13 +17,16 @@ import React from "react";
 export const LoginContext = createContext();
 export const LoginProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userLoginRole, setUserLoginRole] = useState("trainee");
 
   // const contextValue = {
   //   setIsLoggedIn: setIsLoggedIn,
   //   isLoggedIn: isLoggedIn,
   // };
   return (
-    <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <LoginContext.Provider
+      value={{ isLoggedIn, setIsLoggedIn, userLoginRole, setUserLoginRole }}
+    >
       {children}
     </LoginContext.Provider>
   );

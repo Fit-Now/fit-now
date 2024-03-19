@@ -7,10 +7,14 @@ import MainTab from "../navigations/MainTab";
 import { LoginContext } from "../contexts/LoginContext";
 import { useContext } from "react";
 import ChatRoomScreen from "../screens/ChatRoomScreen";
+import { View, Text, Pressable } from "react-native";
+import { Head } from "@react-navigation/native-stack";
+import RegisterTrainerScreen from "../screens/RegisterTrainerScreen";
+import HomeAdmScreen from "../screens/HomeAdmScreen";
 
 const Stack = createNativeStackNavigator();
 
-const MainStack = () => {
+const MainStack = ({}) => {
   const { isLoggedIn } = useContext(LoginContext);
   return (
     <NavigationContainer>
@@ -22,7 +26,29 @@ const MainStack = () => {
               component={MainTab}
               options={{ headerShown: false }}
             />
-            <Stack.Screen name="ChatRoom" component={ChatRoomScreen} />
+
+            <Stack.Screen
+              name="ChatRoom"
+              component={ChatRoomScreen}
+              // options={{
+              //   headerLeft: ({ props, navigation }) => (
+              //     <HeaderBackButton
+              //       {...props}
+              //       onPress={() => {
+              //         navigation.navigate("Chat");
+              //       }}
+              //     />
+              //   ),
+              // }}
+              options={({ navigation }) => ({
+                headerLeft: () => (
+                  <Pressable onPress={() => navigation.navigate("Chat")}>
+                    <Text style={{ fontSize: 18, color: "blue" }}>Back</Text>
+                  </Pressable>
+                  // <HeaderBackButton />
+                ),
+              })}
+            />
           </>
         ) : (
           <>
@@ -36,7 +62,9 @@ const MainStack = () => {
               component={LoginScreen}
               options={{ headerShown: false }}
             />
-            <Stack.Screen name="Register" component={RegisterScreen} />
+            {/* <Stack.Screen name="Register" component={RegisterScreen} /> */}
+            <Stack.Screen name="Register" component={RegisterTrainerScreen} />
+            <Stack.Screen name="HomeAdm" component={HomeAdmScreen} />
           </>
         )}
       </Stack.Navigator>

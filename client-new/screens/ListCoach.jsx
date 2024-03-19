@@ -1,47 +1,44 @@
 import {
-  Dimensions,
   SafeAreaView,
-  StyleSheet,
-  Text,
   View,
   Image,
+  Text,
   TouchableOpacity,
+  StyleSheet,
+  Dimensions,
 } from "react-native";
 import { formatCapital } from "../utils/formatCapital";
-import { NavigationProp } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("screen");
-const ScheduleListScreen = ({ navigation, route }) => {
-  const { category } = route.params;
+const ListCoach = ({ navigation }) => {
   const dummy = [1, 1, 1];
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topContainer}>
-        <Text style={styles.textTitleChat}>Choose Your Schedule</Text>
+        <Text style={styles.textTitle}>Choose Your Coach</Text>
       </View>
-      <View style={{ marginTop: 20 }}>
+      <View style={{ marginTop: 30 }}>
         {dummy.map((el, idx) => {
           return (
             <TouchableOpacity
               style={styles.containerStatus}
-              // CARA MELEMPAR PARAMS
-              onPress={() =>
-                navigation.navigate("Summarize", {
-                  // IDX + 1 NANTI GANTI DARI VALUE MONTH YANG ADA DI DATABASE
-                  month: idx + 1,
-                  category,
-                })
-              }
+              onPress={() => navigation.navigate("Schedule", {})}
               key={idx}
             >
-              <View style={{ flexDirection: "column", gap: 10 }}>
-                <Text style={styles.textName}>Schedule {idx + 1} Week</Text>
-                <Text>
-                  INI HASIL YANG DIDAPAT DI PAKET {idx + 1} bulan
-                  {`\n`}1. INI HASIL YANG DIDAPAT DI PAKET {idx + 1} bulan
-                  {`\n`}2. INI HASIL YANG DIDAPAT DI PAKET {idx + 1} bulan
-                  {`\n`}3. INI HASIL YANG DIDAPAT DI PAKET {idx + 1} bulan
-                </Text>
+              {/*  INI PUNYA TRAINER NYA */}
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image
+                  source={{
+                    uri: "https://cdn-icons-png.flaticon.com/512/2919/2919906.png",
+                  }}
+                  style={styles.trainerImage}
+                />
+                <View>
+                  <Text style={styles.textName}>
+                    {formatCapital("Trainer ganteng")}
+                  </Text>
+                  <Text>Category Name</Text>
+                </View>
               </View>
             </TouchableOpacity>
           );
@@ -50,8 +47,7 @@ const ScheduleListScreen = ({ navigation, route }) => {
     </SafeAreaView>
   );
 };
-
-export default ScheduleListScreen;
+export default ListCoach;
 
 const styles = StyleSheet.create({
   container: {
@@ -60,18 +56,17 @@ const styles = StyleSheet.create({
   },
   containerStatus: {
     backgroundColor: "#fff",
-    paddingVertical: 40,
+    paddingVertical: 20,
     marginHorizontal: 10,
     borderRadius: 2,
     borderWidth: 1,
-    borderRadius: 5,
     borderColor: "#67C6E3",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 10,
-    marginVertical: 10,
     backgroundColor: "#67C6E3",
+    marginBottom: 10,
   },
   trainerImage: {
     width: 60,
@@ -81,7 +76,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 14,
   },
 
-  textTitleChat: {
+  textTitle: {
     fontWeight: "bold",
     fontSize: 30,
     marginVertical: 20,

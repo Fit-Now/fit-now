@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import ModalCategory from "../components/ModalCategory";
 import { NavigationProp } from "@react-navigation/native";
+import Carousel from "../components/Carousel";
 
 const { width, height } = Dimensions.get("screen");
 const HomeScreen = ({ navigation }) => {
@@ -25,14 +26,15 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.descriptionContainer}>
+      <Carousel />
+      {/* <View style={styles.descriptionContainer}>
         <Text style={styles.title}>FitNow</Text>
         <Text style={styles.descriptionText}>
           "Experience the convenience of training anytime, anywhere. Our app
           allows you to follow your training courses at your own pace, fitting
           seamlessly into your busy schedule."
         </Text>
-      </View>
+      </View> */}
 
       <Text style={styles.textSubTitle}>Sports Category</Text>
       <View style={styles.categoryContainer}>
@@ -41,7 +43,7 @@ const HomeScreen = ({ navigation }) => {
             <Pressable
               key={idx}
               onPress={() =>
-                navigation.navigate("Schedule", {
+                navigation.navigate("ListCoach", {
                   // NANTI BASKETBALL NYA DIGANTI DENGAN VALUE CATEGORY DARI DATABASE
                   category: "basketball",
                 })
@@ -151,7 +153,7 @@ const styles = StyleSheet.create({
     height: 150,
   },
   descriptionContainer: {
-    marginTop: 50,
+    marginTop: 20,
     alignItems: "center",
     backgroundColor: "#67C6E3",
     paddingVertical: 40,

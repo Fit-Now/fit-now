@@ -18,7 +18,12 @@ const SummarizeScreen = ({ route, navigation }) => {
 
   const handleNavigateToChat = () => {
     console.log("ini handleNavgiation to chat di summarize screen");
-    navigation.navigate("Chat");
+    // navigation.reset({
+    //   index: 0,
+    //   routes: [{ name: "HomeScreen" }],
+    // });
+    navigation.navigate("ChatRoom");
+    setShowModalEnd(false);
   };
   const handleNavigateToHome = () => {
     navigation.navigate("HomeScreen");
@@ -43,7 +48,9 @@ const SummarizeScreen = ({ route, navigation }) => {
           style={{
             backgroundColor: "#67C6E3",
             shadowOpacity: 3,
-            shadowRadius: 3,
+            shadowRadius: 5,
+            borderBottomEndRadius: 18,
+            borderBottomStartRadius: 18,
           }}
         >
           <Text style={styles.title}>Schedule For {month} Week Training</Text>

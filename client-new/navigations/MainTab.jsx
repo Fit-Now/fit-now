@@ -1,13 +1,14 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-
 import ChatListScreen from "../screens/ChatListScreen";
 import HomeStack from "../stacks/HomeStack";
+import { LoginContext } from "../contexts/LoginContext";
+import { useContext } from "react";
 
 const Tab = createBottomTabNavigator();
 export default function MainTab() {
+  const { userLoginRole } = useContext(LoginContext);
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -34,7 +35,9 @@ export default function MainTab() {
         headerShown: false,
       })}
     >
-      <Tab.Screen name="Home" component={HomeStack} />
+      {userLoginRole == "trainee" && (
+        <Tab.Screen name="Home" component={HomeStack} />
+      )}
       <Tab.Screen
         name="Chat"
         component={ChatListScreen}
