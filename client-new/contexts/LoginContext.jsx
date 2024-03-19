@@ -20,14 +20,16 @@ export const LoginProvider = ({ children }) => {
   // value dari userLoginInfo = "trainee" atau "trainer" atau "admin"
   const [userLoginRole, setUserLoginRole] = useState("trainee");
 
+  const [user, setUser] = useState('');
+  const [role, setRole] = useState('');
+
+
   // const contextValue = {
   //   setIsLoggedIn: setIsLoggedIn,
   //   isLoggedIn: isLoggedIn,
   // };
   return (
-    <LoginContext.Provider
-      value={{ isLoggedIn, setIsLoggedIn, userLoginRole, setUserLoginRole }}
-    >
+    <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn, user, setUser, role, setRole }}>
       {children}
     </LoginContext.Provider>
   );

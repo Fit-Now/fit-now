@@ -43,10 +43,18 @@ const HomeScreen = ({ navigation }) => {
             <Pressable
               key={idx}
               onPress={() =>
+
                 navigation.navigate("ListCoach", {
                   // NANTI BASKETBALL NYA DIGANTI DENGAN VALUE CATEGORY DARI DATABASE
                   category: "basketball",
                 })
+
+                // navigation.navigate("Schedule", {
+                //   // NANTI BASKETBALL NYA DIGANTI DENGAN VALUE CATEGORY DARI DATABASE
+                //   category: "basketball",
+                // })
+//                 navigation.navigate("Maps")
+
               }
             >
               <Image

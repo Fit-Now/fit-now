@@ -14,15 +14,24 @@ import HomeAdmScreen from "../screens/HomeAdmScreen";
 
 const Stack = createNativeStackNavigator();
 
-const MainStack = ({}) => {
-  const { isLoggedIn } = useContext(LoginContext);
-  const { userLoginRole } = useContext(LoginContext);
+import * as SecureStore from "expo-secure-store";
+
+const MainStack = () => {
+  const { isLoggedIn, setIsLoggedIn, setUser, setRole, role } = useContext(LoginContext);
+  (async () => {
+      const access_token = await SecureStore.getItemAsync("access_token");
+      const userId = await SecureStore.getItemAsync("user_id");
+      const role = await SecureStore.getItemAsync("role");
+      if(access_token) setIsLoggedIn(true)
+      if(userId) setUser(userId)
+      if(role) setRole(role)
+  })();
   return (
     <NavigationContainer>
       <Stack.Navigator>
         {isLoggedIn ? (
           <>
-            {userLoginRole !== "admin" ? (
+            {role !== "admin" ? (
               <>
                 <Stack.Screen
                   name=" "

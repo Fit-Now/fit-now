@@ -12,7 +12,7 @@ import { NavigationProp } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("screen");
 const ChatListScreen = ({ navigation }) => {
-  const dummy = [1, 1, 1];
+  const dummy = [1];
   return (
     <SafeAreaView style={styles.container}>
       <View>

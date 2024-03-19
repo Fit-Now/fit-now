@@ -13,6 +13,7 @@ import { formatCapital } from "../utils/formatCapital";
 import { useContext } from "react";
 import { LoginContext } from "../contexts/LoginContext";
 import { MaterialIcons } from "@expo/vector-icons";
+import * as SecureStore from "expo-secure-store";
 
 const { height } = Dimensions.get("screen");
 const ProfileScreen = ({ navigation }) => {
@@ -42,6 +43,20 @@ const ProfileScreen = ({ navigation }) => {
           <Text style={styles.textName}>{formatCapital("hAi jejeon DuT")}</Text>
 
           <Text style={styles.textEmail}>test@mail.com</Text>
+
+          <TouchableOpacity style={styles.logout}>
+            <Pressable
+              onPress={async () => {
+                await SecureStore.deleteItemAsync("access_token");
+                await SecureStore.deleteItemAsync("user_id");
+                await SecureStore.deleteItemAsync("role");
+                setIsLoggedIn(false);
+                navigation.navigate("Login");
+              }}
+            >
+              <Text style={{ color: "red" }}>Log Out</Text>
+            </Pressable>
+          </TouchableOpacity>
         </View>
       </View>
       <Text></Text>

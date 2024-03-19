@@ -8,35 +8,57 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-import CobaRadioButton from "../components/RadioButton";
 import { useState } from "react";
 import ModalAvatar from "../components/ModalAvatar";
+import { useMutation } from "@apollo/client";
+import { REGISTER } from "../queries";
 
 const { height } = Dimensions.get("screen");
-const RegisterScreen = () => {
+const RegisterScreen = ({ navigation }) => {
   const [showModalAvatar, setShowModalAvatar] = useState(false);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [registerDispatcher, { data, error, loading }] = useMutation(REGISTER, {
+    onCompleted: (item) => {
+      navigation.navigate("Login");
+    },
+  });
   // INI DAPETIN VALUENYA ROLE
-  const [selectedId, setSelectedId] = useState("");
+  const [selectedId, setSelectedId] = useState();
 
   // INI DAPETIN AVATAR
   const [avatar, setAvatar] = useState(
     "https://cdn-icons-png.flaticon.com/512/2919/2919906.png"
   );
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
+    try {
+      await registerDispatcher({
+        variables: {
+          payload: {
+            name,
+            email,
+            password,
+            imageUrl : avatar,
+          },
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
     // VARIABLE YANG AKAN DIBUTUHKAN UNTUK REGISTER
-    console.log(name, email, password, selectedId, avatar);
   };
+  console.log(name, email, password, avatar);
 
-  const handleRole = (id) => {
-    // dapetin valuenya dari id di radiobutton
-    setSelectedId(id);
-    // console.log(selectedId, "<< di register");
-  };
+  // const handleRole = (id) => {
+  //   // dapetin valuenya dari id di radiobutton
+  //   setSelectedId(id);
+  //   // console.log(selectedId, "<< di register");
+  // };
+  console.log(error);
+
   const handleShowAvatar = () => {
     setShowModalAvatar(!showModalAvatar);
   };
@@ -91,8 +113,6 @@ const RegisterScreen = () => {
           onChangeText={setPassword}
         />
         {/* <TextInput style={styles.inputLabel} placeholder="Status" /> */}
-
-        <CobaRadioButton handleRole={handleRole} selectedId={selectedId} />
       </View>
       <TouchableOpacity
         style={{ alignItems: "center" }}
@@ -167,3 +187,4 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+

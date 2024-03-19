@@ -6,6 +6,8 @@ import ScheduleListScreen from "../screens/ScheduleListScreen";
 import SummarizeScreen from "../screens/SummarizeScreen";
 import ListCoach from "../screens/ListCoach";
 
+import Maps from "../screens/Maps";
+
 const Stack = createNativeStackNavigator();
 
 const HomeStack = () => {
@@ -27,6 +29,13 @@ const HomeStack = () => {
         component={SummarizeScreen}
         // options={{ headerShown: false }}
       />
+
+      <Stack.Screen
+        name="Maps"
+        component={Maps}
+        // options={{ headerShown: false }}
+      />
+      <Stack.Screen name="Chat" component={ChatRoomScreen} />
     </Stack.Navigator>
   );
 };
