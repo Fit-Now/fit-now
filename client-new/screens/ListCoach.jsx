@@ -37,7 +37,15 @@ const ListCoach = ({ navigation }) => {
                   <Text style={styles.textName}>
                     {formatCapital("Trainer ganteng")}
                   </Text>
-                  <Text>Category Name</Text>
+                  <Text
+                    style={{
+                      ...styles.textName,
+                      fontSize: 16,
+                      fontWeight: "normal",
+                    }}
+                  >
+                    Category Name
+                  </Text>
                 </View>
               </View>
             </TouchableOpacity>
@@ -60,12 +68,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     borderRadius: 2,
     borderWidth: 1,
-    borderColor: "#67C6E3",
+    borderColor: "#20488f",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 10,
-    backgroundColor: "#67C6E3",
+    backgroundColor: "#20488f",
     marginBottom: 10,
   },
   trainerImage: {
@@ -75,7 +83,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginHorizontal: 14,
   },
-
   textTitle: {
     fontWeight: "bold",
     fontSize: 30,
@@ -85,12 +92,13 @@ const styles = StyleSheet.create({
   textName: {
     fontSize: 18,
     fontWeight: "bold",
+    color: "#fff",
   },
   topContainer: {
     gap: 10,
     justifyContent: "center",
     padding: 18,
-    backgroundColor: "#67C6E3",
+    backgroundColor: "#20488f",
     shadowOpacity: 3,
     shadowRadius: 5,
     borderBottomEndRadius: 18,

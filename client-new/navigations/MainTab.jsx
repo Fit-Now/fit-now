@@ -38,6 +38,7 @@ export default function MainTab() {
       {userLoginRole == "trainee" && (
         <Tab.Screen name="Home" component={HomeStack} />
       )}
+
       <Tab.Screen
         name="Chat"
         component={ChatListScreen}

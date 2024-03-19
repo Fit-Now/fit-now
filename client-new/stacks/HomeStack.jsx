@@ -14,8 +14,7 @@ const HomeStack = () => {
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{ title: "Home" }}
-        // options={{ headerShown: false }}
+        options={{ title: "Home", headerShown: false }}
       />
       <Stack.Screen name="ListCoach" component={ListCoach} />
       <Stack.Screen

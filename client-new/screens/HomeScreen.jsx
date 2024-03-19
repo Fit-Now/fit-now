@@ -62,9 +62,9 @@ const HomeScreen = ({ navigation }) => {
         <Pressable onPress={handleShowModal}>
           <Image
             source={{
-              uri: "https://cdn.iconscout.com/icon/premium/png-256-thumb/more-3530422-2956952.png",
+              uri: "https://cdn.iconscout.com/icon/premium/png-256-thumb/more-9467911-7688655.png",
             }}
-            style={styles.categoryImage}
+            style={styles.seeAllIcon}
           />
 
           <Text style={{ alignSelf: "center" }}>See All</Text>
@@ -140,11 +140,17 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     rowGap: 50,
     columnGap: 5,
-    // backgroundColor: "#67C6E3",
+    // backgroundColor: "#20488f",
   },
   categoryImage: {
     width: 80,
     height: 80,
+    borderRadius: 50,
+    marginBottom: 5,
+  },
+  seeAllIcon: {
+    width: 70,
+    height: 70,
     borderRadius: 50,
     marginBottom: 5,
   },
@@ -155,7 +161,7 @@ const styles = StyleSheet.create({
   descriptionContainer: {
     marginTop: 20,
     alignItems: "center",
-    backgroundColor: "#67C6E3",
+    backgroundColor: "#20488f",
     paddingVertical: 40,
     marginHorizontal: 10,
     borderRadius: 20,
@@ -169,9 +175,10 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
   textSubTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
     marginLeft: 10,
-    marginVertical: 20,
+    marginBottom: 20,
+    marginTop: 45,
   },
 });

@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     width: 300,
     margin: 12,
     padding: 10,
-    backgroundColor: "#67C6E3",
+    backgroundColor: "#20488f",
     borderRadius: 10,
     justifyContent: "center",
   },
@@ -181,9 +181,9 @@ const styles = StyleSheet.create({
     color: "#0765ff",
   },
   title: {
-    fontSize: 60,
+    fontSize: 40,
     fontWeight: "bold",
-    color: "#67C6E3",
+    color: "#20488f",
   },
   subTitle: {
     fontSize: 20,

@@ -1,6 +1,8 @@
 import React from "react";
 import { Dimensions, FlatList, Image, Text, View } from "react-native";
-import gambar1 from "../assets/fitnow.jpg";
+import gambar1 from "../assets/fit now.png";
+import gambar2 from "../assets/fit now run.png";
+import gambar3 from "../assets/fit now disc.png";
 
 const image = gambar1;
 const Carousel = () => {
@@ -8,26 +10,30 @@ const Carousel = () => {
   const carouselData = [
     {
       id: "1",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYV5xxLy9EpgOa2sP4_74_MSm4Hh6POUlnnARKqXnHsitN3PwS_yEeCHWjT3DoaigCYss&usqp=CAU",
+      image: gambar1,
     },
     {
       id: "2",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjYI3PVv0rob8zS3_tf95fz3Pu8CUA0ML76WkczK52YaXTVSBUHSpWySMbnIrNTO3Mo0k&usqp=CAU",
+      image: gambar2,
+      // image:
+      //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjYI3PVv0rob8zS3_tf95fz3Pu8CUA0ML76WkczK52YaXTVSBUHSpWySMbnIrNTO3Mo0k&usqp=CAU",
     },
     {
       id: "3",
-      image:
-        "https://cdn.create.vista.com/api/media/small/425468124/stock-vector-colorful-sports-banner-with-athletes",
+      image: gambar3,
+      // image:
+      //   "https://cdn.create.vista.com/api/media/small/425468124/stock-vector-colorful-sports-banner-with-athletes",
     },
   ];
   const renderItem = ({ item, idx }) => {
     return (
       <View>
         <Image
-          source={{ uri: item.image }}
-          style={{ height: 230, width: screenWidth }}
+          source={item.image}
+          style={{
+            height: 230,
+            width: screenWidth,
+          }}
         />
       </View>
     );
@@ -39,7 +45,9 @@ const Carousel = () => {
         <View
           key={idx}
           style={{
-            backgroundColor: "red",
+            backgroundColor: "#fff",
+            borderWidth: 3,
+            borderColor: "black",
             height: 10,
             width: 10,
             borderRadius: 5,

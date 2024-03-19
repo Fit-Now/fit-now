@@ -32,17 +32,16 @@ const LoginScreen = ({ navigation }) => {
         >
           <View
             style={{
-              marginTop: 145,
-              marginBottom: 80,
+              marginTop: 125,
               alignItems: "center",
               // backgroundColor: "gray",
             }}
           >
             <Text
               style={{
-                fontSize: 80,
+                fontSize: 60,
                 fontWeight: "bold",
-                color: "#67C6E3",
+                color: "#20488f",
               }}
             >
               FitNow
@@ -99,7 +98,7 @@ const styles = StyleSheet.create({
     width: 300,
     margin: 12,
     borderWidth: 2,
-    borderColor: "#67C6E3",
+    borderColor: "#20488f",
     borderRadius: 10,
     padding: 10,
     fontSize: 18,
@@ -116,7 +115,7 @@ const styles = StyleSheet.create({
     width: 300,
     margin: 12,
     padding: 10,
-    backgroundColor: "#67C6E3",
+    backgroundColor: "#20488f",
     borderRadius: 10,
     justifyContent: "center",
   },

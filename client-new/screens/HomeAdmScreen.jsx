@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 18,
-    backgroundColor: "#67C6E3",
+    backgroundColor: "#20488f",
     marginHorizontal: 10,
   },
   heading: {
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     elevation: 2,
     borderRadius: 3,
     borderWidth: 2,
-    borderColor: "#67C6E3",
+    borderColor: "#20488f",
     // backgroundColor: "red",
     padding: 19,
   },
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     fontWeight: "bold",
-    color: "#67C6E3",
+    color: "#20488f",
     textAlign: "center",
     marginBottom: 20,
   },

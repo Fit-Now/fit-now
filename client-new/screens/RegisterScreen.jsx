@@ -44,8 +44,8 @@ const RegisterScreen = () => {
     <View style={styles.container}>
       <View
         style={{
-          marginTop: 50,
-          marginBottom: 30,
+          marginTop: 30,
+          marginBottom: 20,
           alignItems: "center",
           // backgroundColor: "gray",
         }}
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     width: 300,
     margin: 12,
     borderWidth: 2,
-    borderColor: "#67C6E3",
+    borderColor: "#20488f",
     borderRadius: 10,
     padding: 10,
     fontSize: 18,
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     width: 300,
     margin: 12,
     padding: 10,
-    backgroundColor: "#67C6E3",
+    backgroundColor: "#20488f",
     borderRadius: 10,
     justifyContent: "center",
   },
@@ -156,9 +156,9 @@ const styles = StyleSheet.create({
     color: "#0765ff",
   },
   title: {
-    fontSize: 80,
+    fontSize: 60,
     fontWeight: "bold",
-    color: "#67C6E3",
+    color: "#20488f",
   },
   categoryImage: {
     width: 100,

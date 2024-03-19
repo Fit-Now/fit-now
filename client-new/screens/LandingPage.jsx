@@ -33,7 +33,7 @@ export default LandingPage;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#67C6E3",
+    backgroundColor: "#20488f",
     alignItems: "center",
     // justifyContent: "space-between",
     flexDirection: "column",
@@ -56,16 +56,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#fff",
     fontSize: 28,
-    // textShadowColor: "#67C6E3",
+    // textShadowColor: "#20488f",
     // textShadowRadius: 10,
   },
   title: {
     fontSize: 60,
     fontWeight: "bold",
-    color: "#67C6E3",
+    color: "#20488f",
   },
   textTagline: {
-    color: "#67C6E3",
+    color: "#20488f",
     fontSize: 20,
     fontWeight: "bold",
   },
