@@ -15,15 +15,17 @@ import { LOGIN } from "../queries";
 
 const { width, height } = Dimensions.get("screen");
 const LoginScreen = ({ navigation }) => {
-  const { setIsLoggedIn } = useContext(LoginContext);
+  const { setIsLoggedIn, setUser, setRole } = useContext(LoginContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginDispatcher, { data, error, loading }] = useMutation(LOGIN, {
     onCompleted: async (item) => {
       const access_token = item.Login.token;
-      
-      SecureStore.setItem('email', email)
+      await SecureStore.setItemAsync("role", item.Login.role);
+      setRole(item.Login.role) 
       await SecureStore.setItemAsync("access_token", access_token);
+      setUser(item.Login.userId)
+      await SecureStore.setItemAsync("user_id", item.Login.userId);
       setIsLoggedIn(true);
     },
   });

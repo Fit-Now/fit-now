@@ -48,6 +48,8 @@ input RegisterInput {
 
 type LoginOutput {
   token: String
+  userId: ID
+  role: String
 }
 
 type Query {
@@ -269,7 +271,7 @@ const resolvers = {
 
       const token = generateToken(payload);
 
-      return { token };
+      return { userId: users._id, role: users.role, token };
     },
   },
 };

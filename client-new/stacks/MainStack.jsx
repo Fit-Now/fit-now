@@ -7,11 +7,21 @@ import MainTab from "../navigations/MainTab";
 import { LoginContext } from "../contexts/LoginContext";
 import { useContext } from "react";
 import ChatRoomScreen from "../screens/ChatRoomScreen";
+import * as SecureStore from "expo-secure-store";
 
 const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
-  const { isLoggedIn } = useContext(LoginContext);
+  const { isLoggedIn, setIsLoggedIn, setUser, setRole } = useContext(LoginContext);
+  (async () => {
+      const access_token = await SecureStore.getItemAsync("access_token");
+      console.log(access_token);
+      const userId = await SecureStore.getItemAsync("user_id");
+      const role = await SecureStore.getItemAsync("role");
+      if(access_token) setIsLoggedIn(true)
+      if(userId) setUser(userId)
+      if(role) setRole(role)
+  })();
   return (
     <NavigationContainer>
       <Stack.Navigator>
