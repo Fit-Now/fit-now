@@ -17,6 +17,8 @@ import React from "react";
 export const LoginContext = createContext();
 export const LoginProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // value dari userLoginInfo = "trainee" atau "trainer" atau "admin"
+  const [userLoginRole, setUserLoginRole] = useState("trainee");
 
   const [user, setUser] = useState('');
   const [role, setRole] = useState('');
@@ -27,7 +29,6 @@ export const LoginProvider = ({ children }) => {
   //   isLoggedIn: isLoggedIn,
   // };
   return (
-
     <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn, user, setUser, role, setRole }}>
       {children}
     </LoginContext.Provider>

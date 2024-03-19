@@ -12,6 +12,7 @@ import { NavigationProp } from "@react-navigation/native";
 import { formatCapital } from "../utils/formatCapital";
 import { useContext } from "react";
 import { LoginContext } from "../contexts/LoginContext";
+import { MaterialIcons } from "@expo/vector-icons";
 import * as SecureStore from "expo-secure-store";
 
 const { height } = Dimensions.get("screen");
@@ -21,7 +22,17 @@ const ProfileScreen = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.profileContainer}>
         {/* INI PUNYA USER YANG LAGI LOGIN */}
-
+        <TouchableOpacity
+          style={styles.logout}
+          onPress={() => setIsLoggedIn(false)}
+        >
+          <MaterialIcons
+            name="logout"
+            size={30}
+            color="black"
+            style={{ alignSelf: "flex-end", color: "#fff", padding: 10 }}
+          />
+        </TouchableOpacity>
         <Image
           source={{
             uri: "https://cdn-icons-png.flaticon.com/512/2919/2919906.png",
@@ -32,6 +43,7 @@ const ProfileScreen = ({ navigation }) => {
           <Text style={styles.textName}>{formatCapital("hAi jejeon DuT")}</Text>
 
           <Text style={styles.textEmail}>test@mail.com</Text>
+
           <TouchableOpacity style={styles.logout}>
             <Pressable
               onPress={async () => {
@@ -85,10 +97,11 @@ const styles = StyleSheet.create({
     minHeight: height,
   },
   profileImage: {
-    width: 70,
-    height: 70,
+    width: 100,
+    height: 100,
     borderRadius: 50,
     marginBottom: 5,
+    alignSelf: "center",
   },
   trainerImage: {
     width: 60,
@@ -99,21 +112,26 @@ const styles = StyleSheet.create({
   },
   profileContainer: {
     gap: 10,
-    // alignItems: "center",
-    padding: 30,
-    backgroundColor: "#67C6E3",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingBottom: 60,
+    backgroundColor: "#20488f",
     shadowOpacity: 3,
     shadowRadius: 5,
-    borderBottomEndRadius: 18,
-    borderBottomStartRadius: 18,
-    flexDirection: "row",
+    borderBottomEndRadius: 50,
+    borderBottomStartRadius: 50,
+    // flexDirection: "row",
   },
   textName: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: "bold",
+    color: "#fff",
   },
   textEmail: {
-    fontSize: 18,
+    fontSize: 20,
+    color: "#fff",
+    alignSelf: "center",
+    padding: 5,
   },
   containerStatus: {
     backgroundColor: "#fff",
@@ -131,6 +149,10 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   logout: {
-    padding: 8,
+    alignSelf: "flex-end",
+    marginVertical: 10,
+    backgroundColor: "#20488f",
+    borderRadius: 20,
+    padding: 5,
   },
 });
