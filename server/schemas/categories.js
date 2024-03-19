@@ -1,5 +1,4 @@
-const { findALlCategories } = require("../models/categories");
-
+const { findALlCategories, addCategory } = require("../models/categories");
 
 const typeDefs = `#graphql
 
@@ -13,19 +12,35 @@ type Query {
     getAllCategory: [Category]
 }
 
+input NewCategory {
+    name: String
+    logo: String
+}
+
+type Mutation {
+    AddNewCategory(payload: NewCategory): Category
+}
+
 `;
 
-const resolvers ={
-    Query: {
-        getAllCategory: async () => {
-            const categories = await findALlCategories()
-            // console.log(categories, "ini categories");
-            return categories
-        }
-    }
-}
+const resolvers = {
+  Query: {
+    getAllCategory: async () => {
+      const categories = await findALlCategories();
+      return categories;
+    },
+  },
+  Mutation: {
+    AddNewCategory: async (_parents, args) => {
+      const { payload } = args;
+      const newCategory = await addCategory(payload);
 
-module.exports ={
-    CategoriesTypeDefs: typeDefs,
-    categoriesResolvers: resolvers
-}
+      return newCategory;
+    },
+  },
+};
+
+module.exports = {
+  CategoriesTypeDefs: typeDefs,
+  categoriesResolvers: resolvers,
+};

@@ -1,21 +1,32 @@
-const { getDatabase } = require("../config/mongoConnection")
-
+const { ObjectId } = require("mongodb");
+const { getDatabase } = require("../config/mongoConnection");
 
 const getCategoryColletion = () => {
-    const db = getDatabase()
-    const categoriesCollection = db.collection("Categories")
+  const db = getDatabase();
+  const categoriesCollection = db.collection("Categories");
 
-    return categoriesCollection
-}
+  return categoriesCollection;
+};
 
 const findALlCategories = async () => {
+  const categories = await getCategoryColletion().find().toArray();
 
-    const categories = await getCategoryColletion().find().toArray()
+  return categories;
+};
 
-    return categories
+const addCategory = async (payload) => {
+  const categoryCollection = await getCategoryColletion();
+  const newCategory = await categoryCollection.insertOne(payload);
 
-}
+  const categories = await categoryCollection.findOne({
+    _id: new ObjectId(newCategory.insertedId),
+  });
+
+  return categories;
+};
 
 module.exports = {
-    getCategoryColletion, findALlCategories
-}
+  getCategoryColletion,
+  findALlCategories,
+  addCategory,
+};
