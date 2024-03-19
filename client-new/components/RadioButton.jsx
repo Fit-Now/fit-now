@@ -2,13 +2,7 @@ import React, { useMemo, useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import RadioGroup from "react-native-radio-buttons-group";
 
-export default function CobaRadioButton({
-  handleRole,
-  selectedId,
-}: {
-  handleRole: any;
-  selectedId: string | undefined;
-}) {
+export default function CobaRadioButton({ handleRole, selectedId }) {
   const radioButtons = useMemo(
     () => [
       {
@@ -29,7 +23,7 @@ export default function CobaRadioButton({
     []
   );
 
-  const [selectedValue, setSelectedValue] = useState<string>();
+  // const [selectedValue, setSelectedValue] = useState();
 
   return (
     <View>

@@ -31,13 +31,7 @@ const testdoang = [
   },
 ];
 const { width, height } = Dimensions.get("screen");
-const ModalAvatar = ({
-  handleShowAvatar,
-  setAvatar,
-}: {
-  handleShowAvatar: any;
-  setAvatar: Dispatch<SetStateAction<string>>;
-}) => {
+const ModalAvatar = ({ handleShowAvatar, setAvatar }) => {
   return (
     <Modal transparent={true}>
       <SafeAreaView>

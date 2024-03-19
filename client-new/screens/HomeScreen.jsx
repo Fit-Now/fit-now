@@ -14,8 +14,8 @@ import ModalCategory from "../components/ModalCategory";
 import { NavigationProp } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("screen");
-const HomeScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
-  const [showModal, setShowModal] = useState<boolean>(false);
+const HomeScreen = ({ navigation }) => {
+  const [showModal, setShowModal] = useState(false);
 
   const handleShowModal = () => {
     setShowModal(!showModal);
@@ -41,10 +41,11 @@ const HomeScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
             <Pressable
               key={idx}
               onPress={() =>
-                navigation.navigate("Schedule", {
-                  // NANTI BASKETBALL NYA DIGANTI DENGAN VALUE CATEGORY DARI DATABASE
-                  category: "basketball",
-                })
+                // navigation.navigate("Schedule", {
+                //   // NANTI BASKETBALL NYA DIGANTI DENGAN VALUE CATEGORY DARI DATABASE
+                //   category: "basketball",
+                // })
+                navigation.navigate("Maps")
               }
             >
               <Image

@@ -1,23 +1,37 @@
-const { findAllLocations } = require("../models/locations");
+const { findAllLocations, addLocation } = require("../models/locations");
+
 
 const typeDefs = `#graphql
 
 type Location {
     _id : ID
     name: String
-    Coach: [Coach]
+    Coachs: [Coach]
     CategoryId: ID
     Category: Category
-    imageUrl: [Image]
+    imageUrl: [String]
+    longitude: Float
+    latitude: Float
+    address: String
 }
 
-type Image {
-    imgurl : String
+input AddNewLocation{
+  name: String
+  CategoryId: ID
+  imageUrl: [String]
+  longitude: Float
+  latitude: Float
+
 }
 
 type Query {
     getAllLocation: [Location]
 }
+
+type Mutation {
+  addLocation(payload: AddNewLocation): Location
+}
+
 
 
 `;
@@ -30,6 +44,15 @@ const resolvers = {
       return locations;
     },
   },
+  Mutation: {
+    addLocation: async (_parents, args) => {
+      const { payload } = args;
+      const locations = await addLocation(payload);
+
+      return locations;
+    },
+  },
+
 };
 
 module.exports = {

@@ -42,6 +42,8 @@ const authentication = async (req) => {
     userId: user._id,
     name: user.name,
     userEmail: user.email,
+    status: user.status
+
   };
 };
 

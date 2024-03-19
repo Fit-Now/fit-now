@@ -8,20 +8,19 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-import CobaRadioButton from "../components/CobaRadioButton";
+import CobaRadioButton from "../components/RadioButton";
 import { useState } from "react";
 import ModalAvatar from "../components/ModalAvatar";
 
 const { height } = Dimensions.get("screen");
 const RegisterScreen = () => {
-  const [showModalAvatar, setShowModalAvatar] = useState<boolean>(false);
-
+  const [showModalAvatar, setShowModalAvatar] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // INI DAPETIN VALUENYA ROLE
-  const [selectedId, setSelectedId] = useState<string>();
+  const [selectedId, setSelectedId] = useState("");
 
   // INI DAPETIN AVATAR
   const [avatar, setAvatar] = useState(
@@ -33,7 +32,7 @@ const RegisterScreen = () => {
     console.log(name, email, password, selectedId, avatar);
   };
 
-  const handleRole = (id: string) => {
+  const handleRole = (id) => {
     // dapetin valuenya dari id di radiobutton
     setSelectedId(id);
     // console.log(selectedId, "<< di register");

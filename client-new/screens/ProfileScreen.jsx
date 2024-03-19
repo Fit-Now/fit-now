@@ -14,7 +14,7 @@ import { useContext } from "react";
 import { LoginContext } from "../contexts/LoginContext";
 
 const { height } = Dimensions.get("screen");
-const ProfileScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
+const ProfileScreen = ({ navigation }) => {
   const { setIsLoggedIn } = useContext(LoginContext);
   return (
     <SafeAreaView style={styles.container}>
@@ -27,16 +27,17 @@ const ProfileScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
           }}
           style={styles.profileImage}
         />
+        <View style={{ justifyContent: "center" }}>
+          <Text style={styles.textName}>{formatCapital("hAi jejeon DuT")}</Text>
 
-        <Text style={styles.textName}>{formatCapital("hAi jejeon DuT")}</Text>
-
-        <Text style={styles.textEmail}>test@mail.com</Text>
-        <TouchableOpacity
-          style={styles.logout}
-          onPress={() => setIsLoggedIn(false)}
-        >
-          <Text style={{ color: "red" }}>Log Out</Text>
-        </TouchableOpacity>
+          <Text style={styles.textEmail}>test@mail.com</Text>
+          <TouchableOpacity
+            style={styles.logout}
+            onPress={() => setIsLoggedIn(false)}
+          >
+            <Text style={{ color: "red" }}>Log Out</Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <Text></Text>
 
@@ -76,8 +77,8 @@ const styles = StyleSheet.create({
     minHeight: height,
   },
   profileImage: {
-    width: 90,
-    height: 90,
+    width: 70,
+    height: 70,
     borderRadius: 50,
     marginBottom: 5,
   },
@@ -90,9 +91,14 @@ const styles = StyleSheet.create({
   },
   profileContainer: {
     gap: 10,
-    alignItems: "center",
-    padding: 50,
+    // alignItems: "center",
+    padding: 30,
     backgroundColor: "#67C6E3",
+    shadowOpacity: 3,
+    shadowRadius: 5,
+    borderBottomEndRadius: 18,
+    borderBottomStartRadius: 18,
+    flexDirection: "row",
   },
   textName: {
     fontSize: 20,
@@ -118,8 +124,5 @@ const styles = StyleSheet.create({
   },
   logout: {
     padding: 8,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: "gray",
   },
 });

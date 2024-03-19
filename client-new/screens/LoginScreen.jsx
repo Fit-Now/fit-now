@@ -11,7 +11,7 @@ import {
 import { LoginContext } from "../contexts/LoginContext";
 
 const { width, height } = Dimensions.get("screen");
-const LoginScreen = ({ navigation }: { navigation: NavigationProp<any> }) => {
+const LoginScreen = ({ navigation }) => {
   const { setIsLoggedIn } = useContext(LoginContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

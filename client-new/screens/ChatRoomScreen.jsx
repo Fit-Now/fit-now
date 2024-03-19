@@ -11,15 +11,15 @@ import {
   ScrollView,
   ImageBackground,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
+// import { Feather } from "@expo/vector-icons";
 import { RouteProp } from "@react-navigation/native";
 
 const { height, width } = Dimensions.get("screen");
 // DIBIKIN ANY DULU, NANTI DIGANTI
-export default function ChatRoomScreen({ route }: { route: any }) {
-  const paramsYangDitangkap = route.params.contohLemparParams;
-  const [chats, setChats] = useState<any>([]);
-  const [chat, setChat] = useState<string>("");
+export default function ChatRoomScreen({ route }) {
+  const paramsYangDitangkap = route.params?.contohLemparParams;
+  const [chats, setChats] = useState([]);
+  const [chat, setChat] = useState("");
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.chatTab}>
@@ -52,7 +52,7 @@ export default function ChatRoomScreen({ route }: { route: any }) {
           paddingTop: 5,
         }}
       >
-        {chats?.map((el: string, idx: number) => {
+        {chats?.map((el, idx) => {
           return idx % 2 != 0 ? (
             <View
               style={{ alignSelf: "flex-start", paddingHorizontal: 10 }}

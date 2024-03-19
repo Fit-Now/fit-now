@@ -10,6 +10,8 @@ type Coach {
     Users: [User]
     locationId: ID
     email: String
+    imgUrl: String
+
 }
 
 input AddNewCoach {
