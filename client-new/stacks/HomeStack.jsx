@@ -1,11 +1,11 @@
-import { NavigationContainer } from "@react-navigation/native";
+// import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import LoginScreen from "../screens/LoginScreen";
-import RegisterScreen from "../screens/RegisterScreen";
-import LandingPage from "../screens/LandingPage";
-import MainTab from "../navigations/MainTab";
-import { LoginContext } from "../contexts/LoginContext";
-import { useContext } from "react";
+// import LoginScreen from "../screens/LoginScreen";
+// import RegisterScreen from "../screens/RegisterScreen";
+// import LandingPage from "../screens/LandingPage";
+// import MainTab from "../navigations/MainTab";
+// import { LoginContext } from "../contexts/LoginContext";
+// import { useContext } from "react";
 import ChatRoomScreen from "../screens/ChatRoomScreen";
 import HomeScreen from "../screens/HomeScreen";
 

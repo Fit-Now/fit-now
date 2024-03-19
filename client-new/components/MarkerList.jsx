@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Image, View } from "react-native";
 import { Marker } from "react-native-maps";
-import { SelectMarkerContext } from "../Context/SelectMarkerContext";
+import { SelectMarkerContext } from "../contexts/SelectMarkerContext";
 
 
 export default function MarkerList({places, index}){
@@ -17,7 +17,7 @@ export default function MarkerList({places, index}){
         onPress={()=> setSelectedMarker(index)
 
         }>
-            <Image source={{uri: places.logo}} style={{ width: 40, height: 50, resizeMode: 'stretch' }}/>
+            {/* <Image source={{uri: places.logo}} style={{ width: 40, height: 50, resizeMode: 'stretch' }}/> */}
         </Marker>
     )
 }

@@ -1,7 +1,7 @@
 import { FlatList, View, Text, Dimensions } from "react-native";
 import PlaceItem from "./PlaceItem";
 import { useContext, useEffect, useRef } from "react";
-import { SelectMarkerContext } from "../Context/SelectMarkerContext";
+import { SelectMarkerContext } from "../contexts/SelectMarkerContext";
 
 export default function PlaceListFitNow({ places }) {
 //   console.log(places);
@@ -22,6 +22,7 @@ const getItemLayout = (_,index) => ({
 })
   return (
     <View>
+      {/* <Text>{JSON.stringify(places)}</Text> */}
       <FlatList
         data={places}
         horizontal={true}
@@ -31,6 +32,7 @@ const getItemLayout = (_,index) => ({
         showsHorizontalScrollIndicator={false}
         renderItem={({ item, index }) => (
           <View key={index} style={{marginLeft:20}}>
+            {/* <Text>{JSON.stringify(item)}</Text> */}
             <PlaceItem place={item}/>
           </View>
         )}

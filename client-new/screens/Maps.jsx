@@ -4,11 +4,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useContext, useEffect, useState } from "react";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import MapViewStyle from "../utils/MapViewStyle.json";
-import { UserLocationContext } from "../Context/UserLocationContext";
+import { UserLocationContext } from "../contexts/UserLocationContext";
 import SearchBarMaps from "../components/SearchBar";
 import MarkerList from "../components/MarkerList";
 import PlaceListFitNow from "../components/PlaceList";
-import { SelectMarkerContext } from "../Context/SelectMarkerContext";
+import { SelectMarkerContext } from "../contexts/SelectMarkerContext";
 
 const Maps = () => {
   const [selectedMarker,setSelectedMarker] = useState([])
@@ -16,16 +16,24 @@ const Maps = () => {
   const places = require('../data.json')
   const [placeList, setPlaceList] = useState([])
   
-  const GetNearbyPlace = ()=> {
-    setPlaceList(places)
+   const GetNearbyPlace = ()=> {
+    const newPlace = places
+    console.log(places, 'ini places');
+    setPlaceList(newPlace)
+    // console.log(placeList, 'ini placeList');
   }
 
   useEffect(()=> {
-    location&&GetNearbyPlace()
+    if (location) {
+      GetNearbyPlace()
+    }
   },[location])
 
-  // console.log(placeList);
+  // console.log(places, 'ini places' );
 
+  console.log(placeList, 'ini placelist');
+
+  // return <></>
   return (
     location?.latitude && (
       <>
@@ -45,7 +53,7 @@ const Maps = () => {
               region={{ latitude: location?.latitude, longitude: location?.longitude, latitudeDelta: 0.0422, longitudeDelta: 0.421 }}
             >
               <Marker coordinate={{ latitude: location?.latitude, longitude: location?.longitude }}>
-                <Image source={require("../assets/person-mark.png")} style={{ width: 60, height: 60 }} />
+                {/* <Image source={require("../assets/person-mark.png")} style={{ width: 60, height: 60 }} /> */}
               </Marker>
               {places.map((item, index) => (
                 <MarkerList key={index} places={item} index={index}/>
@@ -53,7 +61,8 @@ const Maps = () => {
             </MapView>
           </View>
           <View style={styles.placeList}>
-            {placeList&&<PlaceListFitNow places={placeList} />}
+            {/* <Text>{JSON.stringify(placeList)}</Text> */}
+            {placeList?.length > 0 &&<PlaceListFitNow places={placeList} />}
           </View>
         </SafeAreaView>
       </SelectMarkerContext.Provider>
