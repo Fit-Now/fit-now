@@ -3,7 +3,7 @@ import PlaceItem from "./PlaceItem";
 import { useContext, useEffect, useRef } from "react";
 import { SelectMarkerContext } from "../contexts/SelectMarkerContext";
 
-export default function PlaceListFitNow({ places }) {
+export default function PlaceListFitNow({ places, navigation}) {
 //   console.log(places);
 const flatListRef = useRef(null)
 const {selectedMarker, setSelectedMarker} = useContext(SelectMarkerContext)
@@ -33,7 +33,7 @@ const getItemLayout = (_,index) => ({
         renderItem={({ item, index }) => (
           <View key={index} style={{marginLeft:20}}>
             {/* <Text>{JSON.stringify(item)}</Text> */}
-            <PlaceItem place={item}/>
+            <PlaceItem place={item} navigation={navigation}/>
           </View>
         )}
       />

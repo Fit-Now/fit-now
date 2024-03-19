@@ -1,7 +1,7 @@
-import { Dimensions, Image, Text, View } from "react-native";
+import { Dimensions, Image, Pressable, Text, View } from "react-native";
 
 
-export default function PlaceItem ({place}) {
+export default function PlaceItem ({place, navigation}) {
     // console.log(place);
     
     return(
@@ -10,8 +10,17 @@ export default function PlaceItem ({place}) {
             <View style={{padding:15}}>
             <Text style={{fontSize:20, fontFamily:'Avenir-Book', fontWeight:'bold'}}>{place.name}</Text>
             <Text style={{fontSize:15, color:'grey'}}>{place.address}</Text>
+            <Pressable
+              onPress={() =>
+                // navigation.navigate("Schedule", {
+                //   // NANTI BASKETBALL NYA DIGANTI DENGAN VALUE CATEGORY DARI DATABASE
+                //   category: "basketball",
+                // })
+                navigation.navigate("Schedule")
+              }
+            >
             <Text style={{fontSize:15, color:'grey'}}>Category: {place.category}</Text>
-
+            </Pressable>
 
 
             </View>

@@ -13,7 +13,7 @@ import {
   ScrollView,
   ImageBackground,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
+// import { Feather } from "@expo/vector-icons";
 import {
   doc,
   onSnapshot,
@@ -142,7 +142,7 @@ export default function ChatRoomScreen({ route }) {
           </View>
         ))}
 
-//         {chats?.map((el, idx) => {
+{/* //         {chats?.map((el, idx) => {
 //           return idx % 2 != 0 ? (
 //             <View
 //               style={{ alignSelf: "flex-start", paddingHorizontal: 10 }}
@@ -175,7 +175,7 @@ export default function ChatRoomScreen({ route }) {
 //               </Text>
 //             </View>
 //           );
-//         })}
+//         })} */}
       </ScrollView>
 
       <View
