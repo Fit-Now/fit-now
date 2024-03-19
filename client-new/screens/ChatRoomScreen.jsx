@@ -13,7 +13,7 @@ import {
   ImageBackground,
   KeyboardAvoidingView,
 } from "react-native";
-// import { Feather } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import {
   doc,
   onSnapshot,
@@ -63,6 +63,8 @@ export default function ChatRoomScreen({ route }) {
       chat,
       timestamp,
     });
+    setChat("");
+
   };
 
   const createSummaryChat = async ({ id, text, timestamp }) => {
@@ -131,11 +133,15 @@ export default function ChatRoomScreen({ route }) {
         style={{
           flex: 1,
           paddingTop: 5,
-          gap: 10
+          gap: 10,
 
         }}
       >
-       
+        {/* {chats?.map((chat, idx) => (
+          <View style={{ width : 200, padding: 10, margin: 2, backgroundColor: 'white', borderRadius: 10}} key={chat.id}>
+            <Text>{chat.text}</Text>
+          </View>
+        ))} */}
         {chats?.map((chat, idx) =>
           user === chat.senderId ? (
             <View
@@ -173,64 +179,60 @@ export default function ChatRoomScreen({ route }) {
         // keyboardVerticalOffset={60}
         // style={{ flex: 1 }}
       >
+      <View
+        style={{
+          // position: "absolute",
+          flexDirection: "row",
+          alignItems: "center",
+          // bottom: 0,
+          gap: 3,
+          // height: 300,
+          marginBottom: 80,
+        }}
+      >
         <View
           style={{
-            // position: "absolute",
+            backgroundColor: "#fff",
             flexDirection: "row",
-            alignItems: "center",
-            // bottom: 0,
-            gap: 3,
-            // height: 300,
-            marginBottom: 100,
+            alignItems: "flex-start",
+            width,
+            height: 80,
+            borderTopWidth: 0.2,
           }}
         >
-          <View
+          <TextInput
             style={{
-              backgroundColor: "#fff",
-              flexDirection: "row",
-              alignItems: "flex-start",
-              width,
-              height: 80,
-              borderTopWidth: 0.2,
+              padding: 10,
+              margin: 1,
+              borderRadius: 20,
+              fontSize: 18,
+              borderWidth: 1,
+              width: 0.85 * width,
+              borderColor: "gray",
+              marginLeft: 10,
+              marginTop: 14,
+              
             }}
-
+            value={chat}
             onChangeText={(v) => setChat(v)}
           />
           <TouchableOpacity
             onPress={() => onSendMessage()}
             style={{ marginTop: 20, margin: 1 }}
           >
-            <TextInput
+            {/* <Text>O</Text> */}
+            <Feather
+              name="send"
+              size={30}
+              color={"#0765ff"}
               style={{
-                padding: 10,
-                margin: 1,
-                borderRadius: 20,
-                fontSize: 18,
-                borderWidth: 1,
-                width: 0.85 * width,
-                borderColor: "gray",
-                marginLeft: 10,
-                marginTop: 14,
+                paddingHorizontal: 5,
+                textAlign: "center",
               }}
-              onChangeText={(v) => setChat(v)}
             />
-            <TouchableOpacity
-              onPress={() => setChats([...chats, chat])}
-              style={{ marginTop: 20, margin: 1 }}
-            >
-              {/* <Text>O</Text> */}
-              <Feather
-                name="send"
-                size={30}
-                color={"#0765ff"}
-                style={{
-                  paddingHorizontal: 5,
-                  textAlign: "center",
-                }}
-              />
-            </TouchableOpacity>
-          </View>
+          </TouchableOpacity>
         </View>
+      </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -250,7 +252,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 20,
-    backgroundColor: "#20488f",
+    backgroundColor: "#67C6E3",
     // marginBottom: 10,
   },
   categoryImage: {
@@ -263,7 +265,6 @@ const styles = StyleSheet.create({
   textName: {
     fontSize: 18,
     fontWeight: "bold",
-    color: "#fff",
   },
   chatContainer: {
     // backgroundColor: "gray",

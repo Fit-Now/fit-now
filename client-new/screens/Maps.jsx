@@ -10,7 +10,7 @@ import MarkerList from "../components/MarkerList";
 import PlaceListFitNow from "../components/PlaceList";
 import { SelectMarkerContext } from "../contexts/SelectMarkerContext";
 
-const Maps = () => {
+const Maps = ({navigation}) => {
   const [selectedMarker,setSelectedMarker] = useState([])
   const { location, setLocation } = useContext(UserLocationContext);
   const places = require('../data.json')
@@ -62,7 +62,7 @@ const Maps = () => {
           </View>
           <View style={styles.placeList}>
             {/* <Text>{JSON.stringify(placeList)}</Text> */}
-            {placeList?.length > 0 &&<PlaceListFitNow places={placeList} />}
+            {placeList?.length > 0 &&<PlaceListFitNow places={placeList} navigation={navigation} />}
           </View>
         </SafeAreaView>
       </SelectMarkerContext.Provider>

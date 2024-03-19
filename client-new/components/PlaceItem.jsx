@@ -12,11 +12,11 @@ export default function PlaceItem ({place, navigation}) {
             <Text style={{fontSize:15, color:'grey'}}>{place.address}</Text>
             <Pressable
               onPress={() =>
-                // navigation.navigate("Schedule", {
-                //   // NANTI BASKETBALL NYA DIGANTI DENGAN VALUE CATEGORY DARI DATABASE
-                //   category: "basketball",
-                // })
-                navigation.navigate("Schedule")
+                navigation.navigate("ListCoach", {
+                  // NANTI BASKETBALL NYA DIGANTI DENGAN VALUE CATEGORY DARI DATABASE
+                  category: "basketball",
+                })
+                // navigation.navigate("ListCoach")
               }
             >
             <Text style={{fontSize:15, color:'grey'}}>Category: {place.category}</Text>

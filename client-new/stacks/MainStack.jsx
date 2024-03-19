@@ -26,6 +26,7 @@ const MainStack = () => {
       if(userId) setUser(userId)
       if(role) setRole(role)
   })();
+console.log(role)
   return (
     <NavigationContainer>
       <Stack.Navigator>

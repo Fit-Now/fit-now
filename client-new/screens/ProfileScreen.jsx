@@ -24,14 +24,20 @@ const ProfileScreen = ({ navigation }) => {
         {/* INI PUNYA USER YANG LAGI LOGIN */}
         <TouchableOpacity
           style={styles.logout}
-          onPress={() => setIsLoggedIn(false)}
+          onPress={async () => {
+            await SecureStore.deleteItemAsync("access_token");
+            await SecureStore.deleteItemAsync("user_id");
+            await SecureStore.deleteItemAsync("role");
+            setIsLoggedIn(false);
+            navigation.navigate("Login");
+          }}
         >
-          <MaterialIcons
-            name="logout"
-            size={30}
-            color="black"
-            style={{ alignSelf: "flex-end", color: "#fff", padding: 10 }}
-          />
+            <MaterialIcons
+              name="logout"
+              size={30}
+              color="black"
+              style={{ alignSelf: "flex-end", color: "#fff", padding: 10 }}
+            />
         </TouchableOpacity>
         <Image
           source={{
@@ -41,22 +47,7 @@ const ProfileScreen = ({ navigation }) => {
         />
         <View style={{ justifyContent: "center" }}>
           <Text style={styles.textName}>{formatCapital("hAi jejeon DuT")}</Text>
-
           <Text style={styles.textEmail}>test@mail.com</Text>
-
-          <TouchableOpacity style={styles.logout}>
-            <Pressable
-              onPress={async () => {
-                await SecureStore.deleteItemAsync("access_token");
-                await SecureStore.deleteItemAsync("user_id");
-                await SecureStore.deleteItemAsync("role");
-                setIsLoggedIn(false);
-                navigation.navigate("Login");
-              }}
-            >
-              <Text style={{ color: "red" }}>Log Out</Text>
-            </Pressable>
-          </TouchableOpacity>
         </View>
       </View>
       <Text></Text>

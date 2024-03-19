@@ -12,7 +12,7 @@ import { useContext } from "react";
 
 const Tab = createBottomTabNavigator();
 export default function MainTab() {
-  const { userLoginRole } = useContext(LoginContext);
+  const { role } = useContext(LoginContext);
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -34,13 +34,13 @@ export default function MainTab() {
           } else if (route.name === "Profile") {
             iconName = focused ? "person" : "person-outline";
           }
-          // return <Ionicons name={iconName} size={size} color={color} />;
+          return <Ionicons name={iconName} size={size} color={color} />;
 
         },
         headerShown: false,
       })}
     >
-      {userLoginRole == "trainee" && (
+      {role == "Trainee" && (
         <Tab.Screen name="Home" component={HomeStack} />
       )}
 

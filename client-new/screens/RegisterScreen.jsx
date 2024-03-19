@@ -65,6 +65,8 @@ const RegisterScreen = ({ navigation }) => {
     setShowModalAvatar(!showModalAvatar);
   };
   return (
+    <KeyboardAvoidingView>
+    <TouchableWithoutFeedback>
     <View style={styles.container}>
       <View
         style={{
@@ -77,12 +79,7 @@ const RegisterScreen = ({ navigation }) => {
         <Text style={styles.title}>FitNow</Text>
       </View>
       <View style={{ alignItems: "center" }}>
-        <Pressable onPress={handleShowAvatar} style={{ alignItems: "center" }}>
-          <Image
-            source={{
-              uri: avatar,
-            }}
-          >
+        
             <Text style={styles.title}>FitNow</Text>
           </View>
           <View style={{ alignItems: "center" }}>
