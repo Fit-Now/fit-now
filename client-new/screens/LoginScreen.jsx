@@ -9,6 +9,8 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { LoginContext } from "../contexts/LoginContext";
 
@@ -25,9 +27,9 @@ const LoginScreen = ({ navigation }) => {
     onCompleted: async (item) => {
       const access_token = item.Login.token;
       await SecureStore.setItemAsync("role", item.Login.role);
-      setRole(item.Login.role) 
+      setRole(item.Login.role);
       await SecureStore.setItemAsync("access_token", access_token);
-      setUser(item.Login.userId)
+      setUser(item.Login.userId);
       await SecureStore.setItemAsync("user_id", item.Login.userId);
       setIsLoggedIn(true);
     },
@@ -83,8 +85,7 @@ const LoginScreen = ({ navigation }) => {
           </View>
         </KeyboardAvoidingView>
         <TouchableOpacity
-
-          onPress={ async() => await handleLogin()}
+          onPress={async () => await handleLogin()}
           style={{ alignItems: "center" }}
         >
           <View style={styles.buttom}>
@@ -147,4 +148,3 @@ const styles = StyleSheet.create({
     color: "#0765ff",
   },
 });
-
