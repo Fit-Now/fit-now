@@ -31,9 +31,7 @@ const ModalAfterSchedule = ({
             style={styles.button}
             onPress={handleNavigateToHome}
           >
-            <Text style={{ ...styles.textChatNow, color: "#fff" }}>
-              Chat Later
-            </Text>
+            <Text style={styles.textChatNow}>Chat Later</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -48,7 +46,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    backgroundColor: "#67C6E3",
+    backgroundColor: "#20488f",
     width: 0.7 * width,
     height: 0.3 * height,
     top: 0.35 * height,
@@ -64,9 +62,10 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     fontSize: 20,
     marginHorizontal: 50,
+    color: "#fff",
   },
   button: {
-    backgroundColor: "#67C6E3",
+    backgroundColor: "#f1f1f1",
     borderRadius: 20,
     padding: 10,
     marginHorizontal: 80,
@@ -76,7 +75,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   textChatNow: {
-    color: "blue",
+    color: "#20488f",
     fontWeight: "bold",
     fontSize: 18,
   },

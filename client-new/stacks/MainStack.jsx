@@ -7,15 +7,19 @@ import MainTab from "../navigations/MainTab";
 import { LoginContext } from "../contexts/LoginContext";
 import { useContext } from "react";
 import ChatRoomScreen from "../screens/ChatRoomScreen";
-import * as SecureStore from "expo-secure-store";
+import { View, Text, Pressable } from "react-native";
+import { Head } from "@react-navigation/native-stack";
+import RegisterTrainerScreen from "../screens/RegisterTrainerScreen";
+import HomeAdmScreen from "../screens/HomeAdmScreen";
 
 const Stack = createNativeStackNavigator();
 
+import * as SecureStore from "expo-secure-store";
+
 const MainStack = () => {
-  const { isLoggedIn, setIsLoggedIn, setUser, setRole } = useContext(LoginContext);
+  const { isLoggedIn, setIsLoggedIn, setUser, setRole, role } = useContext(LoginContext);
   (async () => {
       const access_token = await SecureStore.getItemAsync("access_token");
-      console.log(access_token);
       const userId = await SecureStore.getItemAsync("user_id");
       const role = await SecureStore.getItemAsync("role");
       if(access_token) setIsLoggedIn(true)
@@ -27,12 +31,53 @@ const MainStack = () => {
       <Stack.Navigator>
         {isLoggedIn ? (
           <>
-            <Stack.Screen
-              name=" "
-              component={MainTab}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen name="ChatRoom" component={ChatRoomScreen} />
+            {role !== "admin" ? (
+              <>
+                <Stack.Screen
+                  name=" "
+                  component={MainTab}
+                  options={{ headerShown: false }}
+                />
+
+                <Stack.Screen
+                  name="ChatRoom"
+                  component={ChatRoomScreen}
+                  // options={{
+                  //   headerLeft: ({ props, navigation }) => (
+                  //     <HeaderBackButton
+                  //       {...props}
+                  //       onPress={() => {
+                  //         navigation.navigate("Chat");
+                  //       }}
+                  //     />
+                  //   ),
+                  // }}
+                  options={({ navigation }) => ({
+                    headerLeft: () => (
+                      <Pressable onPress={() => navigation.navigate("Chat")}>
+                        <Text style={{ fontSize: 18, color: "blue" }}>
+                          Back
+                        </Text>
+                      </Pressable>
+                      // <HeaderBackButton />
+                    ),
+                  })}
+                />
+              </>
+            ) : (
+              <>
+                <Stack.Screen
+                  name="HomeAdm"
+                  component={HomeAdmScreen}
+                  options={{ title: "Trainer List" }}
+                />
+                <Stack.Screen
+                  name="RegisterAdm"
+                  component={RegisterTrainerScreen}
+                  options={{ title: "Add Trainer" }}
+                />
+              </>
+            )}
           </>
         ) : (
           <>

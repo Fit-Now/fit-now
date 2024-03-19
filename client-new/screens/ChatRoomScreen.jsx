@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect, useState } from "react";
 
 import {
@@ -12,6 +11,7 @@ import {
   TouchableOpacity,
   ScrollView,
   ImageBackground,
+  KeyboardAvoidingView,
 } from "react-native";
 // import { Feather } from "@expo/vector-icons";
 import {
@@ -27,7 +27,6 @@ import { db } from "../connection/fireBaseConfig";
 import { useFocusEffect } from "@react-navigation/native";
 import { LoginContext } from "../contexts/LoginContext";
 import { v4 as uuid } from "uuid";
-
 
 const { height, width } = Dimensions.get("screen");
 // DIBIKIN ANY DULU, NANTI DIGANTI
@@ -74,7 +73,7 @@ export default function ChatRoomScreen({ route }) {
           text,
           senderId: currentUser.uid,
           date: Timestamp.now(),
-        })
+        }),
       };
 
       const docRef = doc(db, "chats", currentUser);
@@ -83,26 +82,25 @@ export default function ChatRoomScreen({ route }) {
         await setDoc(docRef, {
           messages: arrayUnion({
             id: Math.random().toString(36).substring(7),
-            text : chat,
+            text: chat,
             senderId: user,
             date: Timestamp.now(),
-          })
+          }),
         });
       } else {
         await updateDoc(docRef, {
           messages: arrayUnion({
             id: Math.random(),
-            text : chat,
+            text: chat,
             senderId: user,
             date: Timestamp.now(),
-          })
+          }),
         });
       }
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(user);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.chatTab}>
@@ -133,105 +131,107 @@ export default function ChatRoomScreen({ route }) {
         style={{
           flex: 1,
           paddingTop: 5,
+          gap: 10
+
         }}
       >
-
-        {chats?.map((chat, idx) => (
-          <View>
-            <Text>{chat.text}</Text>
-          </View>
-        ))}
-
-{/* //         {chats?.map((el, idx) => {
-//           return idx % 2 != 0 ? (
-//             <View
-//               style={{ alignSelf: "flex-start", paddingHorizontal: 10 }}
-//               key={idx}
-//             >
-//               <Text style={styles.chatName}>Nama</Text>
-//               <Text
-//                 style={{
-//                   ...styles.chatContainer,
-//                   alignSelf: "flex-start",
-//                   borderColor: "green",
-//                 }}
-//               >
-//                 {el}
-//               </Text>
-//             </View>
-//           ) : (
-//             <View style={{ alignSelf: "flex-end", paddingHorizontal: 10 }}>
-//               <Text style={{ ...styles.chatName, alignSelf: "flex-end" }}>
-//                 Nama
-//               </Text>
-//               <Text
-//                 style={{
-//                   ...styles.chatContainer,
-
-//                   borderColor: "blue",
-//                 }}
-//               >
-//                 {el}
-//               </Text>
-//             </View>
-//           );
-//         })} */}
+       
+        {chats?.map((chat, idx) =>
+          user === chat.senderId ? (
+            <View
+              style={{
+                width: 200,
+                padding: 10,
+                margin: 2,
+                backgroundColor: "white",
+                borderRadius: 10,
+                marginLeft: width/2 -10
+              }}
+              key={chat.id}
+            >
+              <Text>{chat.text}</Text>
+            </View>
+          ) : (
+            <View
+              style={{
+                width: 200,
+                padding: 10,
+                margin: 2,
+                marginLeft: 10,
+                backgroundColor: "white",
+                borderRadius: 10
+              }}
+              key={chat.id}
+            >
+              <Text>{chat.text}</Text>
+            </View>
+          )
+        )}
       </ScrollView>
-
-      <View
-        style={{
-          // position: "absolute",
-          flexDirection: "row",
-          alignItems: "center",
-          // bottom: 0,
-          gap: 3,
-          // height: 300,
-          marginBottom: 80,
-        }}
+      <KeyboardAvoidingView
+        behavior="padding"
+        // keyboardVerticalOffset={60}
+        // style={{ flex: 1 }}
       >
         <View
           style={{
-            backgroundColor: "#fff",
+            // position: "absolute",
             flexDirection: "row",
-            alignItems: "flex-start",
-            width,
-            height: 80,
-            borderTopWidth: 0.2,
+            alignItems: "center",
+            // bottom: 0,
+            gap: 3,
+            // height: 300,
+            marginBottom: 100,
           }}
         >
-          <TextInput
+          <View
             style={{
-              padding: 10,
-              margin: 1,
-              borderRadius: 20,
-              fontSize: 18,
-              borderWidth: 1,
-              width: 0.85 * width,
-              borderColor: "gray",
-              marginLeft: 10,
-              marginTop: 14,
+              backgroundColor: "#fff",
+              flexDirection: "row",
+              alignItems: "flex-start",
+              width,
+              height: 80,
+              borderTopWidth: 0.2,
             }}
+
             onChangeText={(v) => setChat(v)}
           />
           <TouchableOpacity
-
             onPress={() => onSendMessage()}
-
             style={{ marginTop: 20, margin: 1 }}
           >
-            {/* <Text>O</Text> */}
-            <Feather
-              name="send"
-              size={30}
-              color={"#0765ff"}
+            <TextInput
               style={{
-                paddingHorizontal: 5,
-                textAlign: "center",
+                padding: 10,
+                margin: 1,
+                borderRadius: 20,
+                fontSize: 18,
+                borderWidth: 1,
+                width: 0.85 * width,
+                borderColor: "gray",
+                marginLeft: 10,
+                marginTop: 14,
               }}
+              onChangeText={(v) => setChat(v)}
             />
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setChats([...chats, chat])}
+              style={{ marginTop: 20, margin: 1 }}
+            >
+              {/* <Text>O</Text> */}
+              <Feather
+                name="send"
+                size={30}
+                color={"#0765ff"}
+                style={{
+                  paddingHorizontal: 5,
+                  textAlign: "center",
+                }}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 20,
-    backgroundColor: "#67C6E3",
+    backgroundColor: "#20488f",
     // marginBottom: 10,
   },
   categoryImage: {
@@ -263,6 +263,7 @@ const styles = StyleSheet.create({
   textName: {
     fontSize: 18,
     fontWeight: "bold",
+    color: "#fff",
   },
   chatContainer: {
     // backgroundColor: "gray",

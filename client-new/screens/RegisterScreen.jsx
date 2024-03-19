@@ -7,6 +7,10 @@ import {
   Pressable,
   Image,
   Dimensions,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { useState } from "react";
 import ModalAvatar from "../components/ModalAvatar";
@@ -41,7 +45,7 @@ const RegisterScreen = ({ navigation }) => {
             name,
             email,
             password,
-            imageUrl : avatar,
+            imageUrl: avatar,
           },
         },
       });
@@ -50,14 +54,12 @@ const RegisterScreen = ({ navigation }) => {
     }
     // VARIABLE YANG AKAN DIBUTUHKAN UNTUK REGISTER
   };
-  console.log(name, email, password, avatar);
 
   // const handleRole = (id) => {
   //   // dapetin valuenya dari id di radiobutton
   //   setSelectedId(id);
   //   // console.log(selectedId, "<< di register");
   // };
-  console.log(error);
 
   const handleShowAvatar = () => {
     setShowModalAvatar(!showModalAvatar);
@@ -66,8 +68,8 @@ const RegisterScreen = ({ navigation }) => {
     <View style={styles.container}>
       <View
         style={{
-          marginTop: 50,
-          marginBottom: 30,
+          marginTop: 30,
+          marginBottom: 20,
           alignItems: "center",
           // backgroundColor: "gray",
         }}
@@ -80,59 +82,72 @@ const RegisterScreen = ({ navigation }) => {
             source={{
               uri: avatar,
             }}
-            style={styles.categoryImage}
-          />
-          <Text
-            style={{ alignSelf: "center", marginBottom: 20, color: "blue" }}
           >
-            Choose your avatar!
-          </Text>
+            <Text style={styles.title}>FitNow</Text>
+          </View>
+          <View style={{ alignItems: "center" }}>
+            <Pressable
+              onPress={handleShowAvatar}
+              style={{ alignItems: "center" }}
+            >
+              <Image
+                source={{
+                  uri: avatar,
+                }}
+                style={styles.categoryImage}
+              />
+              <Text
+                style={{ alignSelf: "center", marginBottom: 20, color: "blue" }}
+              >
+                Choose your avatar!
+              </Text>
 
-          {/* MODAL AVATAR */}
-          {showModalAvatar && (
-            <ModalAvatar
-              handleShowAvatar={handleShowAvatar}
-              setAvatar={setAvatar}
+              {/* MODAL AVATAR */}
+              {showModalAvatar && (
+                <ModalAvatar
+                  handleShowAvatar={handleShowAvatar}
+                  setAvatar={setAvatar}
+                />
+              )}
+            </Pressable>
+
+            <TextInput
+              style={styles.inputLabel}
+              placeholder="Name"
+              onChangeText={setName}
             />
-          )}
-        </Pressable>
-        <TextInput
-          style={styles.inputLabel}
-          placeholder="Name"
-          onChangeText={setName}
-        />
-        <TextInput
-          style={styles.inputLabel}
-          placeholder="Email"
-          onChangeText={setEmail}
-        />
-        <TextInput
-          style={styles.inputLabel}
-          secureTextEntry
-          placeholder="Password"
-          onChangeText={setPassword}
-        />
-        {/* <TextInput style={styles.inputLabel} placeholder="Status" /> */}
-      </View>
-      <TouchableOpacity
-        style={{ alignItems: "center" }}
-        onPress={handleRegister}
-      >
-        <View style={styles.button}>
-          <Text style={styles.textBottom}>Register</Text>
+            <TextInput
+              style={styles.inputLabel}
+              placeholder="Email"
+              onChangeText={setEmail}
+            />
+            <TextInput
+              style={styles.inputLabel}
+              secureTextEntry
+              placeholder="Password"
+              onChangeText={setPassword}
+            />
+            {/* <TextInput style={styles.inputLabel} placeholder="Status" /> */}
+          </View>
+
+          <TouchableOpacity
+            style={{ alignItems: "center" }}
+            onPress={handleRegister}
+          >
+            <View style={styles.button}>
+              <Text style={styles.textBottom}>Register</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <View
+              style={{
+                justifyContent: "center",
+              }}
+            ></View>
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <View
-          style={{
-            margin: 12,
-            padding: 10,
-            justifyContent: "center",
-            marginBottom: 170,
-          }}
-        ></View>
-      </TouchableOpacity>
-    </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -142,14 +157,14 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
     flex: 1,
-    minHeight: height,
+    justifyContent: "space-around",
   },
   inputLabel: {
     height: 50,
     width: 300,
     margin: 12,
     borderWidth: 2,
-    borderColor: "#67C6E3",
+    borderColor: "#20488f",
     borderRadius: 10,
     padding: 10,
     fontSize: 18,
@@ -166,7 +181,7 @@ const styles = StyleSheet.create({
     width: 300,
     margin: 12,
     padding: 10,
-    backgroundColor: "#67C6E3",
+    backgroundColor: "#20488f",
     borderRadius: 10,
     justifyContent: "center",
   },
@@ -176,9 +191,9 @@ const styles = StyleSheet.create({
     color: "#0765ff",
   },
   title: {
-    fontSize: 80,
+    fontSize: 60,
     fontWeight: "bold",
-    color: "#67C6E3",
+    color: "#20488f",
   },
   categoryImage: {
     width: 100,
@@ -187,4 +202,3 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
-

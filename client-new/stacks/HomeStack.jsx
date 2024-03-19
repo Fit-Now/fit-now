@@ -1,11 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
 import ChatRoomScreen from "../screens/ChatRoomScreen";
 import HomeScreen from "../screens/HomeScreen";
-
 import ScheduleListScreen from "../screens/ScheduleListScreen";
 import SummarizeScreen from "../screens/SummarizeScreen";
+import ListCoach from "../screens/ListCoach";
 
 import Maps from "../screens/Maps";
 
@@ -17,9 +16,9 @@ const HomeStack = () => {
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{ title: "Home" }}
-        // options={{ headerShown: false }}
+        options={{ title: "Home", headerShown: false }}
       />
+      <Stack.Screen name="ListCoach" component={ListCoach} />
       <Stack.Screen
         name="Schedule"
         component={ScheduleListScreen}

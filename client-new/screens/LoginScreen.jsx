@@ -7,6 +7,10 @@ import {
   TouchableOpacity,
   View,
   Dimensions,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { LoginContext } from "../contexts/LoginContext";
 
@@ -23,9 +27,9 @@ const LoginScreen = ({ navigation }) => {
     onCompleted: async (item) => {
       const access_token = item.Login.token;
       await SecureStore.setItemAsync("role", item.Login.role);
-      setRole(item.Login.role) 
+      setRole(item.Login.role);
       await SecureStore.setItemAsync("access_token", access_token);
-      setUser(item.Login.userId)
+      setUser(item.Login.userId);
       await SecureStore.setItemAsync("user_id", item.Login.userId);
       setIsLoggedIn(true);
     },
@@ -45,41 +49,43 @@ const LoginScreen = ({ navigation }) => {
   return (
     <>
       <View style={styles.container}>
-        <View
-          style={{
-            marginTop: 145,
-            marginBottom: 80,
-            alignItems: "center",
-            // backgroundColor: "gray",
-          }}
+        <KeyboardAvoidingView
+          style={styles.keyboardViewContainer}
+          behavior={Platform.OS === "ios" ? "padding" : null}
         >
-          <Text
+          <View
             style={{
-              fontSize: 80,
-              fontWeight: "bold",
-              color: "#67C6E3",
+              marginTop: 125,
+              alignItems: "center",
+              // backgroundColor: "gray",
             }}
           >
-            FitNow
-          </Text>
-        </View>
-
-        <View style={{ alignItems: "center" }}>
-          <TextInput
-            onChangeText={setEmail}
-            style={styles.inputLabel}
-            placeholder="Email"
-          />
-          <TextInput
-            onChangeText={setPassword}
-            style={styles.inputLabel}
-            secureTextEntry
-            placeholder="Password"
-          />
-        </View>
+            <Text
+              style={{
+                fontSize: 60,
+                fontWeight: "bold",
+                color: "#20488f",
+              }}
+            >
+              FitNow
+            </Text>
+          </View>
+          <View style={{ alignItems: "center" }}>
+            <TextInput
+              onChangeText={setEmail}
+              style={styles.inputLabel}
+              placeholder="Email"
+            />
+            <TextInput
+              onChangeText={setPassword}
+              style={styles.inputLabel}
+              secureTextEntry
+              placeholder="Password"
+            />
+          </View>
+        </KeyboardAvoidingView>
         <TouchableOpacity
-
-          onPress={ async() => await handleLogin()}
+          onPress={async () => await handleLogin()}
           style={{ alignItems: "center" }}
         >
           <View style={styles.buttom}>
@@ -115,7 +121,7 @@ const styles = StyleSheet.create({
     width: 300,
     margin: 12,
     borderWidth: 2,
-    borderColor: "#67C6E3",
+    borderColor: "#20488f",
     borderRadius: 10,
     padding: 10,
     fontSize: 18,
@@ -132,7 +138,7 @@ const styles = StyleSheet.create({
     width: 300,
     margin: 12,
     padding: 10,
-    backgroundColor: "#67C6E3",
+    backgroundColor: "#20488f",
     borderRadius: 10,
     justifyContent: "center",
   },
@@ -142,4 +148,3 @@ const styles = StyleSheet.create({
     color: "#0765ff",
   },
 });
-
