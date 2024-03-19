@@ -11,6 +11,7 @@ import HomeScreen from "../screens/HomeScreen";
 
 import ScheduleListScreen from "../screens/ScheduleListScreen";
 import SummarizeScreen from "../screens/SummarizeScreen";
+import Maps from "../screens/Maps";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,11 @@ const HomeStack = () => {
       <Stack.Screen
         name="Summarize"
         component={SummarizeScreen}
+        // options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Maps"
+        component={Maps}
         // options={{ headerShown: false }}
       />
       <Stack.Screen name="Chat" component={ChatRoomScreen} />

@@ -11,7 +11,7 @@ import {
   ScrollView,
   ImageBackground,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
+// import { Feather } from "@expo/vector-icons";
 import { RouteProp } from "@react-navigation/native";
 
 const { height, width } = Dimensions.get("screen");
