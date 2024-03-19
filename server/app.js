@@ -9,6 +9,7 @@ const { locationTypeDefs, locationResolvers } = require("./schemas/location");
 const { UserSchedulesTypeDefs, UserSchedulesResolvers } = require("./schemas/UserScheduled");
 const { SchdulesTypeDefs, SchdulesResolvers } = require("./schemas/schedules");
 
+
 const PORT = 3000;
 
 const server = new ApolloServer({

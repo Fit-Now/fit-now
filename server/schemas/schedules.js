@@ -1,6 +1,7 @@
 const { findAllSchedules, AddSchedules } = require("../models/schedules")
 
 
+
 const typeDefs = `#graphql
 
 type Schedule {
@@ -50,3 +51,4 @@ module.exports = {
     SchdulesTypeDefs: typeDefs,
     SchdulesResolvers: resolvers
 }
+

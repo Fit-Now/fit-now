@@ -43,6 +43,7 @@ const authentication = async (req) => {
     name: user.name,
     userEmail: user.email,
     status: user.status
+
   };
 };
 

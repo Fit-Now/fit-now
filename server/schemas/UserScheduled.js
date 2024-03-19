@@ -4,6 +4,7 @@ const {
   AddUserSchedule,
 } = require("../models/UserScheduled");
 
+
 const typeDefs = `#graphql
 
 type UserSchedule {
@@ -64,3 +65,4 @@ module.exports = {
   UserSchedulesTypeDefs: typeDefs,
   UserSchedulesResolvers: resolvers,
 };
+

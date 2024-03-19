@@ -1,5 +1,6 @@
 const { findAllLocations, addLocation } = require("../models/locations");
 
+
 const typeDefs = `#graphql
 
 type Location {
@@ -20,6 +21,7 @@ input AddNewLocation{
   imageUrl: [String]
   longitude: Float
   latitude: Float
+
 }
 
 type Query {
@@ -29,6 +31,7 @@ type Query {
 type Mutation {
   addLocation(payload: AddNewLocation): Location
 }
+
 
 
 `;
@@ -49,6 +52,7 @@ const resolvers = {
       return locations;
     },
   },
+
 };
 
 module.exports = {

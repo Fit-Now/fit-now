@@ -11,6 +11,7 @@ type Coach {
     locationId: ID
     email: String
     imgUrl: String
+
 }
 
 input AddNewCoach {
