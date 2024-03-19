@@ -18,12 +18,17 @@ export const LoginContext = createContext();
 export const LoginProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const [user, setUser] = useState('');
+  const [role, setRole] = useState('');
+
+
   // const contextValue = {
   //   setIsLoggedIn: setIsLoggedIn,
   //   isLoggedIn: isLoggedIn,
   // };
   return (
-    <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+
+    <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn, user, setUser, role, setRole }}>
       {children}
     </LoginContext.Provider>
   );

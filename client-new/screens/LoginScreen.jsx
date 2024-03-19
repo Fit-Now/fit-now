@@ -10,16 +10,37 @@ import {
 } from "react-native";
 import { LoginContext } from "../contexts/LoginContext";
 
+import { useMutation } from "@apollo/client";
+import * as SecureStore from "expo-secure-store";
+import { LOGIN } from "../queries";
+
 const { width, height } = Dimensions.get("screen");
 const LoginScreen = ({ navigation }) => {
-  const { setIsLoggedIn } = useContext(LoginContext);
+  const { setIsLoggedIn, setUser, setRole } = useContext(LoginContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-
-    console.log(email, password);
+  const [loginDispatcher, { data, error, loading }] = useMutation(LOGIN, {
+    onCompleted: async (item) => {
+      const access_token = item.Login.token;
+      await SecureStore.setItemAsync("role", item.Login.role);
+      setRole(item.Login.role) 
+      await SecureStore.setItemAsync("access_token", access_token);
+      setUser(item.Login.userId)
+      await SecureStore.setItemAsync("user_id", item.Login.userId);
+      setIsLoggedIn(true);
+    },
+  });
+  const handleLogin = async () => {
+    try {
+      await loginDispatcher({
+        variables: {
+          email,
+          password,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>
@@ -42,6 +63,7 @@ const LoginScreen = ({ navigation }) => {
             FitNow
           </Text>
         </View>
+
         <View style={{ alignItems: "center" }}>
           <TextInput
             onChangeText={setEmail}
@@ -56,7 +78,8 @@ const LoginScreen = ({ navigation }) => {
           />
         </View>
         <TouchableOpacity
-          onPress={handleLogin}
+
+          onPress={ async() => await handleLogin()}
           style={{ alignItems: "center" }}
         >
           <View style={styles.buttom}>
@@ -119,3 +142,4 @@ const styles = StyleSheet.create({
     color: "#0765ff",
   },
 });
+
