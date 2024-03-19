@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   View,
   Dimensions,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { LoginContext } from "../contexts/LoginContext";
 
@@ -24,37 +26,42 @@ const LoginScreen = ({ navigation }) => {
   return (
     <>
       <View style={styles.container}>
-        <View
-          style={{
-            marginTop: 145,
-            marginBottom: 80,
-            alignItems: "center",
-            // backgroundColor: "gray",
-          }}
+        <KeyboardAvoidingView
+          style={styles.keyboardViewContainer}
+          behavior={Platform.OS === "ios" ? "padding" : null}
         >
-          <Text
+          <View
             style={{
-              fontSize: 80,
-              fontWeight: "bold",
-              color: "#67C6E3",
+              marginTop: 145,
+              marginBottom: 80,
+              alignItems: "center",
+              // backgroundColor: "gray",
             }}
           >
-            FitNow
-          </Text>
-        </View>
-        <View style={{ alignItems: "center" }}>
-          <TextInput
-            onChangeText={setEmail}
-            style={styles.inputLabel}
-            placeholder="Email"
-          />
-          <TextInput
-            onChangeText={setPassword}
-            style={styles.inputLabel}
-            secureTextEntry
-            placeholder="Password"
-          />
-        </View>
+            <Text
+              style={{
+                fontSize: 80,
+                fontWeight: "bold",
+                color: "#67C6E3",
+              }}
+            >
+              FitNow
+            </Text>
+          </View>
+          <View style={{ alignItems: "center" }}>
+            <TextInput
+              onChangeText={setEmail}
+              style={styles.inputLabel}
+              placeholder="Email"
+            />
+            <TextInput
+              onChangeText={setPassword}
+              style={styles.inputLabel}
+              secureTextEntry
+              placeholder="Password"
+            />
+          </View>
+        </KeyboardAvoidingView>
         <TouchableOpacity
           onPress={handleLogin}
           style={{ alignItems: "center" }}
