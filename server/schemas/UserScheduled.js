@@ -13,7 +13,7 @@ type UserSchedule {
     ScheduleId: ID
     startDate: String
     endDate: String
-    roomChatId: ID
+    roomChatId: String
     LocationId: ID
     CategoryId: ID
 }
@@ -23,6 +23,7 @@ input AddUserSchedule {
     ScheduleId: ID
     LocationId: ID
     duration: Int
+    CategoryId: ID
 }
 
 

@@ -43,12 +43,13 @@ function settingEndDate(n) {
 }
 
 const AddUserSchedule = async (payload) => {
-  payload.CoachId = new ObjectId(payload.CoachId)
-  payload.ScheduleId = new ObjectId(payload.ScheduleId)
-  payload.LocationId = new ObjectId(payload.LocationId)
-
+  payload.roomChatId = payload.UserId + payload.CoachId;
+  payload.CoachId = new ObjectId(payload.CoachId);
+  payload.ScheduleId = new ObjectId(payload.ScheduleId);
+  payload.LocationId = new ObjectId(payload.LocationId);
+  payload.CategoryId = new ObjectId(payload.CategoryId);
   payload.startDate = new Date();
-  
+
   if (payload.duration === 7) {
     payload.endDate = settingEndDate(7);
   } else if (payload.duration === 14) {
@@ -56,8 +57,8 @@ const AddUserSchedule = async (payload) => {
   } else if (payload.duration === 21) {
     payload.endDate = settingEndDate(21);
   }
-  delete payload.duration
-  
+  delete payload.duration;
+
   const userScheduleCollection = await getUserScheduleCollection();
   const newUserSchedules = await userScheduleCollection.insertOne(payload);
 
@@ -74,5 +75,5 @@ module.exports = {
   getUserScheduleCollection,
   findAllUserSchedules,
   findUserScheduleById,
-  AddUserSchedule
+  AddUserSchedule,
 };
