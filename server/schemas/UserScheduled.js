@@ -4,6 +4,7 @@ const {
   AddUserSchedule,
 } = require("../models/UserScheduled");
 
+
 const typeDefs = `#graphql
 
 type UserSchedule {
@@ -26,6 +27,52 @@ input AddUserSchedule {
     CategoryId: ID
 }
 
+input AddUserSchedule {
+    UserId: ID
+    CoachId: ID
+    ScheduleId: ID
+    LocationId: ID
+    duration: Int
+}
+
+
+type Query {
+    getAllUserSchedule: [UserSchedule]
+    getUserScheduleById(userScheduleId: ID): UserSchedule
+}
+
+type Mutation {
+    AddNewUserSchedule(payload: AddUserSchedule): UserSchedule
+}
+
+`;
+
+const resolvers = {
+  Query: {
+    getAllUserSchedule: async () => {
+      const schedules = await findAllUserSchedules();
+      return schedules;
+    },
+    getUserScheduleById: async (_parents, args) => {
+      const schedules = await findUserScheduleById(args.userScheduleId);
+
+      return schedules;
+    },
+  },
+  Mutation: {
+    AddNewUserSchedule: async (_parents, args) => {
+      const { payload } = args;
+      const newUserSchedules = await AddUserSchedule(payload);
+
+      return newUserSchedules;
+    },
+  },
+};
+
+module.exports = {
+  UserSchedulesTypeDefs: typeDefs,
+  UserSchedulesResolvers: resolvers,
+};
 
 type Query {
     getAllUserSchedule: [UserSchedule]
@@ -68,3 +115,4 @@ module.exports = {
   UserSchedulesTypeDefs: typeDefs,
   UserSchedulesResolvers: resolvers,
 };
+

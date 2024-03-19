@@ -13,6 +13,7 @@ const findAllSchedules = async () => {
       $lookup: {
         from: "Coachs",
         localField: "sport",
+
         foreignField: "sport",
         as: "Coachs",
       },
@@ -27,6 +28,7 @@ const findAllSchedules = async () => {
 const findScheduleBySport = async (sport) => {
   const schedules = await getScheduleCollection().findOne({ sport });
   return schedules;
+
 };
 
 const AddSchedules = async (payload) => {
@@ -44,4 +46,5 @@ module.exports = {
   findAllSchedules,
   AddSchedules,
   findScheduleBySport,
+
 };

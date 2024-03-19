@@ -1,5 +1,6 @@
 const { findAllLocations, addLocation } = require("../models/locations");
 
+
 const typeDefs = `#graphql
 
 type Location {
@@ -21,6 +22,7 @@ input AddNewLocation{
   longitude: Float
   latitude: Float
   address: String
+
 }
 
 type Query {
@@ -30,6 +32,7 @@ type Query {
 type Mutation {
   addLocation(payload: AddNewLocation): Location
 }
+
 
 
 `;
@@ -45,12 +48,14 @@ const resolvers = {
   Mutation: {
     addLocation: async (_parents, args, contextValue) => {
       const userLogin = await contextValue.auth();
+
       const { payload } = args;
       const locations = await addLocation(payload);
 
       return locations;
     },
   },
+
 };
 
 module.exports = {

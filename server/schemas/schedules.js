@@ -1,5 +1,7 @@
 const { findAllSchedules, AddSchedules, findScheduleBySport } = require("../models/schedules");
 
+
+
 const typeDefs = `#graphql
 
 type Schedule {
@@ -9,6 +11,7 @@ type Schedule {
     decription: [String]
     Coachs: [Coach]
     CategoryId: ID
+
 }
 
 type Query {
@@ -58,3 +61,4 @@ module.exports = {
   SchdulesTypeDefs: typeDefs,
   SchdulesResolvers: resolvers,
 };
+

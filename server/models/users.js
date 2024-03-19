@@ -73,6 +73,7 @@ const searchUserByEmail = async (email) => {
 
   console.log(users, "ini users");
 
+
   return users;
 };
 
@@ -113,6 +114,7 @@ module.exports = {
   addUser,
   getCollection,
   searchUserByEmail,
+
   getOneUserById,
   addCoach,
   findAllUserCoach,

@@ -50,6 +50,7 @@ const AddUserSchedule = async (payload) => {
   payload.CategoryId = new ObjectId(payload.CategoryId);
   payload.startDate = new Date();
 
+
   if (payload.duration === 7) {
     payload.endDate = settingEndDate(7);
   } else if (payload.duration === 14) {
@@ -58,6 +59,7 @@ const AddUserSchedule = async (payload) => {
     payload.endDate = settingEndDate(21);
   }
   delete payload.duration;
+
 
   const userScheduleCollection = await getUserScheduleCollection();
   const newUserSchedules = await userScheduleCollection.insertOne(payload);
@@ -76,4 +78,5 @@ module.exports = {
   findAllUserSchedules,
   findUserScheduleById,
   AddUserSchedule,
+
 };

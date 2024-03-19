@@ -1,4 +1,5 @@
 const { ObjectId } = require("mongodb");
+
 const { getDatabase } = require("../config/mongoConnection");
 
 const getLocationCollection = () => {
@@ -32,6 +33,7 @@ const findAllLocations = async () => {
         preserveNullAndEmptyArrays: true,
       },
     },
+
   ];
 
   const locations = await getLocationCollection().aggregate(agg).toArray();
@@ -45,6 +47,7 @@ const addLocation = async (payload) => {
   const locationCollection = await getLocationCollection();
   const newLocation = await locationCollection.insertOne(payload);
 
+
   const locations = await locationCollection.findOne({
     _id: new ObjectId(newLocation.insertedId),
   });
@@ -56,4 +59,5 @@ module.exports = {
   getLocationCollection,
   findAllLocations,
   addLocation,
+
 };

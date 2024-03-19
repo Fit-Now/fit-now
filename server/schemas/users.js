@@ -1,4 +1,5 @@
 
+
 const { GraphQLError } = require("graphql");
 const {
   findAllUser,
@@ -22,6 +23,7 @@ type User {
     status: String
     password: String
     role: String
+
     Coach: [Coach]
 }
 
@@ -32,6 +34,7 @@ type UserCoach {
     email: String!
     password: String
     role: String
+
     Description: Coach
 }
 
@@ -39,11 +42,14 @@ input RegisterInput {
   name: String!
   email: String!
   password: String!
+
   imageUrl: String
 }
 
 type LoginOutput {
   token: String
+  userId: ID
+  role: String
 }
 
 type Query {
@@ -51,6 +57,7 @@ type Query {
   getUserById(userId: ID!):User
   getAllUserCoach: [UserCoach]
   getUserByEmail(email: String): User
+
 }
 
 type Mutation {
@@ -88,12 +95,14 @@ const resolvers = {
       return users;
     },
 
+
   },
 
   Mutation: {
     Register: async (_parents, args) => {
       const { payload } = args;
       const { name, email, password, imageUrl } = payload;
+
 
       if (!name) {
         throw new GraphQLError("Name is required", {
@@ -161,6 +170,7 @@ const resolvers = {
       const { payload } = args;
       const { name, email, password, imageUrl } = payload;
 
+
       if (!name) {
         throw new GraphQLError("Name is required", {
           extensions: {
@@ -217,6 +227,7 @@ const resolvers = {
           },
         });
       }
+
       const newUser = await addCoach(payload);
 
       return newUser;
@@ -254,7 +265,7 @@ const resolvers = {
 
       const token = generateToken(payload);
 
-      return { token };
+      return { userId: users._id, role: users.role, token };
     },
   },
 };
