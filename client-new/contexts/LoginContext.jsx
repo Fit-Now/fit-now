@@ -17,6 +17,7 @@ import React from "react";
 export const LoginContext = createContext();
 export const LoginProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // value dari userLoginInfo = "trainee" atau "trainer" atau "admin"
   const [userLoginRole, setUserLoginRole] = useState("trainee");
 
   // const contextValue = {

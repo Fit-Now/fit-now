@@ -31,7 +31,8 @@ const RegisterTrainerScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [value, setValue] = useState(null);
+  const [categoryValue, setCategoryValue] = useState(null);
+  const [locationValue, setLocationValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
   const handleRegister = () => {
@@ -86,11 +87,11 @@ const RegisterTrainerScreen = ({ navigation }) => {
           valueField="value"
           placeholder={!isFocus ? "Select Category" : "..."}
           searchPlaceholder="Search..."
-          value={value}
+          value={categoryValue}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
           onChange={(item) => {
-            setValue(item.value);
+            setCategoryValue(item.value);
             setIsFocus(false);
           }}
         />
@@ -106,11 +107,11 @@ const RegisterTrainerScreen = ({ navigation }) => {
           valueField="value"
           placeholder={!isFocus ? "Select location" : "..."}
           searchPlaceholder="Search..."
-          value={value}
+          value={locationValue}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
           onChange={(item) => {
-            setValue(item.value);
+            setLocationValue(item.value);
             setIsFocus(false);
           }}
         />

@@ -16,39 +16,59 @@ const Stack = createNativeStackNavigator();
 
 const MainStack = ({}) => {
   const { isLoggedIn } = useContext(LoginContext);
+  const { userLoginRole } = useContext(LoginContext);
   return (
     <NavigationContainer>
       <Stack.Navigator>
         {isLoggedIn ? (
           <>
-            <Stack.Screen
-              name=" "
-              component={MainTab}
-              options={{ headerShown: false }}
-            />
+            {userLoginRole !== "admin" ? (
+              <>
+                <Stack.Screen
+                  name=" "
+                  component={MainTab}
+                  options={{ headerShown: false }}
+                />
 
-            <Stack.Screen
-              name="ChatRoom"
-              component={ChatRoomScreen}
-              // options={{
-              //   headerLeft: ({ props, navigation }) => (
-              //     <HeaderBackButton
-              //       {...props}
-              //       onPress={() => {
-              //         navigation.navigate("Chat");
-              //       }}
-              //     />
-              //   ),
-              // }}
-              options={({ navigation }) => ({
-                headerLeft: () => (
-                  <Pressable onPress={() => navigation.navigate("Chat")}>
-                    <Text style={{ fontSize: 18, color: "blue" }}>Back</Text>
-                  </Pressable>
-                  // <HeaderBackButton />
-                ),
-              })}
-            />
+                <Stack.Screen
+                  name="ChatRoom"
+                  component={ChatRoomScreen}
+                  // options={{
+                  //   headerLeft: ({ props, navigation }) => (
+                  //     <HeaderBackButton
+                  //       {...props}
+                  //       onPress={() => {
+                  //         navigation.navigate("Chat");
+                  //       }}
+                  //     />
+                  //   ),
+                  // }}
+                  options={({ navigation }) => ({
+                    headerLeft: () => (
+                      <Pressable onPress={() => navigation.navigate("Chat")}>
+                        <Text style={{ fontSize: 18, color: "blue" }}>
+                          Back
+                        </Text>
+                      </Pressable>
+                      // <HeaderBackButton />
+                    ),
+                  })}
+                />
+              </>
+            ) : (
+              <>
+                <Stack.Screen
+                  name="HomeAdm"
+                  component={HomeAdmScreen}
+                  options={{ title: "Trainer List" }}
+                />
+                <Stack.Screen
+                  name="RegisterAdm"
+                  component={RegisterTrainerScreen}
+                  options={{ title: "Add Trainer" }}
+                />
+              </>
+            )}
           </>
         ) : (
           <>
@@ -62,9 +82,7 @@ const MainStack = ({}) => {
               component={LoginScreen}
               options={{ headerShown: false }}
             />
-            {/* <Stack.Screen name="Register" component={RegisterScreen} /> */}
-            <Stack.Screen name="Register" component={RegisterTrainerScreen} />
-            <Stack.Screen name="HomeAdm" component={HomeAdmScreen} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
           </>
         )}
       </Stack.Navigator>

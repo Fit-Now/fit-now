@@ -1,6 +1,8 @@
 import React from "react";
 import { Dimensions, FlatList, Image, Text, View } from "react-native";
+import gambar1 from "../assets/fitnow.jpg";
 
+const image = gambar1;
 const Carousel = () => {
   const screenWidth = Dimensions.get("window").width;
   const carouselData = [

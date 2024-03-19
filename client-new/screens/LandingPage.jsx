@@ -17,7 +17,7 @@ const LandingPage = ({ navigation }) => {
         }}
       >
         <Text style={styles.title}>FitNow</Text>
-        <Text style={styles.textTagline}>Fitness.Anytime.Anywhere</Text>
+        <Text style={styles.textTagline}>Fit.Anytime.Anywhere</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.buttom}
