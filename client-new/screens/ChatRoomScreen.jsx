@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   ScrollView,
   ImageBackground,
+  KeyboardAvoidingView,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import {
@@ -171,59 +172,70 @@ export default function ChatRoomScreen({ route }) {
           )
         )}
       </ScrollView>
-
-      <View
-        style={{
-          // position: "absolute",
-          flexDirection: "row",
-          alignItems: "center",
-          // bottom: 0,
-          gap: 3,
-          // height: 300,
-          marginBottom: 80,
-        }}
+      <KeyboardAvoidingView
+        behavior="padding"
+        // keyboardVerticalOffset={60}
+        // style={{ flex: 1 }}
       >
         <View
           style={{
-            backgroundColor: "#fff",
+            // position: "absolute",
             flexDirection: "row",
-            alignItems: "flex-start",
-            width,
-            height: 80,
-            borderTopWidth: 0.2,
+            alignItems: "center",
+            // bottom: 0,
+            gap: 3,
+            // height: 300,
+            marginBottom: 100,
           }}
         >
-          <TextInput
+          <View
             style={{
-              padding: 10,
-              margin: 1,
-              borderRadius: 20,
-              fontSize: 18,
-              borderWidth: 1,
-              width: 0.85 * width,
-              borderColor: "gray",
-              marginLeft: 10,
-              marginTop: 14,
+              backgroundColor: "#fff",
+              flexDirection: "row",
+              alignItems: "flex-start",
+              width,
+              height: 80,
+              borderTopWidth: 0.2,
             }}
+
             onChangeText={(v) => setChat(v)}
           />
           <TouchableOpacity
             onPress={() => onSendMessage()}
             style={{ marginTop: 20, margin: 1 }}
           >
-            {/* <Text>O</Text> */}
-            <Feather
-              name="send"
-              size={30}
-              color={"#0765ff"}
+            <TextInput
               style={{
-                paddingHorizontal: 5,
-                textAlign: "center",
+                padding: 10,
+                margin: 1,
+                borderRadius: 20,
+                fontSize: 18,
+                borderWidth: 1,
+                width: 0.85 * width,
+                borderColor: "gray",
+                marginLeft: 10,
+                marginTop: 14,
               }}
+              onChangeText={(v) => setChat(v)}
             />
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setChats([...chats, chat])}
+              style={{ marginTop: 20, margin: 1 }}
+            >
+              {/* <Text>O</Text> */}
+              <Feather
+                name="send"
+                size={30}
+                color={"#0765ff"}
+                style={{
+                  paddingHorizontal: 5,
+                  textAlign: "center",
+                }}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
@@ -242,7 +254,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 20,
-    backgroundColor: "#67C6E3",
+    backgroundColor: "#20488f",
     // marginBottom: 10,
   },
   categoryImage: {
@@ -255,6 +267,7 @@ const styles = StyleSheet.create({
   textName: {
     fontSize: 18,
     fontWeight: "bold",
+    color: "#fff",
   },
   chatContainer: {
     // backgroundColor: "gray",

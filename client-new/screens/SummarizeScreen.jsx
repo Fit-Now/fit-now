@@ -18,7 +18,12 @@ const SummarizeScreen = ({ route, navigation }) => {
 
   const handleNavigateToChat = () => {
     console.log("ini handleNavgiation to chat di summarize screen");
-    navigation.navigate("Chat");
+    // navigation.reset({
+    //   index: 0,
+    //   routes: [{ name: "HomeScreen" }],
+    // });
+    navigation.navigate("ChatRoom");
+    setShowModalEnd(false);
   };
   const handleNavigateToHome = () => {
     navigation.navigate("HomeScreen");
@@ -41,12 +46,29 @@ const SummarizeScreen = ({ route, navigation }) => {
       <View>
         <View
           style={{
-            backgroundColor: "#67C6E3",
+            backgroundColor: "#20488f",
             shadowOpacity: 3,
-            shadowRadius: 3,
+            shadowRadius: 5,
+            borderBottomEndRadius: 18,
+            borderBottomStartRadius: 18,
           }}
         >
           <Text style={styles.title}>Schedule For {month} Week Training</Text>
+        </View>
+        <View style={{ flexDirection: "column", gap: 10 }}>
+          <Text style={styles.textName}>Schedule Week</Text>
+          <Text style={styles.textList}>
+            INI HASIL YANG DIDAPAT DI PAKET bulan
+            {`\n`}1. INI HASIL YANG DIDAPAT DI PAKET bulan
+            {`\n`}2. INI HASIL YANG DIDAPAT DI PAKET bulan
+            {`\n`}3. INI HASIL YANG DIDAPAT DI PAKET bulan
+            {`\n`}1. INI HASIL YANG DIDAPAT DI PAKET bulan
+            {`\n`}2. INI HASIL YANG DIDAPAT DI PAKET bulan
+            {`\n`}3. INI HASIL YANG DIDAPAT DI PAKET bulan
+            {`\n`}1. INI HASIL YANG DIDAPAT DI PAKET bulan
+            {`\n`}2. INI HASIL YANG DIDAPAT DI PAKET bulan
+            {`\n`}3. INI HASIL YANG DIDAPAT DI PAKET bulan
+          </Text>
         </View>
         <View style={styles.containerSummerize}>
           <Text style={styles.textTitleSummerize}>What will you get :</Text>
@@ -89,7 +111,7 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: "#67C6E3",
+    backgroundColor: "#20488f",
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 10,
@@ -120,9 +142,9 @@ const styles = StyleSheet.create({
   containerSummerize: {
     marginHorizontal: 10,
     marginVertical: 30,
-    // backgroundColor: "#67C6E3",
+    // backgroundColor: "#20488f",
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: "#67C6E3",
+    borderColor: "#20488f",
   },
 });

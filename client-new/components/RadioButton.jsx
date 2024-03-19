@@ -7,16 +7,16 @@ export default function CobaRadioButton({ handleRole, selectedId }) {
     () => [
       {
         id: "trainee",
-        label: "Trainee",
+        label: "Beginner",
         value: "option1",
-        borderColor: "#67C6E3",
+        borderColor: "#20488f",
         color: "blue",
       },
       {
         id: "trainer",
-        label: "Trainer",
+        label: "Professional",
         value: "option2",
-        borderColor: "#67C6E3",
+        borderColor: "#20488f",
         color: "blue",
       },
     ],
@@ -33,7 +33,7 @@ export default function CobaRadioButton({ handleRole, selectedId }) {
           alignSelf: "flex-start",
         }}
       >
-        Role :
+        Status :
       </Text>
       <RadioGroup
         radioButtons={radioButtons}
@@ -43,7 +43,7 @@ export default function CobaRadioButton({ handleRole, selectedId }) {
         selectedId={selectedId}
         containerStyle={{
           flexDirection: "row",
-          gap: 70,
+          gap: 50,
         }}
       />
     </View>
