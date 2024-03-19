@@ -13,7 +13,7 @@ import {
   ImageBackground,
   KeyboardAvoidingView,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
+// import { Feather } from "@expo/vector-icons";
 import {
   doc,
   onSnapshot,
@@ -135,11 +135,7 @@ export default function ChatRoomScreen({ route }) {
 
         }}
       >
-        {/* {chats?.map((chat, idx) => (
-          <View style={{ width : 200, padding: 10, margin: 2, backgroundColor: 'white', borderRadius: 10}} key={chat.id}>
-            <Text>{chat.text}</Text>
-          </View>
-        ))} */}
+       
         {chats?.map((chat, idx) =>
           user === chat.senderId ? (
             <View
