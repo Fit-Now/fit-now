@@ -31,10 +31,10 @@ import { v4 as uuid } from "uuid";
 const { height, width } = Dimensions.get("screen");
 // DIBIKIN ANY DULU, NANTI DIGANTI
 export default function ChatRoomScreen({ route }) {
-  const paramsYangDitangkap = route.params?.contohLemparParams;
+  const dataChats = route.params?.dataChats;
   const { user } = useContext(LoginContext);
-  const currentUser =
-    "65f7dbeaa380957e0e11c5cf65f6ff8fd0549fae23244c2b";
+  const currentUser = `${user}${dataChats?._id}`;
+  console.log(currentUser);
   const [chats, setChats] = useState([]);
   const [chat, setChat] = useState("");
   useFocusEffect(
@@ -69,15 +69,6 @@ export default function ChatRoomScreen({ route }) {
 
   const createSummaryChat = async ({ id, text, timestamp }) => {
     try {
-      const payload = {
-        messages: arrayUnion({
-          id: Math.random().toString(36).substring(7),
-          text,
-          senderId: currentUser.uid,
-          date: Timestamp.now(),
-        }),
-      };
-
       const docRef = doc(db, "chats", currentUser);
       const findDoc = await getDoc(docRef);
       if (!findDoc.exists()) {
@@ -112,7 +103,7 @@ export default function ChatRoomScreen({ route }) {
           }}
           style={styles.categoryImage}
         />
-        <Text style={styles.textName}>{paramsYangDitangkap}</Text>
+        <Text style={styles.textName}>{dataChats?.name}</Text>
       </View>
       <Image
         source={{

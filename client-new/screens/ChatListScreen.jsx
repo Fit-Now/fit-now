@@ -9,23 +9,29 @@ import {
 } from "react-native";
 import { formatCapital } from "../utils/formatCapital";
 import { NavigationProp } from "@react-navigation/native";
+import { GET_PROFILE_USER } from "../queries";
+import { useQuery } from "@apollo/client";
 
 const { width, height } = Dimensions.get("screen");
 const ChatListScreen = ({ navigation }) => {
-  const dummy = [1];
+  const { data, error, loading } = useQuery(GET_PROFILE_USER, {
+    fetchPolicy: "no-cache",
+  });
+  let userChats = data?.getUserById;
+  console.log(userChats?.Coach);
   return (
     <SafeAreaView style={styles.container}>
       <View>
         <Text style={styles.textTitleChat}>Chats</Text>
       </View>
-      {dummy.map((el, idx) => {
+      {userChats?.Coach?.map((el, idx) => {
         return (
           <TouchableOpacity
             style={styles.containerStatus}
             // CARA MELEMPAR PARAMS
             onPress={() =>
               navigation.navigate("ChatRoom", {
-                contohLemparParams: "Trainer ganteng",
+                dataChats: el,
               })
             }
             key={idx}
@@ -34,12 +40,12 @@ const ChatListScreen = ({ navigation }) => {
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Image
                 source={{
-                  uri: "https://cdn-icons-png.flaticon.com/512/2919/2919906.png",
+                  uri: `${el.imageUrl}`,
                 }}
                 style={styles.trainerImage}
               />
               <Text style={styles.textName}>
-                {formatCapital("Trainer ganteng")}
+                {el.name}
               </Text>
             </View>
           </TouchableOpacity>

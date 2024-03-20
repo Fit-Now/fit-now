@@ -53,11 +53,11 @@ const HomeScreen = ({ navigation }) => {
                 //   category: "basketball",
                 // })
 
-                // navigation.navigate("Schedule", {
-                //   // NANTI BASKETBALL NYA DIGANTI DENGAN VALUE CATEGORY DARI DATABASE
-                //   category: "basketball",
-                // })
-                navigation.navigate("Maps")
+                navigation.navigate("Schedule", {
+                  // NANTI BASKETBALL NYA DIGANTI DENGAN VALUE CATEGORY DARI DATABASE
+                  category: "basketball",
+                })
+                // navigation.navigate("Maps")
               }
             >
               <Image
