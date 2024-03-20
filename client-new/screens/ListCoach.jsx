@@ -8,10 +8,19 @@ import {
   Dimensions,
 } from "react-native";
 import { formatCapital } from "../utils/formatCapital";
+import { GET_ONE_COACH } from "../queries";
+import { useQuery } from "@apollo/client";
 
 const { width, height } = Dimensions.get("screen");
 const ListCoach = ({ navigation, route }) => {
   const {Coachs} = route.params
+  console.log(Coachs?._id);
+  console.log(Coachs, 'inini');
+  
+  // const { data, error, loading } = useQuery(GET_ONE_COACH, {
+  //   variables: { coachId: Coachs?._id },
+  // });
+  // console.log(data, "ini data");
   // console.log(Coachs);
   // const dummy = [1, 1, 1];
   return (

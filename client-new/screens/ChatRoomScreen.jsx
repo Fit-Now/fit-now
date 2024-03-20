@@ -27,21 +27,40 @@ import { db } from "../connection/fireBaseConfig";
 import { useFocusEffect } from "@react-navigation/native";
 import { LoginContext } from "../contexts/LoginContext";
 import { v4 as uuid } from "uuid";
+import { GET_ONE_USER } from "../queries";
+import { useQuery } from "@apollo/client";
 
 const { height, width } = Dimensions.get("screen");
 // DIBIKIN ANY DULU, NANTI DIGANTI
 export default function ChatRoomScreen({ route }) {
   const dataChats = route.params?.dataChats;
-  const couchId = route.params?.couchId;
+  let couchId = route?.params?.couchId;
+  const { Username } = route?.params;
+  // console.log(couchId);
+  const { role } = useContext(LoginContext);
+
+  // console.log(dataChats, "ini data chats");
+  const { data, error, loading } = useQuery(GET_ONE_USER, {
+    variables: { coachId: dataChats ?? null, userId: couchId ?? null },
+  });
+
   const { user } = useContext(LoginContext);
   let currentUser;
+  let name;
   if (dataChats) {
-    currentUser = `${user}${dataChats?._id}`;
+    if (role === "Coach") {
+      currentUser = `${dataChats}${user}`;
+      name = Username;
+    } else {
+      currentUser = `${user}${data?.getCoachById.usersCoach._id}`;
+      name = data?.getCoachById.usersCoach.name;
+    }
   } else {
+    name = data?.getUserByIdArgs.name;
     currentUser = `${user}${couchId}`;
   }
-
-  console.log(currentUser);
+  // console.log(data);
+  // console.log(currentUser, "ini current user");
   const [chats, setChats] = useState([]);
   const [chat, setChat] = useState("");
   useFocusEffect(
@@ -109,7 +128,7 @@ export default function ChatRoomScreen({ route }) {
           }}
           style={styles.categoryImage}
         />
-        <Text style={styles.textName}>{dataChats?.name}</Text>
+        <Text style={styles.textName}>{name}</Text>
       </View>
       <Image
         source={{

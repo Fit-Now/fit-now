@@ -25,6 +25,34 @@ const findAllCoachs = async () => {
   return coachs;
 };
 
+const findCoachById = async (id) => {
+  const agg = [
+    {
+      $lookup: {
+        from: "Users",
+        localField: "email",
+        foreignField: "email",
+        as: "usersCoach",
+      },
+    },
+    {
+      $unwind: {
+        path: "$usersCoach",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+    {
+      $match: {
+        _id: new ObjectId(id),
+      },
+    },
+  ];
+
+  const coachs = await getCoachsCollection().aggregate(agg).toArray();
+  console.log(coachs);
+  return coachs[0];
+};
+
 const AddNewCoachs = async (payload) => {
   const coachCollection = await getCoachsCollection();
   const newCoach = await coachCollection.insertOne(payload);
@@ -35,4 +63,9 @@ const AddNewCoachs = async (payload) => {
   return coachs;
 };
 
-module.exports = { getCoachsCollection, findAllCoachs, AddNewCoachs };
+module.exports = {
+  getCoachsCollection,
+  findAllCoachs,
+  AddNewCoachs,
+  findCoachById,
+};

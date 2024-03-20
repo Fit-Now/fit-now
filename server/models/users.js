@@ -71,9 +71,6 @@ const searchUserByEmail = async (email) => {
     }
   );
 
-  console.log(users, "ini users");
-
-
   return users;
 };
 
@@ -108,6 +105,14 @@ const getOneUserById = async (userId) => {
     },
     {
       $lookup: {
+        from: "Users",
+        localField: "Coach.email",
+        foreignField: "email",
+        as: "UsersCoach",
+      },
+    },
+    {
+      $lookup: {
         from: "Schedules",
         localField: "UserSchedules.ScheduleId",
         foreignField: "_id",
@@ -117,7 +122,7 @@ const getOneUserById = async (userId) => {
   ];
 
   const users = await getCollection().aggregate(agg).toArray();
-
+  console.log(users[0].Coach);
   return users[0];
 };
 
@@ -131,12 +136,58 @@ const findAllUserCoach = async () => {
   return users;
 };
 
+const getProfileOneCoach = async (id) => {
+  console.log(id);
+  agg = [
+    {
+      '$match': {
+        'role': 'Coach'
+      }
+    }, {
+      '$lookup': {
+        'from': 'Users', 
+        'localField': 'email', 
+        'foreignField': 'email', 
+        'as': 'coachUser'
+      }
+    }, {
+      '$unwind': {
+        'path': '$coachUser', 
+        'preserveNullAndEmptyArrays': true
+      }
+    }, {
+      '$lookup': {
+        'from': 'UserSchedules', 
+        'localField': 'coachUser._id', 
+        'foreignField': 'CoachId', 
+        'as': 'UserSchedules'
+      }
+    }, {
+      '$lookup': {
+        'from': 'Users', 
+        'localField': 'UserSchedules.UserId', 
+        'foreignField': '_id', 
+        'as': 'UsersJoin'
+      }
+    },
+    {
+      $match :  {
+        'coachUser._id': new ObjectId(id)
+      }
+    }
+  ];
+  
+  const users = await getCollection().aggregate(agg).toArray();
+  console.log(users.UserSchedules);
+  return users[0]
+};
+
 module.exports = {
   findAllUser,
   addUser,
   getCollection,
   searchUserByEmail,
-
+  getProfileOneCoach,
   getOneUserById,
   addCoach,
   findAllUserCoach,

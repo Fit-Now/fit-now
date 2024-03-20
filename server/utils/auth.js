@@ -25,7 +25,7 @@ const authentication = async (req) => {
     });
   }
 
-  const decodedToken = verifyToken(token);  
+  const decodedToken = verifyToken(token);
 
   const user = await getOneUserById(decodedToken.id);
 
@@ -42,8 +42,8 @@ const authentication = async (req) => {
     userId: user._id,
     name: user.name,
     userEmail: user.email,
-    status: user.status
-
+    status: user.status,
+    role: user.role,
   };
 };
 

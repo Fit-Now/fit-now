@@ -21,11 +21,11 @@ const ScheduleListScreen = ({ navigation, route }) => {
   const { coachId, sport, locationId } = route.params;
   // console.log(coachId, sport);
   const { data, error, loading } = useQuery(GET_SCHEDULE_BY_SPORT, {
-    variables: { sport }
+    variables: { coachId,sport }
   }, {
     fetchPolicy: "no-cache"
   })
-  // console.log(data.getScheduleBySport);
+  console.log(data?.getCoachById.usersCoach._id);
   const dummy = [1, 1, 1];
   return (
     <SafeAreaView style={styles.container}>
@@ -49,7 +49,7 @@ const ScheduleListScreen = ({ navigation, route }) => {
                       navigation.navigate("Summarize", {
                         week : idx + 1,
                         schedule: el.decription,
-                        coachId: coachId,
+                        coachId: data?.getCoachById.usersCoach._id,
                         scheduleId: el._id,
                         duration: el.duration,
                         category: el.sport,

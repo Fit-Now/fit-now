@@ -6,6 +6,8 @@ const {
   getOneUserById,
   addCoach,
   findAllUserCoach,
+  searchUserByEmail,
+  getProfileOneCoach,
 } = require("../models/users");
 const { generateToken } = require("../utils/jwt");
 const { comparePassword } = require("../utils/bcrypt");
@@ -34,6 +36,19 @@ type UserCoach {
     Description: Coach
 }
 
+type ProfileCoach {
+  _id: ID
+  name: String
+  imageUrl: String
+  email: String!
+  password: String
+  role: String
+  coachUser: User
+  UserSchedules: [Schedule]
+  UsersJoin: [User]
+}
+
+
 input RegisterInput {
   name: String!
   email: String!
@@ -50,9 +65,10 @@ type LoginOutput {
 type Query {
   getAllUsers: [User]
   getUserById:User
+  getUserByIdArgs(userId: String):User
   getAllUserCoach: [UserCoach]
   getUserByEmail(email: String): User
-
+  getProfileCoach: ProfileCoach
 }
 
 type Mutation {
@@ -78,6 +94,13 @@ const resolvers = {
 
       return users;
     },
+    getUserByIdArgs: async (_parents, args, contextValue) => {
+      await contextValue.auth();
+      if (!args.userId) return null;
+      const users = await getOneUserById(args.userId);
+
+      return users;
+    },
 
     getAllUserCoach: async () => {
       const userCoach = await findAllUserCoach();
@@ -90,6 +113,13 @@ const resolvers = {
 
       return users;
     },
+
+    getProfileCoach: async(_parents, _args, contextValue) => {
+      const {role, userId} = await contextValue.auth();
+      console.log(userId);
+      const user = await getProfileOneCoach(userId);
+      return user
+    }
   },
 
   Mutation: {

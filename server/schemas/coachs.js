@@ -1,5 +1,5 @@
 const { ObjectId } = require("mongodb");
-const { findAllCoachs, AddNewCoachs } = require("../models/coachs");
+const { findAllCoachs, AddNewCoachs, findCoachById } = require("../models/coachs");
 
 const typeDefs = `#graphql
 
@@ -11,6 +11,7 @@ type Coach {
     locationId: ID
     email: String
     imageUrl: String
+    usersCoach: User
 }
 
 input AddNewCoach {
@@ -20,9 +21,20 @@ input AddNewCoach {
     locationId: ID
     imageUrl: String
 }
+type Coach {
+    _id : ID
+    name: String
+    sport: String
+    locationId: ID
+    email: String
+    imageUrl: String
+    Users: [User]
+    Schedule: [Schedule]
+}
 
 type Query {
     getAllCoachs: [Coach]
+    getCoachById(coachId: String): Coach
 }
 
 type Mutation{
@@ -37,6 +49,13 @@ const resolvers = {
       const coachs = await findAllCoachs();
 
     //   console.log(coachs, "ini coachs");
+      return coachs;
+    },
+    getCoachById: async (_parents, args, contextValue) => {
+      const { userEmail } = await contextValue.auth();
+
+      const coachs = await findCoachById(args.coachId);
+      console.log(coachs, 'ini coachs');
       return coachs;
     },
   },
