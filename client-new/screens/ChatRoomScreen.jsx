@@ -34,7 +34,7 @@ export default function ChatRoomScreen({ route }) {
   const paramsYangDitangkap = route.params?.contohLemparParams;
   const { user } = useContext(LoginContext);
   const currentUser =
-    "nKrTvyTLwefZDa4wVkhO3QZ3qtk1brLm1oQcp5XoGLy1p5J4a5IeHQA3";
+    "65f7dbeaa380957e0e11c5cf65f6ff8fd0549fae23244c2b";
   const [chats, setChats] = useState([]);
   const [chat, setChat] = useState("");
   useFocusEffect(

@@ -13,17 +13,22 @@ import {
 import ModalCategory from "../components/ModalCategory";
 import { NavigationProp } from "@react-navigation/native";
 import Carousel from "../components/Carousel";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_CATEGORY } from "../queries";
 
 const { width, height } = Dimensions.get("screen");
 const HomeScreen = ({ navigation }) => {
+  const {data, error, loading} = useQuery(GET_ALL_CATEGORY,{
+    fetchPolicy: "no-cache"
+  })
   const [showModal, setShowModal] = useState(false);
 
   const handleShowModal = () => {
     setShowModal(!showModal);
   };
 
-  const testdoang = [1, 1, 1];
-
+  const categories = data?.getAllCategory;
+  const event = [1,2,3]
   return (
     <SafeAreaView style={styles.container}>
       <Carousel />
@@ -38,7 +43,7 @@ const HomeScreen = ({ navigation }) => {
 
       <Text style={styles.textSubTitle}>Sports Category</Text>
       <View style={styles.categoryContainer}>
-        {testdoang.map((el, idx) => {
+        {categories?.slice(0,3).map((el, idx) => {
           return (
             <Pressable
               key={idx}
@@ -57,11 +62,11 @@ const HomeScreen = ({ navigation }) => {
             >
               <Image
                 source={{
-                  uri: "https://www.kindpng.com/picc/m/244-2443827_transparent-sports-icon-png-soccer-app-icon-png.png",
+                  uri: `${el.logo}`,
                 }}
                 style={styles.categoryImage}
               />
-              <Text>Basketball</Text>
+              <Text>{el.name}</Text>
             </Pressable>
           );
         })}
@@ -76,11 +81,11 @@ const HomeScreen = ({ navigation }) => {
           <Text style={{ alignSelf: "center" }}>See All</Text>
         </Pressable>
       </View>
-      {showModal && <ModalCategory handleShowModal={handleShowModal} />}
+      {showModal && <ModalCategory handleShowModal={handleShowModal} categories={categories} navigation={navigation} />}
 
       <Text style={styles.textSubTitle}>Events</Text>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        {testdoang.map((el, idx) => {
+        {event?.map((el, idx) => {
           return (
             <View
               key={idx}

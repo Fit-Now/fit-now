@@ -69,3 +69,13 @@ export const GET_PROFILE_USER = gql`
     }
   }
 `;
+
+export const GET_ALL_CATEGORY = gql`
+  query GetAllCategory {
+    getAllCategory {
+      _id
+      name
+      logo
+    }
+  }
+`;

@@ -20,8 +20,8 @@ type User {
     status: String
     password: String
     role: String
-
     Coach: [Coach]
+    Schedules: [Schedule]
 }
 
 type UserCoach {

@@ -7,11 +7,11 @@ import {
   Image,
   StyleSheet,
   Pressable,
+  ScrollView,
 } from "react-native";
 
 const { width, height } = Dimensions.get("screen");
-export default function ModalCategory({ handleShowModal }) {
-  const testDoang = [1, 1, 1, 1, 1];
+export default function ModalCategory({ handleShowModal, categories, navigation }) {
   return (
     <Modal transparent={true}>
       <SafeAreaView>
@@ -36,30 +36,36 @@ export default function ModalCategory({ handleShowModal }) {
               <Text style={{ alignSelf: "flex-end", padding: 10 }}>X</Text>
             </Pressable>
           </View>
-
-          {testDoang.map((el, idx) => {
-            return (
-              <View
-                style={{
-                  borderWidth: 1,
-                  height: 90,
-                  borderColor: "gray",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  gap: 10,
-                }}
-                key={idx}
-              >
-                <Image
-                  source={{
-                    uri: "https://www.kindpng.com/picc/m/244-2443827_transparent-sports-icon-png-soccer-app-icon-png.png",
-                  }}
-                  style={styles.categoryImage}
-                />
-                <Text style={styles.textCategory}>Basketball</Text>
-              </View>
-            );
-          })}
+          <ScrollView>
+            {categories?.map((el, idx) => {
+              return (
+                <Pressable
+                  key={el.name+idx}
+                  onPress={() => navigation.navigate('Maps')}
+                >
+                  <View
+                    style={{
+                      borderWidth: 1,
+                      height: 90,
+                      borderColor: "gray",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: 10,
+                    }}
+                    key={idx}
+                  >
+                    <Image
+                      source={{
+                        uri: `${el.logo}`,
+                      }}
+                      style={styles.categoryImage}
+                    />
+                    <Text style={styles.textCategory}>{el.name}</Text>
+                  </View>
+                </Pressable>
+              );
+            })}
+          </ScrollView>
         </View>
       </SafeAreaView>
     </Modal>

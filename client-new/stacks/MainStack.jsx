@@ -32,7 +32,7 @@ console.log(role)
       <Stack.Navigator>
         {isLoggedIn ? (
           <>
-            {role !== "admin" ? (
+            {role !== "Admin" ? (
               <>
                 <Stack.Screen
                   name=" "

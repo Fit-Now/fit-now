@@ -48,6 +48,7 @@ const AddUserSchedule = async (payload) => {
   payload.ScheduleId = new ObjectId(payload.ScheduleId);
   payload.LocationId = new ObjectId(payload.LocationId);
   payload.CategoryId = new ObjectId(payload.CategoryId);
+  payload.UserId = new ObjectId(payload.UserId);
   payload.startDate = new Date();
 
 

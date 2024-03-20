@@ -86,10 +86,32 @@ const getOneUserById = async (userId) => {
     },
     {
       $lookup: {
+        from: "UserSchedules",
+        localField: "_id",
+        foreignField: "UserId",
+        as: "UserSchedules",
+      },
+    },
+    {
+      $unwind: {
+        path: "$Coach",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+    {
+      $lookup: {
         from: "Coachs",
-        localField: "coachId",
+        localField: "UserSchedules.CoachId",
         foreignField: "_id",
         as: "Coach",
+      },
+    },
+    {
+      $lookup: {
+        from: "Schedules",
+        localField: "UserSchedules.ScheduleId",
+        foreignField: "_id",
+        as: "Schedules",
       },
     },
   ];
