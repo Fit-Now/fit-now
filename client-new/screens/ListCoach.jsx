@@ -10,7 +10,9 @@ import {
 import { formatCapital } from "../utils/formatCapital";
 
 const { width, height } = Dimensions.get("screen");
-const ListCoach = ({ navigation }) => {
+const ListCoach = ({ navigation, route }) => {
+  const { category } = route.params;
+
   const dummy = [1, 1, 1];
   return (
     <SafeAreaView style={styles.container}>
@@ -22,7 +24,9 @@ const ListCoach = ({ navigation }) => {
           return (
             <TouchableOpacity
               style={styles.containerStatus}
-              onPress={() => navigation.navigate("Schedule", {})}
+              onPress={() => {
+                navigation.navigate("Schedule", { category });
+              }}
               key={idx}
             >
               {/*  INI PUNYA TRAINER NYA */}

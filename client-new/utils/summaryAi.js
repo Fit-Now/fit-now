@@ -12,16 +12,17 @@ const summaryAi = async (category, month) => {
   // console.log(month);
   // console.log(category);
 
-  // const prompt = `Give 3 points summary what will we get after ${month} week training ${category}`;
+  // const prompt = `Give 2 points without number list summary what will we get after ${month} week training ${category}`;
 
   // const result = await model.generateContent(prompt);
   // const response = await result.response;
   // const text = response.text();
-  // return ` `text.replace(/\*\*/g, '')
+  // return text.replace(/\*\*/g, '').split(".").join(`. \n`)
+
 
   return (`1. **Improved Ball Handling:** Enhanced coordination, dribbling skills, and control over the ball.
   2. **Fundamentals of Shooting:** Understanding of proper form, footwork, and release mechanics.
-  3. **Basic Defensive Concepts:** Introduction to stance, footwork, and techniques for defending against opponents.`).replace(/\*\*/g, '')
+  3. **Basic Defensive Concepts:** Introduction to stance, footwork, and techniques for defending against opponents.`).replace(/\*\*/g, '').split(".").join(`. \n`)
 };
 
 export default summaryAi;

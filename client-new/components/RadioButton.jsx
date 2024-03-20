@@ -6,14 +6,14 @@ export default function RadioButton({ handleRole, selectedId }) {
   const radioButtons = useMemo(
     () => [
       {
-        id: "trainee",
+        id: "beginner",
         label: "Beginner",
         value: "option1",
         borderColor: "#20488f",
         color: "blue",
       },
       {
-        id: "trainer",
+        id: "profesional",
         label: "Professional",
         value: "option2",
         borderColor: "#20488f",

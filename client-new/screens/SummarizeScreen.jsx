@@ -53,6 +53,7 @@ const SummarizeScreen = ({ route, navigation }) => {
     //   index: 0,
     //   routes: [{ name: "HomeScreen" }],
     // });
+    navigation.navigate("HomeScreen");
     navigation.navigate("ChatRoom");
     setShowModalEnd(false);
   };
@@ -64,7 +65,7 @@ const SummarizeScreen = ({ route, navigation }) => {
     setShowModalEnd(!showModalEnd);
   };
   const runSummary = async () => {
-    const result = await summaryAi("basketball", month);
+    const result = await summaryAi(category, month);
     console.log(result, "result di runSummary");
     setSummary(result);
   };
@@ -172,20 +173,26 @@ const styles = StyleSheet.create({
     color: "blue",
   },
   textTitleSummerize: {
-    fontSize: 20,
+    fontSize: 24,
     marginVertical: 10,
     paddingHorizontal: 10,
+    fontWeight: "700",
+    color: "#20488f",
+    marginVertical: 30,
   },
   textSummerize: {
-    fontSize: 18,
+    fontSize: 20,
     paddingBottom: 20,
+    paddingHorizontal: 10,
+    textAlign: "justify",
   },
   containerSummerize: {
     marginHorizontal: 10,
     marginVertical: 30,
+    borderTopWidth: 2,
     // backgroundColor: "#20488f",
-    borderRadius: 10,
-    borderWidth: 2,
+    // borderRadius: 10,
+    // borderWidth: 2,
     borderColor: "#20488f",
   },
   textList: {

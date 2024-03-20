@@ -11,7 +11,11 @@ import {
 } from "react-native";
 
 const { width, height } = Dimensions.get("screen");
-export default function ModalCategory({ handleShowModal, categories, navigation }) {
+export default function ModalCategory({
+  handleShowModal,
+  categories,
+  navigation,
+}) {
   return (
     <Modal transparent={true}>
       <SafeAreaView>
@@ -40,8 +44,11 @@ export default function ModalCategory({ handleShowModal, categories, navigation 
             {categories?.map((el, idx) => {
               return (
                 <Pressable
-                  key={el.name+idx}
-                  onPress={() => navigation.navigate('Maps')}
+                  key={el.name + idx}
+                  onPress={() => {
+                    navigation.navigate("Maps", { category: el.name });
+                    handleShowModal();
+                  }}
                 >
                   <View
                     style={{
