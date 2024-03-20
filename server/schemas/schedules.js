@@ -10,13 +10,13 @@ type Schedule {
     duration: Int
     decription: [String]
     Coachs: [Coach]
-    CategoryId: ID
+    Category: Category
 
 }
 
 type Query {
     getAllSchedules: [Schedule]
-    getScheduleBySport(sport: String): Schedule
+    getScheduleBySport(sport: String): [Schedule]
 }
 
 input ScheduleInput {

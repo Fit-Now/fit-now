@@ -5,7 +5,7 @@ import { SelectMarkerContext } from "../contexts/SelectMarkerContext";
 
 
 export default function MarkerList({places, index}){
-    // console.log(places);
+    // console.log(places, 'ini marker');
     const {selectedMarker,setSelectedMarker} = useContext(SelectMarkerContext)
     
     return places&& (
@@ -17,7 +17,7 @@ export default function MarkerList({places, index}){
         onPress={()=> setSelectedMarker(index)
 
         }>
-            {/* <Image source={{uri: places.logo}} style={{ width: 40, height: 50, resizeMode: 'stretch' }}/> */}
+            <Image source={{uri: places?.Category?.marker}} style={{ width: 40, height: 50, resizeMode: 'stretch' }}/>
         </Marker>
     )
 }

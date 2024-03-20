@@ -129,3 +129,115 @@ query GetAllLocation {
     address
   }
 }`
+
+export const GET_ALL_LOCATION_BY_CATEGORY = gql`
+query GetLocationByCategory($categoryId: ID) {
+  getLocationByCategory(CategoryId: $categoryId) {
+    _id
+    name
+    Coachs {
+      _id
+      name
+      sport
+      Users {
+        _id
+        name
+        imageUrl
+        email
+        status
+        password
+        role
+        Coach {
+          _id
+          name
+          sport
+          locationId
+          email
+          imgUrl
+        }
+        Schedules {
+          _id
+          sport
+          duration
+          decription
+        }
+      }
+      locationId
+      email
+      imgUrl
+    }
+    CategoryId
+    Category {
+      _id
+      name
+      logo
+      marker
+    }
+    imageUrl
+    longitude
+    latitude
+    address
+  }
+}`
+
+export const GET_SCHEDULE_BY_SPORT = gql`
+query GetScheduleBySport($sport: String) {
+  getScheduleBySport(sport: $sport) {
+    _id
+    sport
+    duration
+    decription
+    Coachs {
+      _id
+      name
+      sport
+      Users {
+        _id
+        name
+        imageUrl
+        email
+        status
+        password
+        role
+        Coach {
+          _id
+          name
+          sport
+          locationId
+          email
+          imgUrl
+        }
+        Schedules {
+          _id
+          sport
+          duration
+          decription
+        }
+      }
+      locationId
+      email
+      imgUrl
+    }
+    Category {
+      _id
+      name
+      logo
+      marker
+    }
+  }
+}`
+
+export const ADD_USER_SCHEDULE = gql`
+mutation AddNewUserSchedule($payload: AddUserSchedule) {
+  AddNewUserSchedule(payload: $payload) {
+    _id
+    UserId
+    CoachId
+    ScheduleId
+    startDate
+    endDate
+    roomChatId
+    LocationId
+    CategoryId
+  }
+}`

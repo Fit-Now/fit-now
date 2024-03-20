@@ -6,7 +6,7 @@ type Category {
     _id : ID
     name: String
     logo: String
-
+    marker: String
 }
 
 type Query {

@@ -48,16 +48,17 @@ const HomeScreen = ({ navigation }) => {
             <Pressable
               key={idx}
               onPress={() =>
-                // navigation.navigate("ListCoach", {
-                //   // NANTI BASKETBALL NYA DIGANTI DENGAN VALUE CATEGORY DARI DATABASE
-                //   category: "basketball",
-                // })
+                navigation.navigate("Maps", {
+                  // NANTI BASKETBALL NYA DIGANTI DENGAN VALUE CATEGORY DARI DATABASE
+                  categoryId: el._id,
+                })
+                // console.log(el._id)
 
-                // navigation.navigate("Schedule", {
+                // navigation.navigate("Maps", {
                 //   // NANTI BASKETBALL NYA DIGANTI DENGAN VALUE CATEGORY DARI DATABASE
-                //   category: "basketball",
+                //   CategoryId: "basketball",
                 // })
-                navigation.navigate("Maps")
+                // navigation.navigate("Maps")
               }
             >
               <Image

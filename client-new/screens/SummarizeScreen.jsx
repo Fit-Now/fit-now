@@ -13,27 +13,25 @@ import ModalAfterSchedule from "../components/ModalAfterSchedule";
 import { LoginContext } from "../contexts/LoginContext";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../connection/fireBaseConfig";
+import { useMutation } from "@apollo/client";
+import { ADD_USER_SCHEDULE } from "../queries";
 
 const { width, height } = Dimensions.get("screen");
 const SummarizeScreen = ({ route, navigation }) => {
+  const [userScheduleDispatcher, { data, error, loading }] = useMutation(ADD_USER_SCHEDULE)
   const { user } = useContext(LoginContext);
-  const { month, category } = route.params;
+  const { week, category, schedule, duration, coachId, scheduleId, locationId, categoryId } = route.params;
   const [summary, setSummary] = useState("");
   const [showModalEnd, setShowModalEnd] = useState(false);
   const [seeMore, setSeeMore] = useState(false);
-  const coachId = "65f6ff8fd0549fae23244c2b";
+  console.log(categoryId);
 
-  const text = `INI HASIL YANG DIDAPAT DI PAKET bulan
-  \n 1. INI HASIL YANG DIDAPAT DI PAKET bulan
-  \n 2. INI HASIL YANG DIDAPAT DI PAKET bulan
-  \n 3. INI HASIL YANG DIDAPAT DI PAKET bulan
-  \n 1. INI HASIL YANG DIDAPAT DI PAKET bulan
-  \n 2. INI HASIL YANG DIDAPAT DI PAKET bulan
-  \n 3. INI HASIL YANG DIDAPAT DI PAKET bulan
-  \n 1. INI HASIL YANG DIDAPAT DI PAKET bulan
-  \n 2. INI HASIL YANG DIDAPAT DI PAKET bulan
-  \n 3. INI HASIL YANG DIDAPAT DI PAKET bulan`;
-
+  let iniText = '';
+  const dataText = schedule.map((txt, idx) => {
+    let num = idx + 1
+    iniText += JSON.stringify(num + '. ' + txt) + `\n` + `\n`
+  })
+  // console.log(iniText);
   const handleJoin = async () => {
     //check whether the group(chats in firestore) exists, if not create
     const combinedId = user + coachId;
@@ -44,11 +42,24 @@ const SummarizeScreen = ({ route, navigation }) => {
         //create a chat in chats collection
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
       }
-    } catch (err) {}
+    } catch (err) { }
   };
-  const handleNavigateToChat = () => {
+  const handleNavigateToChat = async () => {
     console.log("ini handleNavgiation to chat di summarize screen");
     handleJoin();
+    const combinedId = user + coachId;
+
+    await userScheduleDispatcher({
+      variables: {
+        payload: {
+          UserId: user,
+          CoachId: coachId,
+          ScheduleId: scheduleId,
+          LocationId: locationId,
+          CategoryId: categoryId,
+        }
+      }
+    })
     // navigation.reset({
     //   index: 0,
     //   routes: [{ name: "HomeScreen" }],
@@ -56,7 +67,18 @@ const SummarizeScreen = ({ route, navigation }) => {
     navigation.navigate("ChatRoom");
     setShowModalEnd(false);
   };
-  const handleNavigateToHome = () => {
+  const handleNavigateToHome =async () => {
+    await userScheduleDispatcher({
+      variables: {
+        payload: {
+          UserId: user,
+          CoachId: coachId,
+          ScheduleId: scheduleId,
+          LocationId: locationId,
+          CategoryId: categoryId,
+        }
+      }
+    })
     navigation.navigate("HomeScreen");
   };
 
@@ -64,14 +86,14 @@ const SummarizeScreen = ({ route, navigation }) => {
     setShowModalEnd(!showModalEnd);
   };
   const runSummary = async () => {
-    const result = await summaryAi("basketball", month);
+    const result = await summaryAi("basketball", week);
     console.log(result, "result di runSummary");
     setSummary(result);
   };
 
   useEffect(() => {
     runSummary();
-  }, [month]);
+  }, [week]);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -84,7 +106,7 @@ const SummarizeScreen = ({ route, navigation }) => {
             borderBottomStartRadius: 18,
           }}
         >
-          <Text style={styles.title}>Schedule For {month} Week Training</Text>
+          <Text style={styles.title}>Schedule For {week} Week Training</Text>
         </View>
         <View
           style={{
@@ -93,17 +115,17 @@ const SummarizeScreen = ({ route, navigation }) => {
             gap: 10,
           }}
         >
-          <Text style={styles.textName}>Schedule Week {month}</Text>
+          <Text style={styles.textName}>Schedule Week {week}</Text>
           {seeMore ? (
             <View>
-              <Text style={styles.textList}>{text}</Text>
+              <Text style={styles.textList}>{iniText}</Text>
               <TouchableOpacity onPress={() => setSeeMore(false)}>
                 <Text style={styles.textList}>...See less</Text>
               </TouchableOpacity>
             </View>
           ) : (
             <View>
-              <Text style={styles.textList}>{text.slice(0, 100)}</Text>
+              <Text style={styles.textList}>{iniText.slice(0, 100)}</Text>
               <TouchableOpacity onPress={() => setSeeMore(true)}>
                 <Text style={styles.textList}>...See more</Text>
               </TouchableOpacity>
