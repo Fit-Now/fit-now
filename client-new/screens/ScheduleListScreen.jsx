@@ -7,13 +7,25 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  Pressable,
 } from "react-native";
 import { formatCapital } from "../utils/formatCapital";
 import { NavigationProp } from "@react-navigation/native";
+import { useQuery } from "@apollo/client";
+import { GET_SCHEDULE_BY_SPORT } from "../queries";
+import { useState } from "react";
 
 const { width, height } = Dimensions.get("screen");
 const ScheduleListScreen = ({ navigation, route }) => {
-  const { category } = route.params;
+  const[time, setTime] = useState()
+  const { coachId, sport, locationId } = route.params;
+  // console.log(coachId, sport);
+  const { data, error, loading } = useQuery(GET_SCHEDULE_BY_SPORT, {
+    variables: { sport }
+  }, {
+    fetchPolicy: "no-cache"
+  })
+  // console.log(data.getScheduleBySport);
   const dummy = [1, 1, 1];
   return (
     <SafeAreaView style={styles.container}>
@@ -22,24 +34,35 @@ const ScheduleListScreen = ({ navigation, route }) => {
           <Text style={styles.textTitle}>Choose Your Schedule</Text>
         </View>
         <View style={{ marginTop: 20 }}>
-          {dummy.map((el, idx) => {
+          {data?.getScheduleBySport.map((el, idx) => {
             return (
               <TouchableOpacity
                 style={styles.containerStatus}
                 // CARA MELEMPAR PARAMS
-                onPress={() =>
-                  navigation.navigate("Summarize", {
-                    // IDX + 1 NANTI GANTI DARI VALUE MONTH YANG ADA DI DATABASE
-                    month: idx + 1,
-                    category,
-                  })
-                }
                 key={idx}
               >
-                <View style={{ flexDirection: "column", gap: 10 }}>
+                <View style={{ fleSxDirection: "column", gap: 10 }}>
                   <Text style={styles.textName}>Schedule {idx + 1} Week</Text>
                   <Text style={styles.textList}>
-                    INI HASIL YANG DIDAPAT DI PAKET {idx + 1} bulan
+                    <Pressable onPress={() => {
+                      setTime(el.duration)
+                      navigation.navigate("Summarize", {
+                        week : idx + 1,
+                        schedule: el.decription,
+                        coachId: coachId,
+                        scheduleId: el._id,
+                        duration: el.duration,
+                        category: el.sport,
+                        locationId: locationId,
+                        categoryId: el.Category._id
+                      })
+                      }}>
+                      {el?.decription.map((txt, idx) => (
+                        <Text style={styles.textList}>{idx + 1}. {txt}</Text>
+                      ))}
+                    </Pressable>
+                    {/* {console.log(el.decription)} */}
+                    {/* INI HASIL YANG DIDAPAT DI PAKET {idx + 1} bulan
                     {`\n`}1. INI HASIL YANG DIDAPAT DI PAKET {idx + 1} bulan
                     {`\n`}2. INI HASIL YANG DIDAPAT DI PAKET {idx + 1} bulan
                     {`\n`}3. INI HASIL YANG DIDAPAT DI PAKET {idx + 1} bulan
@@ -48,7 +71,7 @@ const ScheduleListScreen = ({ navigation, route }) => {
                     {`\n`}3. INI HASIL YANG DIDAPAT DI PAKET {idx + 1} bulan
                     {`\n`}1. INI HASIL YANG DIDAPAT DI PAKET {idx + 1} bulan
                     {`\n`}2. INI HASIL YANG DIDAPAT DI PAKET {idx + 1} bulan
-                    {`\n`}3. INI HASIL YANG DIDAPAT DI PAKET {idx + 1} bulan
+                    {`\n`}3. INI HASIL YANG DIDAPAT DI PAKET {idx + 1} bulan */}
                   </Text>
                 </View>
               </TouchableOpacity>

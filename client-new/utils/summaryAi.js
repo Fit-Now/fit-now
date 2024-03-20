@@ -17,7 +17,7 @@ const summaryAi = async (category, month) => {
   // const result = await model.generateContent(prompt);
   // const response = await result.response;
   // const text = response.text();
-  // return ` `text.replace(/\*\*/g, '')
+  // return text.replace(/\*\*/g, '')
 
   return (`1. **Improved Ball Handling:** Enhanced coordination, dribbling skills, and control over the ball.
   2. **Fundamentals of Shooting:** Understanding of proper form, footwork, and release mechanics.

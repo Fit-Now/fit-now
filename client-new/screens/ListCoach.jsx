@@ -10,19 +10,25 @@ import {
 import { formatCapital } from "../utils/formatCapital";
 
 const { width, height } = Dimensions.get("screen");
-const ListCoach = ({ navigation }) => {
-  const dummy = [1, 1, 1];
+const ListCoach = ({ navigation, route }) => {
+  const {Coachs} = route.params
+  // console.log(Coachs);
+  // const dummy = [1, 1, 1];
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topContainer}>
         <Text style={styles.textTitle}>Choose Your Coach</Text>
       </View>
       <View style={{ marginTop: 30 }}>
-        {dummy.map((el, idx) => {
+        {Coachs.map((el, idx) => {
           return (
             <TouchableOpacity
               style={styles.containerStatus}
-              onPress={() => navigation.navigate("Schedule", {})}
+              onPress={() => navigation.navigate("Schedule", {
+                coachId: el._id,
+                sport: el.sport,
+                locationId: el.locationId
+              })}
               key={idx}
             >
               {/*  INI PUNYA TRAINER NYA */}
@@ -35,7 +41,7 @@ const ListCoach = ({ navigation }) => {
                 />
                 <View>
                   <Text style={styles.textName}>
-                    {formatCapital("Trainer ganteng")}
+                    {formatCapital(`${el.name}`)}
                   </Text>
                   <Text
                     style={{
@@ -44,7 +50,7 @@ const ListCoach = ({ navigation }) => {
                       fontWeight: "normal",
                     }}
                   >
-                    Category Name
+                    {el.sport}
                   </Text>
                 </View>
               </View>

@@ -116,7 +116,7 @@ const RegisterScreen = ({ navigation }) => {
             onChangeText={setPassword}
           />
           {/* <TextInput style={styles.inputLabel} placeholder="Status" /> */}
-          <RadioButton />
+          {/* <RadioButton /> */}
         </View>
 
         <TouchableOpacity

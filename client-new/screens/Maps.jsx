@@ -10,34 +10,38 @@ import MarkerList from "../components/MarkerList";
 import PlaceListFitNow from "../components/PlaceList";
 import { SelectMarkerContext } from "../contexts/SelectMarkerContext";
 import { useQuery } from "@apollo/client";
-import { GET_ALL_LOCATION } from "../queries";
+import { GET_ALL_LOCATION, GET_ALL_LOCATION_BY_CATEGORY } from "../queries";
 
-const Maps = ({navigation}) => {
+const Maps = ({route, navigation}) => {
+  const {categoryId} = route.params
+  console.log(categoryId, 'ini category Id di Maps');
   const [selectedMarker,setSelectedMarker] = useState([])
   const { location, setLocation } = useContext(UserLocationContext);
-  const places = require('../data.json')
-  const {data, error, loading} = useQuery(GET_ALL_LOCATION,{
-    fetchPolicy: "no-cache"
+  // const places = require('../data.json')
+
+  const {data, error, loading} = useQuery(GET_ALL_LOCATION_BY_CATEGORY,{
+    variables: {categoryId}
   })
   console.log(data, 'ini data');
   const [placeList, setPlaceList] = useState([])
   
    const GetNearbyPlace = ()=> {
-    const newPlace = places
-    // console.log(places, 'ini places');
+    const newPlace = data?.getLocationByCategory
+    console.log(newPlace, 'ini places');
     setPlaceList(newPlace)
-    // console.log(placeList, 'ini placeList');
+    console.log(placeList, 'ini placeList');
   }
 
   useEffect(()=> {
     if (location) {
       GetNearbyPlace()
     }
+    console.log(placeList);
   },[location])
 
   // console.log(places, 'ini places' );
 
-  // console.log(placeList, 'ini placelist');
+  console.log(placeList, 'ini placelist');
 
   // return <></>
   return (
@@ -61,7 +65,7 @@ const Maps = ({navigation}) => {
               <Marker coordinate={{ latitude: location?.latitude, longitude: location?.longitude }}>
                 {/* <Image source={require("../assets/person-mark.png")} style={{ width: 60, height: 60 }} /> */}
               </Marker>
-              {places.map((item, index) => (
+              {placeList?.map((item, index) => (
                 <MarkerList key={index} places={item} index={index}/>
               ))}
             </MapView>

@@ -26,7 +26,26 @@ const findAllSchedules = async () => {
 };
 
 const findScheduleBySport = async (sport) => {
-  const schedules = await getScheduleCollection().findOne({ sport });
+  const agg = [
+    {$match:{
+      sport
+    }},
+  {
+    '$lookup': {
+      'from': 'Categories', 
+      'localField': 'sport', 
+      'foreignField': 'name', 
+      'as': 'Category'
+    }
+  }, {
+    '$unwind': {
+      'path': '$Category', 
+      'preserveNullAndEmptyArrays': true
+    }
+  }
+];
+
+  const schedules = await getScheduleCollection().aggregate(agg).toArray();
   return schedules;
 
 };

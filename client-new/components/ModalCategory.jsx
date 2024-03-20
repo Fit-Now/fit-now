@@ -1,3 +1,5 @@
+import { useQuery } from "@apollo/client";
+import { useEffect, useState } from "react";
 import {
   Modal,
   SafeAreaView,
@@ -9,9 +11,20 @@ import {
   Pressable,
   ScrollView,
 } from "react-native";
+import { GET_ALL_LOCATION } from "../queries";
 
 const { width, height } = Dimensions.get("screen");
 export default function ModalCategory({ handleShowModal, categories, navigation }) {
+
+  //   const {data, error, loading} = useQuery(GET_ALL_LOCATION,{
+  //   fetchPolicy: "no-cache"
+  // })
+  // const [placeList, setPlaceList] = useState([])
+  
+  // useEffect(()=> {
+  //   setPlaceList(data?.getAllLocation)
+  // },[])
+
   return (
     <Modal transparent={true}>
       <SafeAreaView>
@@ -41,7 +54,10 @@ export default function ModalCategory({ handleShowModal, categories, navigation 
               return (
                 <Pressable
                   key={el.name+idx}
-                  onPress={() => navigation.navigate('Maps')}
+                  onPress={() =>  navigation.navigate("Maps", {
+                  // NANTI BASKETBALL NYA DIGANTI DENGAN VALUE CATEGORY DARI DATABASE
+                  categoryId: el._id,
+                })}
                 >
                   <View
                     style={{
@@ -65,6 +81,29 @@ export default function ModalCategory({ handleShowModal, categories, navigation 
                 </Pressable>
               );
             })}
+             <Pressable
+                  onPress={() =>  navigation.navigate("Maps")}
+                >
+                  <View
+                    style={{
+                      borderWidth: 1,
+                      height: 90,
+                      borderColor: "gray",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      gap: 10,
+                    }}
+                  >
+                    <Image
+                      source={{
+                        uri: `https://drive.google.com/uc?id=1JAFi-y3JnK5KD8aJdUDHR2JocjrptYqV`,
+                      }}
+                      style={styles.categoryImage}
+                    />
+                    <Text style={styles.textCategory}></Text>
+                  </View>
+                </Pressable>
+                
           </ScrollView>
         </View>
       </SafeAreaView>
