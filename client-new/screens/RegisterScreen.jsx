@@ -16,6 +16,7 @@ import { useState } from "react";
 import ModalAvatar from "../components/ModalAvatar";
 import { useMutation } from "@apollo/client";
 import { REGISTER } from "../queries";
+import RadioButton from "../components/RadioButton";
 
 const { height } = Dimensions.get("screen");
 const RegisterScreen = ({ navigation }) => {
@@ -52,7 +53,6 @@ const RegisterScreen = ({ navigation }) => {
     } catch (error) {
       console.log(error);
     }
-    // VARIABLE YANG AKAN DIBUTUHKAN UNTUK REGISTER
   };
 
   // const handleRole = (id) => {
@@ -65,85 +65,76 @@ const RegisterScreen = ({ navigation }) => {
     setShowModalAvatar(!showModalAvatar);
   };
   return (
-    <KeyboardAvoidingView>
-    <TouchableWithoutFeedback>
-    <View style={styles.container}>
-      <View
-        style={{
-          marginTop: 30,
-          marginBottom: 20,
-          alignItems: "center",
-          // backgroundColor: "gray",
-        }}
-      >
-        <Text style={styles.title}>FitNow</Text>
-      </View>
-      <View style={{ alignItems: "center" }}>
-        
-            <Text style={styles.title}>FitNow</Text>
-          </View>
-          <View style={{ alignItems: "center" }}>
-            <Pressable
-              onPress={handleShowAvatar}
-              style={{ alignItems: "center" }}
-            >
-              <Image
-                source={{
-                  uri: avatar,
-                }}
-                style={styles.categoryImage}
-              />
-              <Text
-                style={{ alignSelf: "center", marginBottom: 20, color: "blue" }}
-              >
-                Choose your avatar!
-              </Text>
-
-              {/* MODAL AVATAR */}
-              {showModalAvatar && (
-                <ModalAvatar
-                  handleShowAvatar={handleShowAvatar}
-                  setAvatar={setAvatar}
-                />
-              )}
-            </Pressable>
-
-            <TextInput
-              style={styles.inputLabel}
-              placeholder="Name"
-              onChangeText={setName}
-            />
-            <TextInput
-              style={styles.inputLabel}
-              placeholder="Email"
-              onChangeText={setEmail}
-            />
-            <TextInput
-              style={styles.inputLabel}
-              secureTextEntry
-              placeholder="Password"
-              onChangeText={setPassword}
-            />
-            {/* <TextInput style={styles.inputLabel} placeholder="Status" /> */}
-          </View>
-
-          <TouchableOpacity
-            style={{ alignItems: "center" }}
-            onPress={handleRegister}
-          >
-            <View style={styles.button}>
-              <Text style={styles.textBottom}>Register</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <View
-              style={{
-                justifyContent: "center",
-              }}
-            ></View>
-          </TouchableOpacity>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : null}
+    >
+      <View style={styles.container}>
+        <View style={{ alignItems: "center" }}>
+          <Text style={styles.title}>FitNow</Text>
         </View>
-      </TouchableWithoutFeedback>
+        <View style={{ alignItems: "center" }}>
+          <Pressable
+            onPress={handleShowAvatar}
+            style={{ alignItems: "center" }}
+          >
+            <Image
+              source={{
+                uri: avatar,
+              }}
+              style={styles.categoryImage}
+            />
+            <Text
+              style={{ alignSelf: "center", marginBottom: 20, color: "blue" }}
+            >
+              Choose your avatar!
+            </Text>
+
+            {/* MODAL AVATAR */}
+            {showModalAvatar && (
+              <ModalAvatar
+                handleShowAvatar={handleShowAvatar}
+                setAvatar={setAvatar}
+              />
+            )}
+          </Pressable>
+
+          <TextInput
+            style={styles.inputLabel}
+            placeholder="Name"
+            onChangeText={setName}
+          />
+          <TextInput
+            style={styles.inputLabel}
+            placeholder="Email"
+            onChangeText={setEmail}
+          />
+          <TextInput
+            style={styles.inputLabel}
+            secureTextEntry
+            placeholder="Password"
+            onChangeText={setPassword}
+          />
+          {/* <TextInput style={styles.inputLabel} placeholder="Status" /> */}
+          <RadioButton />
+        </View>
+
+        <TouchableOpacity
+          style={{ alignItems: "center" }}
+          onPress={handleRegister}
+        >
+          <View style={styles.button}>
+            <Text style={styles.textBottom}>Register</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <View
+            style={{
+              justifyContent: "center",
+            }}
+          ></View>
+        </TouchableOpacity>
+      </View>
     </KeyboardAvoidingView>
   );
 };
@@ -191,6 +182,8 @@ const styles = StyleSheet.create({
     fontSize: 60,
     fontWeight: "bold",
     color: "#20488f",
+    marginTop: 30,
+    marginBottom: 10,
   },
   categoryImage: {
     width: 100,

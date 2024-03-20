@@ -20,10 +20,23 @@ const SummarizeScreen = ({ route, navigation }) => {
   const { month, category } = route.params;
   const [summary, setSummary] = useState("");
   const [showModalEnd, setShowModalEnd] = useState(false);
+  const [seeMore, setSeeMore] = useState(false);
   const coachId = "65f6ff8fd0549fae23244c2b";
+
+  const text = `INI HASIL YANG DIDAPAT DI PAKET bulan
+  \n 1. INI HASIL YANG DIDAPAT DI PAKET bulan
+  \n 2. INI HASIL YANG DIDAPAT DI PAKET bulan
+  \n 3. INI HASIL YANG DIDAPAT DI PAKET bulan
+  \n 1. INI HASIL YANG DIDAPAT DI PAKET bulan
+  \n 2. INI HASIL YANG DIDAPAT DI PAKET bulan
+  \n 3. INI HASIL YANG DIDAPAT DI PAKET bulan
+  \n 1. INI HASIL YANG DIDAPAT DI PAKET bulan
+  \n 2. INI HASIL YANG DIDAPAT DI PAKET bulan
+  \n 3. INI HASIL YANG DIDAPAT DI PAKET bulan`;
+
   const handleJoin = async () => {
     //check whether the group(chats in firestore) exists, if not create
-    const combinedId = user + coachId
+    const combinedId = user + coachId;
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
 
@@ -35,7 +48,7 @@ const SummarizeScreen = ({ route, navigation }) => {
   };
   const handleNavigateToChat = () => {
     console.log("ini handleNavgiation to chat di summarize screen");
-    handleJoin()
+    handleJoin();
     // navigation.reset({
     //   index: 0,
     //   routes: [{ name: "HomeScreen" }],
@@ -44,7 +57,6 @@ const SummarizeScreen = ({ route, navigation }) => {
     setShowModalEnd(false);
   };
   const handleNavigateToHome = () => {
-    
     navigation.navigate("HomeScreen");
   };
 
@@ -61,8 +73,8 @@ const SummarizeScreen = ({ route, navigation }) => {
     runSummary();
   }, [month]);
   return (
-      <ScrollView>
     <SafeAreaView style={styles.container}>
+      <ScrollView>
         <View
           style={{
             backgroundColor: "#20488f",
@@ -74,20 +86,29 @@ const SummarizeScreen = ({ route, navigation }) => {
         >
           <Text style={styles.title}>Schedule For {month} Week Training</Text>
         </View>
-        <View style={{ flexDirection: "column", gap: 10 }}>
-          <Text style={styles.textName}>Schedule Week</Text>
-          <Text style={styles.textList}>
-            INI HASIL YANG DIDAPAT DI PAKET bulan
-            {`\n`}1. INI HASIL YANG DIDAPAT DI PAKET bulan
-            {`\n`}2. INI HASIL YANG DIDAPAT DI PAKET bulan
-            {`\n`}3. INI HASIL YANG DIDAPAT DI PAKET bulan
-            {`\n`}1. INI HASIL YANG DIDAPAT DI PAKET bulan
-            {`\n`}2. INI HASIL YANG DIDAPAT DI PAKET bulan
-            {`\n`}3. INI HASIL YANG DIDAPAT DI PAKET bulan
-            {`\n`}1. INI HASIL YANG DIDAPAT DI PAKET bulan
-            {`\n`}2. INI HASIL YANG DIDAPAT DI PAKET bulan
-            {`\n`}3. INI HASIL YANG DIDAPAT DI PAKET bulan
-          </Text>
+        <View
+          style={{
+            ...styles.containerStatus,
+            flexDirection: "column",
+            gap: 10,
+          }}
+        >
+          <Text style={styles.textName}>Schedule Week {month}</Text>
+          {seeMore ? (
+            <View>
+              <Text style={styles.textList}>{text}</Text>
+              <TouchableOpacity onPress={() => setSeeMore(false)}>
+                <Text style={styles.textList}>...See less</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View>
+              <Text style={styles.textList}>{text.slice(0, 100)}</Text>
+              <TouchableOpacity onPress={() => setSeeMore(true)}>
+                <Text style={styles.textList}>...See more</Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
         <View style={styles.containerSummerize}>
           <Text style={styles.textTitleSummerize}>What will you get :</Text>
@@ -107,8 +128,9 @@ const SummarizeScreen = ({ route, navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
           <Text style={styles.textLater}>Maybe Later</Text>
         </TouchableOpacity>
-    </SafeAreaView>
       </ScrollView>
+      <View style={{ padding: 100 }} />
+    </SafeAreaView>
   );
 };
 
@@ -165,5 +187,31 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 2,
     borderColor: "#20488f",
+  },
+  textList: {
+    fontSize: 20,
+    color: "#fff",
+    padding: 10,
+  },
+  containerStatus: {
+    backgroundColor: "#fff",
+    paddingVertical: 40,
+    marginHorizontal: 10,
+    borderRadius: 2,
+    borderWidth: 1,
+    borderRadius: 30,
+    borderColor: "#20488f",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+    marginVertical: 10,
+    backgroundColor: "#20488f",
+  },
+  textName: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: "#fff",
+    alignSelf: "center",
   },
 });

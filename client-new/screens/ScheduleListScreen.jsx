@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     borderRadius: 2,
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 30,
     borderColor: "#20488f",
     flexDirection: "row",
     alignItems: "center",
