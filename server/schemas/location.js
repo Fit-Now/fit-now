@@ -1,4 +1,4 @@
-const { findAllLocations, addLocation } = require("../models/locations");
+const { findAllLocations, addLocation, findLocationByCategory } = require("../models/locations");
 
 
 const typeDefs = `#graphql
@@ -27,6 +27,7 @@ input AddNewLocation{
 
 type Query {
     getAllLocation: [Location]
+    getLocationByCategory(CategoryId: ID): [Location]
 }
 
 type Mutation {
@@ -44,6 +45,12 @@ const resolvers = {
 
       return locations;
     },
+    getLocationByCategory: async (_parents, args) => {
+      const { CategoryId } = args;
+      const locations = await findLocationByCategory(CategoryId);
+
+      return locations;
+    }
   },
   Mutation: {
     addLocation: async (_parents, args, contextValue) => {

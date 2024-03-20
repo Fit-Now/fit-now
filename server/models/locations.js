@@ -33,7 +33,6 @@ const findAllLocations = async () => {
         preserveNullAndEmptyArrays: true,
       },
     },
-
   ];
 
   const locations = await getLocationCollection().aggregate(agg).toArray();
@@ -47,7 +46,6 @@ const addLocation = async (payload) => {
   const locationCollection = await getLocationCollection();
   const newLocation = await locationCollection.insertOne(payload);
 
-
   const locations = await locationCollection.findOne({
     _id: new ObjectId(newLocation.insertedId),
   });
@@ -55,9 +53,45 @@ const addLocation = async (payload) => {
   return locations[0];
 };
 
+const findLocationByCategory = async (CategoryId) => {
+  const agg = [
+    {
+      $match: {
+        CategoryId: new ObjectId(CategoryId),
+      },
+    },
+    {
+      $lookup: {
+        from: "Coachs",
+        localField: "_id",
+        foreignField: "locationId",
+        as: "Coachs",
+      },
+    },
+    {
+      $lookup: {
+        from: "Categories",
+        localField: "CategoryId",
+        foreignField: "_id",
+        as: "Category",
+      },
+    },
+    {
+      $unwind: {
+        path: "$Category",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+  ];
+
+  const locations = await getLocationCollection().aggregate(agg).toArray();
+
+  return locations;
+};
+
 module.exports = {
   getLocationCollection,
   findAllLocations,
   addLocation,
-
+  findLocationByCategory,
 };

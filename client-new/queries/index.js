@@ -79,3 +79,53 @@ export const GET_ALL_CATEGORY = gql`
     }
   }
 `;
+
+export const GET_ALL_LOCATION = gql`
+query GetAllLocation {
+  getAllLocation {
+    _id
+    name
+    Coachs {
+      _id
+      name
+      sport
+      Users {
+        _id
+        name
+        imageUrl
+        email
+        status
+        password
+        role
+        Coach {
+          _id
+          name
+          sport
+          locationId
+          email
+          imgUrl
+        }
+        Schedules {
+          _id
+          sport
+          duration
+          decription
+          CategoryId
+        }
+      }
+      locationId
+      email
+      imgUrl
+    }
+    CategoryId
+    Category {
+      _id
+      name
+      logo
+    }
+    imageUrl
+    longitude
+    latitude
+    address
+  }
+}`
