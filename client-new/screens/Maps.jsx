@@ -9,16 +9,22 @@ import SearchBarMaps from "../components/SearchBar";
 import MarkerList from "../components/MarkerList";
 import PlaceListFitNow from "../components/PlaceList";
 import { SelectMarkerContext } from "../contexts/SelectMarkerContext";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_LOCATION } from "../queries";
 
 const Maps = ({navigation}) => {
   const [selectedMarker,setSelectedMarker] = useState([])
   const { location, setLocation } = useContext(UserLocationContext);
   const places = require('../data.json')
+  const {data, error, loading} = useQuery(GET_ALL_LOCATION,{
+    fetchPolicy: "no-cache"
+  })
+  console.log(data, 'ini data');
   const [placeList, setPlaceList] = useState([])
   
    const GetNearbyPlace = ()=> {
     const newPlace = places
-    console.log(places, 'ini places');
+    // console.log(places, 'ini places');
     setPlaceList(newPlace)
     // console.log(placeList, 'ini placeList');
   }
@@ -31,7 +37,7 @@ const Maps = ({navigation}) => {
 
   // console.log(places, 'ini places' );
 
-  console.log(placeList, 'ini placelist');
+  // console.log(placeList, 'ini placelist');
 
   // return <></>
   return (
