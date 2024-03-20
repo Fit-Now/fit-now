@@ -1,5 +1,3 @@
-
-
 const { GraphQLError } = require("graphql");
 const {
   findAllUser,
@@ -11,7 +9,6 @@ const {
 } = require("../models/users");
 const { generateToken } = require("../utils/jwt");
 const { comparePassword } = require("../utils/bcrypt");
-
 
 const typeDefs = `#graphql
 
@@ -54,7 +51,7 @@ type LoginOutput {
 
 type Query {
   getAllUsers: [User]
-  getUserById(userId: ID!):User
+  getUserById:User
   getAllUserCoach: [UserCoach]
   getUserByEmail(email: String): User
 
@@ -77,8 +74,9 @@ const resolvers = {
       return users;
     },
 
-    getUserById: async (_parents, args) => {
-      const users = await getOneUserById(args.userId);
+    getUserById: async (_parents, _args, contextValue) => {
+      const { userId } = await contextValue.auth();
+      const users = await getOneUserById(userId);
 
       return users;
     },
@@ -94,15 +92,12 @@ const resolvers = {
 
       return users;
     },
-
-
   },
 
   Mutation: {
     Register: async (_parents, args) => {
       const { payload } = args;
       const { name, email, password, imageUrl } = payload;
-
 
       if (!name) {
         throw new GraphQLError("Name is required", {
@@ -169,7 +164,6 @@ const resolvers = {
     RegisterCoach: async (_parents, args) => {
       const { payload } = args;
       const { name, email, password, imageUrl } = payload;
-
 
       if (!name) {
         throw new GraphQLError("Name is required", {

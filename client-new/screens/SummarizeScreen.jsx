@@ -1,6 +1,7 @@
 import {
   Dimensions,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -60,8 +61,8 @@ const SummarizeScreen = ({ route, navigation }) => {
     runSummary();
   }, [month]);
   return (
+      <ScrollView>
     <SafeAreaView style={styles.container}>
-      <View>
         <View
           style={{
             backgroundColor: "#20488f",
@@ -106,8 +107,8 @@ const SummarizeScreen = ({ route, navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
           <Text style={styles.textLater}>Maybe Later</Text>
         </TouchableOpacity>
-      </View>
     </SafeAreaView>
+      </ScrollView>
   );
 };
 

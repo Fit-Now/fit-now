@@ -38,3 +38,34 @@ export const REGISTER = gql`
     }
   }
 `;
+
+export const GET_PROFILE_USER = gql`
+  query GetUserById {
+    getUserById {
+      _id
+      name
+      imageUrl
+      email
+      status
+      password
+      role
+      Coach {
+        _id
+        name
+        sport
+        Users {
+          _id
+          name
+          imageUrl
+          email
+          status
+          password
+          role
+        }
+        locationId
+        email
+        imgUrl
+      }
+    }
+  }
+`;

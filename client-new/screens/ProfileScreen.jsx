@@ -14,10 +14,16 @@ import { useContext } from "react";
 import { LoginContext } from "../contexts/LoginContext";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as SecureStore from "expo-secure-store";
+import { GET_PROFILE_USER } from "../queries";
+import { useQuery } from "@apollo/client";
 
 const { height } = Dimensions.get("screen");
 const ProfileScreen = ({ navigation }) => {
+  const {data, error, loading} = useQuery(GET_PROFILE_USER, {
+    fetchPolicy: "no-cache",
+  })
   const { setIsLoggedIn } = useContext(LoginContext);
+  let user = data?.getUserById;
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.profileContainer}>
@@ -46,8 +52,8 @@ const ProfileScreen = ({ navigation }) => {
           style={styles.profileImage}
         />
         <View style={{ justifyContent: "center" }}>
-          <Text style={styles.textName}>{formatCapital("hAi jejeon DuT")}</Text>
-          <Text style={styles.textEmail}>test@mail.com</Text>
+          <Text style={styles.textName}>{user?.name}</Text>
+          <Text style={styles.textEmail}>{user?.email}</Text>
         </View>
       </View>
       <Text></Text>
