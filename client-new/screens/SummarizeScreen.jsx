@@ -24,7 +24,6 @@ const SummarizeScreen = ({ route, navigation }) => {
   const [summary, setSummary] = useState("");
   const [showModalEnd, setShowModalEnd] = useState(false);
   const [seeMore, setSeeMore] = useState(false);
-  console.log(categoryId);
 
   let iniText = '';
   const dataText = schedule.map((txt, idx) => {
@@ -65,7 +64,9 @@ const SummarizeScreen = ({ route, navigation }) => {
     //   routes: [{ name: "HomeScreen" }],
     // });
     navigation.navigate("HomeScreen");
-    navigation.navigate("ChatRoom");
+    navigation.navigate("ChatRoom", {
+      couchId: coachId,
+    });
     setShowModalEnd(false);
   };
   const handleNavigateToHome =async () => {

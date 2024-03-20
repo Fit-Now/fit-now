@@ -79,7 +79,12 @@ export const GET_PROFILE_USER = gql`
           email
           imageUrl
         }
-        CategoryId
+        Category {
+          _id
+          name
+          logo
+          marker
+        }
       }
     }
   }
@@ -91,168 +96,173 @@ export const GET_ALL_CATEGORY = gql`
       _id
       name
       logo
+      marker
     }
   }
 `;
 
 export const GET_ALL_LOCATION = gql`
-query GetAllLocation {
-  getAllLocation {
-    _id
-    name
-    Coachs {
+  query GetAllLocation {
+    getAllLocation {
       _id
       name
-      sport
-      Users {
+      Coachs {
         _id
         name
-        imageUrl
-        email
-        status
-        password
-        role
-        Coach {
+        sport
+        Users {
           _id
           name
-          sport
-          locationId
+          imageUrl
           email
-          imgUrl
+          status
+          password
+          role
+          Coach {
+            _id
+            name
+            sport
+            locationId
+            email
+            imageUrl
+          }
+          Schedules {
+            _id
+            sport
+            duration
+            decription
+          }
         }
-        Schedules {
-          _id
-          sport
-          duration
-          decription
-          CategoryId
-        }
+        locationId
+        email
+        imageUrl
       }
-      locationId
-      email
-      imgUrl
+      CategoryId
+      Category {
+        _id
+        name
+        logo
+        marker
+      }
+      imageUrl
+      longitude
+      latitude
+      address
     }
-    CategoryId
-    Category {
-      _id
-      name
-      logo
-    }
-    imageUrl
-    longitude
-    latitude
-    address
   }
-}`
+`;
 
 export const GET_ALL_LOCATION_BY_CATEGORY = gql`
-query GetLocationByCategory($categoryId: ID) {
-  getLocationByCategory(CategoryId: $categoryId) {
-    _id
-    name
-    Coachs {
+  query GetLocationByCategory($categoryId: ID) {
+    getLocationByCategory(CategoryId: $categoryId) {
       _id
       name
-      sport
-      Users {
+      Coachs {
         _id
         name
-        imageUrl
-        email
-        status
-        password
-        role
-        Coach {
+        sport
+        Users {
           _id
           name
-          sport
-          locationId
+          imageUrl
           email
-          imgUrl
+          status
+          password
+          role
+          Coach {
+            _id
+            name
+            sport
+            locationId
+            email
+            imageUrl
+          }
+          Schedules {
+            _id
+            sport
+            duration
+            decription
+          }
         }
-        Schedules {
-          _id
-          sport
-          duration
-          decription
-        }
+        locationId
+        email
+        imageUrl
       }
-      locationId
-      email
-      imgUrl
+      CategoryId
+      Category {
+        _id
+        name
+        logo
+        marker
+      }
+      imageUrl
+      longitude
+      latitude
+      address
     }
-    CategoryId
-    Category {
-      _id
-      name
-      logo
-      marker
-    }
-    imageUrl
-    longitude
-    latitude
-    address
   }
-}`
+`;
 
 export const GET_SCHEDULE_BY_SPORT = gql`
-query GetScheduleBySport($sport: String) {
-  getScheduleBySport(sport: $sport) {
-    _id
-    sport
-    duration
-    decription
-    Coachs {
+  query GetScheduleBySport($sport: String) {
+    getScheduleBySport(sport: $sport) {
       _id
-      name
       sport
-      Users {
+      duration
+      decription
+      Coachs {
         _id
         name
-        imageUrl
-        email
-        status
-        password
-        role
-        Coach {
+        sport
+        Users {
           _id
           name
-          sport
-          locationId
+          imageUrl
           email
-          imgUrl
+          status
+          password
+          role
+          Coach {
+            _id
+            name
+            sport
+            locationId
+            email
+            imageUrl
+          }
+          Schedules {
+            _id
+            sport
+            duration
+            decription
+          }
         }
-        Schedules {
-          _id
-          sport
-          duration
-          decription
-        }
+        locationId
+        email
+        imageUrl
       }
-      locationId
-      email
-      imgUrl
-    }
-    Category {
-      _id
-      name
-      logo
-      marker
+      Category {
+        _id
+        name
+        logo
+        marker
+      }
     }
   }
-}`
+`;
 
 export const ADD_USER_SCHEDULE = gql`
-mutation AddNewUserSchedule($payload: AddUserSchedule) {
-  AddNewUserSchedule(payload: $payload) {
-    _id
-    UserId
-    CoachId
-    ScheduleId
-    startDate
-    endDate
-    roomChatId
-    LocationId
-    CategoryId
+  mutation AddNewUserSchedule($payload: AddUserSchedule) {
+    AddNewUserSchedule(payload: $payload) {
+      _id
+      UserId
+      CoachId
+      ScheduleId
+      startDate
+      endDate
+      roomChatId
+      LocationId
+      CategoryId
+    }
   }
-}`
+`;

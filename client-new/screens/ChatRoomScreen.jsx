@@ -32,8 +32,15 @@ const { height, width } = Dimensions.get("screen");
 // DIBIKIN ANY DULU, NANTI DIGANTI
 export default function ChatRoomScreen({ route }) {
   const dataChats = route.params?.dataChats;
+  const couchId = route.params?.couchId;
   const { user } = useContext(LoginContext);
-  const currentUser = `${user}${dataChats?._id}`;
+  let currentUser;
+  if (dataChats) {
+    currentUser = `${user}${dataChats?._id}`;
+  } else {
+    currentUser = `${user}${couchId}`;
+  }
+
   console.log(currentUser);
   const [chats, setChats] = useState([]);
   const [chat, setChat] = useState("");
@@ -64,7 +71,6 @@ export default function ChatRoomScreen({ route }) {
       timestamp,
     });
     setChat("");
-
   };
 
   const createSummaryChat = async ({ id, text, timestamp }) => {
@@ -125,7 +131,6 @@ export default function ChatRoomScreen({ route }) {
           flex: 1,
           paddingTop: 5,
           gap: 10,
-
         }}
       >
         {/* {chats?.map((chat, idx) => (
@@ -142,7 +147,7 @@ export default function ChatRoomScreen({ route }) {
                 margin: 2,
                 backgroundColor: "white",
                 borderRadius: 10,
-                marginLeft: width/2 -10
+                marginLeft: width / 2 - 10,
               }}
               key={chat.id}
             >
@@ -156,7 +161,7 @@ export default function ChatRoomScreen({ route }) {
                 margin: 2,
                 marginLeft: 10,
                 backgroundColor: "white",
-                borderRadius: 10
+                borderRadius: 10,
               }}
               key={chat.id}
             >
@@ -170,60 +175,59 @@ export default function ChatRoomScreen({ route }) {
         // keyboardVerticalOffset={60}
         // style={{ flex: 1 }}
       >
-      <View
-        style={{
-          // position: "absolute",
-          flexDirection: "row",
-          alignItems: "center",
-          // bottom: 0,
-          gap: 3,
-          // height: 300,
-          marginBottom: 80,
-        }}
-      >
         <View
           style={{
-            backgroundColor: "#fff",
+            // position: "absolute",
             flexDirection: "row",
-            alignItems: "flex-start",
-            width,
-            height: 80,
-            borderTopWidth: 0.2,
+            alignItems: "center",
+            // bottom: 0,
+            gap: 3,
+            // height: 300,
+            marginBottom: 80,
           }}
         >
-          <TextInput
+          <View
             style={{
-              padding: 10,
-              margin: 1,
-              borderRadius: 20,
-              fontSize: 18,
-              borderWidth: 1,
-              width: 0.85 * width,
-              borderColor: "gray",
-              marginLeft: 10,
-              marginTop: 14,
-              
+              backgroundColor: "#fff",
+              flexDirection: "row",
+              alignItems: "flex-start",
+              width,
+              height: 80,
+              borderTopWidth: 0.2,
             }}
-            value={chat}
-            onChangeText={(v) => setChat(v)}
-          />
-          <TouchableOpacity
-            onPress={() => onSendMessage()}
-            style={{ marginTop: 20, margin: 1 }}
           >
-            {/* <Text>O</Text> */}
-            <Feather
-              name="send"
-              size={30}
-              color={"#0765ff"}
+            <TextInput
               style={{
-                paddingHorizontal: 5,
-                textAlign: "center",
+                padding: 10,
+                margin: 1,
+                borderRadius: 20,
+                fontSize: 18,
+                borderWidth: 1,
+                width: 0.85 * width,
+                borderColor: "gray",
+                marginLeft: 10,
+                marginTop: 14,
               }}
+              value={chat}
+              onChangeText={(v) => setChat(v)}
             />
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => onSendMessage()}
+              style={{ marginTop: 20, margin: 1 }}
+            >
+              {/* <Text>O</Text> */}
+              <Feather
+                name="send"
+                size={30}
+                color={"#0765ff"}
+                style={{
+                  paddingHorizontal: 5,
+                  textAlign: "center",
+                }}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );

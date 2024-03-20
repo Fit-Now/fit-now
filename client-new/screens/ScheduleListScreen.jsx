@@ -58,7 +58,7 @@ const ScheduleListScreen = ({ navigation, route }) => {
                       })
                       }}>
                       {el?.decription.map((txt, idx) => (
-                        <Text style={styles.textList}>{idx + 1}. {txt}</Text>
+                        <Text key={txt+idx+1} style={styles.textList}>{idx + 1}. {txt}</Text>
                       ))}
                     </Pressable>
                     {/* {console.log(el.decription)} */}

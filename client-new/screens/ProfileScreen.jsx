@@ -24,7 +24,8 @@ const ProfileScreen = ({ navigation }) => {
   });
   const { setIsLoggedIn } = useContext(LoginContext);
   let user = data?.getUserById;
-  console.log(user?.Coach[0]?.imageUrl);
+  console.log(data, "ini data profile");
+  if(loading) return <Text>Loading...</Text>
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.profileContainer}>
