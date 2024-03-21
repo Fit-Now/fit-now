@@ -26,7 +26,7 @@ const ProfileScreen = ({ navigation }) => {
   const { setIsLoggedIn } = useContext(LoginContext);
   let user = data?.getUserById;
   // console.log(data.getUserById.Schedules, "ini data profile");
-  if (loading) return <Text>Loading...</Text>
+  if (loading) return <Text>Loading...</Text>;
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.profileContainer}>
@@ -70,11 +70,15 @@ const ProfileScreen = ({ navigation }) => {
               }}
               style={styles.trainerImage}
             />
-            <Text style={{
-              fontSize: 18,
-              fontWeight: "bold",
-              color: "#fff",
-            }}>{el.name}</Text>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: "bold",
+                color: "#fff",
+              }}
+            >
+              {el.name}
+            </Text>
           </View>
 
           {/* INI KETGORINYA */}
@@ -86,19 +90,23 @@ const ProfileScreen = ({ navigation }) => {
               style={styles.trainerImage}
             /> */}
             <View>
-
-            <Text style={{
-              fontSize: 18,
-              fontWeight: "bold",
-              color: "#fff",
-            }}>{el.sport}</Text>
-             <Text style={{
-              fontSize: 18,
-              fontWeight: "bold",
-              color: "#fff",
-            }}>Duration: 7 Day</Text>
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: "bold",
+                  color: "#fff",
+                }}
+              >
+                {el.sport}
+              </Text>
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: "bold",
+                  color: "#fff",
+                }}
+              ></Text>
             </View>
-
           </View>
         </View>
       ))}
