@@ -22,6 +22,7 @@ const ProfileScreen = ({ navigation }) => {
   const { data, error, loading } = useQuery(GET_PROFILE_USER, {
     fetchPolicy: "no-cache",
   });
+  console.log(data);
   const { setIsLoggedIn } = useContext(LoginContext);
   let user = data?.getUserById;
   console.log(data, "ini data profile");

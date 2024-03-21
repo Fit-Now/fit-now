@@ -30,6 +30,7 @@ const ListCoach = ({ navigation, route }) => {
       </View>
       <View style={{ marginTop: 30 }}>
         {Coachs.map((el, idx) => {
+          console.log(el,'ini ngak tau');
           return (
             <TouchableOpacity
               style={styles.containerStatus}

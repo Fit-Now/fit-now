@@ -21,6 +21,8 @@ const ChatListScreen = ({ navigation }) => {
     const { data, error, loading } = useQuery(GET_PROFILE_USER, {
       fetchPolicy: "no-cache",
     });
+    console.log(data);
+    console.log(error, "ini error");
     let userChats = data?.getUserById;
     // console.log(userChats?.Coach);
     // console.log(data?.getUserById.Coach, "ini data loh");

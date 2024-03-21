@@ -161,30 +161,30 @@ export default function ChatRoomScreen({ route }) {
           user === chat.senderId ? (
             <View
               style={{
-                width: 200,
+                width: 270,
                 padding: 10,
-                margin: 2,
+                margin: 4,
                 backgroundColor: "white",
                 borderRadius: 10,
-                marginLeft: width / 2 - 10,
+                marginLeft: width / 3 - 12,
               }}
               key={chat.id}
             >
-              <Text>{chat.text}</Text>
+              <Text style={{ fontSize: 20}}>{chat.text}</Text>
             </View>
           ) : (
             <View
               style={{
-                width: 200,
+                width: 270,
                 padding: 10,
-                margin: 2,
+                margin: 4,
                 marginLeft: 10,
                 backgroundColor: "white",
                 borderRadius: 10,
               }}
               key={chat.id}
             >
-              <Text>{chat.text}</Text>
+              <Text style={{ fontSize: 20}}>{chat.text}</Text>
             </View>
           )
         )}

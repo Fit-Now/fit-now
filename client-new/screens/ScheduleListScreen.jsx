@@ -19,12 +19,13 @@ const { width, height } = Dimensions.get("screen");
 const ScheduleListScreen = ({ navigation, route }) => {
   const[time, setTime] = useState()
   const { coachId, sport, locationId } = route.params;
-  // console.log(coachId, sport);
+  console.log(coachId, sport);
   const { data, error, loading } = useQuery(GET_SCHEDULE_BY_SPORT, {
-    variables: { coachId,sport }
+    variables: { coachId , sport }
   }, {
     fetchPolicy: "no-cache"
   })
+  console.log(error);
   console.log(data?.getCoachById.usersCoach._id);
   const dummy = [1, 1, 1];
   return (
@@ -34,7 +35,7 @@ const ScheduleListScreen = ({ navigation, route }) => {
           <Text style={styles.textTitle}>Choose Your Schedule</Text>
         </View>
         <View style={{ marginTop: 20 }}>
-          {data?.getScheduleBySport.map((el, idx) => {
+          {data?.getScheduleBySport?.map((el, idx) => {
             return (
               <TouchableOpacity
                 style={styles.containerStatus}
@@ -49,7 +50,8 @@ const ScheduleListScreen = ({ navigation, route }) => {
                       navigation.navigate("Summarize", {
                         week : idx + 1,
                         schedule: el.decription,
-                        coachId: data?.getCoachById.usersCoach._id,
+                        coachId: coachId,
+                        chatCoachId: data?.getCoachById.usersCoach._id,
                         scheduleId: el._id,
                         duration: el.duration,
                         category: el.sport,

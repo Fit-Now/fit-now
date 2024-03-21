@@ -20,7 +20,7 @@ const { width, height } = Dimensions.get("screen");
 const SummarizeScreen = ({ route, navigation }) => {
   const [userScheduleDispatcher, { data, error, loading }] = useMutation(ADD_USER_SCHEDULE)
   const { user } = useContext(LoginContext);
-  const { week, category, schedule, duration, coachId, scheduleId, locationId, categoryId } = route.params;
+  const { week, category, schedule, chatCoachId, duration, coachId, scheduleId, locationId, categoryId } = route.params;
   const [summary, setSummary] = useState("");
   const [showModalEnd, setShowModalEnd] = useState(false);
   const [seeMore, setSeeMore] = useState(false);
@@ -33,7 +33,7 @@ const SummarizeScreen = ({ route, navigation }) => {
   // console.log(iniText);
   const handleJoin = async () => {
     //check whether the group(chats in firestore) exists, if not create
-    const combinedId = user + coachId;
+    const combinedId = user + chatCoachId;
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
 
@@ -65,7 +65,7 @@ const SummarizeScreen = ({ route, navigation }) => {
     // });
     navigation.navigate("HomeScreen");
     navigation.navigate("ChatRoom", {
-      couchId: coachId,
+      couchId: chatCoachId,
     });
     setShowModalEnd(false);
   };

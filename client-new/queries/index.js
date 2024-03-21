@@ -65,6 +65,21 @@ export const GET_PROFILE_USER = gql`
         locationId
         email
         imageUrl
+        usersCoach {
+          _id
+          name
+          imageUrl
+          email
+          status
+          password
+          role
+        }
+        Schedule {
+          _id
+          sport
+          duration
+          decription
+        }
       }
       Schedules {
         _id
@@ -204,7 +219,65 @@ export const GET_ALL_LOCATION_BY_CATEGORY = gql`
 `;
 
 export const GET_SCHEDULE_BY_SPORT = gql`
-  query GetCoachById($coachId: ID, $sport: String) {
+  query GetScheduleBySport($sport: String, $coachId: String) {
+    getScheduleBySport(sport: $sport) {
+      _id
+      sport
+      duration
+      decription
+      Coachs {
+        _id
+        name
+        sport
+        Users {
+          _id
+          name
+          imageUrl
+          email
+          status
+          password
+          role
+          Coach {
+            _id
+            name
+            sport
+            locationId
+            email
+            imageUrl
+          }
+          Schedules {
+            _id
+            sport
+            duration
+            decription
+          }
+        }
+        locationId
+        email
+        imageUrl
+        usersCoach {
+          _id
+          name
+          imageUrl
+          email
+          status
+          password
+          role
+        }
+        Schedule {
+          _id
+          sport
+          duration
+          decription
+        }
+      }
+      Category {
+        _id
+        name
+        logo
+        marker
+      }
+    }
     getCoachById(coachId: $coachId) {
       _id
       name
@@ -263,64 +336,6 @@ export const GET_SCHEDULE_BY_SPORT = gql`
           logo
           marker
         }
-      }
-    }
-    getScheduleBySport(sport: $sport) {
-      _id
-      sport
-      duration
-      decription
-      Coachs {
-        _id
-        name
-        sport
-        Users {
-          _id
-          name
-          imageUrl
-          email
-          status
-          password
-          role
-          Coach {
-            _id
-            name
-            sport
-            locationId
-            email
-            imageUrl
-          }
-          Schedules {
-            _id
-            sport
-            duration
-            decription
-          }
-        }
-        locationId
-        email
-        imageUrl
-        usersCoach {
-          _id
-          name
-          imageUrl
-          email
-          status
-          password
-          role
-        }
-        Schedule {
-          _id
-          sport
-          duration
-          decription
-        }
-      }
-      Category {
-        _id
-        name
-        logo
-        marker
       }
     }
   }
