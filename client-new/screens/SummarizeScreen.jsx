@@ -89,7 +89,10 @@ const SummarizeScreen = ({ route, navigation }) => {
       });
       setShowModalEnd(false);
     }, 100);
+    setShowModalEnd(false);
+
   };
+  
   const handleNavigateToHome = async () => {
     await userScheduleDispatcher({
       variables: {
@@ -214,7 +217,9 @@ const styles = StyleSheet.create({
   },
   textLater: {
     alignSelf: "center",
-    color: "blue",
+    color: "rgb(137, 207, 240)",
+    fontWeight: "bold",
+
   },
   textTitleSummerize: {
     fontSize: 24,

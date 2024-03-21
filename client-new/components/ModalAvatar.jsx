@@ -23,11 +23,31 @@ const testdoang = [
   },
   {
     id: "3",
-    imageUrl: "https://cdn-icons-png.flaticon.com/512/2919/2919906.png",
+    imageUrl: "https://drive.google.com/uc?id=13Oga0FHjEhbt-SHbw-ILNkOIq12tKuGg",
   },
   {
     id: "4",
-    imageUrl: "https://cdn-icons-png.flaticon.com/512/2919/2919906.png",
+    imageUrl: "https://drive.google.com/uc?id=1SiBtZRLO5jsQLYn5IDYjqwxrkgn3lbiw",
+  },
+  {
+    id: "5",
+    imageUrl: "https://drive.google.com/uc?id=1eTAiLP-1Aev1z4dtttgQmjfgsD179CqK",
+  },
+  {
+    id: "6",
+    imageUrl: "https://drive.google.com/uc?id=1u4ixL3UkVHxgg7NKViJI7276dp7JR7OG",
+  },
+  {
+    id: "7",
+    imageUrl: "https://drive.google.com/uc?id=1D4ZrsI0QSJsXq1b9A1aLjmiFpcINft5P",
+  },
+  {
+    id: "8",
+    imageUrl: "https://drive.google.com/uc?id=1RXE3zLTBD-YlwdE43ZzIA_4b-PMTTE7i",
+  },
+  {
+    id: "9",
+    imageUrl: "https://drive.google.com/uc?id=1-519yL_XMyNHrHMJcJdw6AgkqQ1dNl-0",
   },
 ];
 const { width, height } = Dimensions.get("screen");

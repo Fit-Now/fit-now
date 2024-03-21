@@ -19,7 +19,7 @@ const ModalAfterSchedule = ({
       <View style={styles.backgroundModal}>
         <View style={styles.container}>
           <Text style={styles.textContainer}>
-            You are now part of couch name training
+            You are now part of training!
           </Text>
           <TouchableOpacity
             style={styles.button}
@@ -68,11 +68,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#f1f1f1",
     borderRadius: 20,
     padding: 10,
-    marginHorizontal: 80,
+    // marginHorizontal: 80,
     marginVertical: 10,
     alignSelf: "center",
     shadowOpacity: 0.3,
     shadowRadius: 3,
+    marginHorizontal:50
+
   },
   textChatNow: {
     color: "#20488f",

@@ -123,10 +123,10 @@ export default function ChatRoomScreen({ route }) {
     <SafeAreaView style={styles.container}>
       <View style={styles.chatTab}>
         <ImageBackground
-          source={{
-            uri: "https://cdn-icons-png.flaticon.com/512/2919/2919906.png",
-          }}
           style={styles.categoryImage}
+          source={{
+            uri: "https://xsgames.co/randomusers/avatar.php?g=male",
+          }}
         />
         <Text style={styles.textName}>{name}</Text>
       </View>
@@ -258,6 +258,7 @@ const styles = StyleSheet.create({
     flex: 1,
     minHeight: height,
     justifyContent: "space-between",
+    
   },
   chatTab: {
     borderBottomWidth: 0.2,
@@ -266,19 +267,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 20,
-    backgroundColor: "#67C6E3",
+    backgroundColor: "#20488f",
     // marginBottom: 10,
+    
   },
   categoryImage: {
     width: 50,
     height: 50,
-    borderRadius: 50,
     marginBottom: 5,
     marginLeft: 10,
+    borderRadius: 50,
+    overflow: "hidden",
   },
   textName: {
     fontSize: 18,
     fontWeight: "bold",
+    color: "#fff",
   },
   chatContainer: {
     // backgroundColor: "gray",
@@ -291,5 +295,6 @@ const styles = StyleSheet.create({
   },
   chatName: {
     fontWeight: "bold",
+    
   },
 });

@@ -25,8 +25,8 @@ const ProfileScreen = ({ navigation }) => {
   console.log(data);
   const { setIsLoggedIn } = useContext(LoginContext);
   let user = data?.getUserById;
-  console.log(data, "ini data profile");
-  if(loading) return <Text>Loading...</Text>
+  // console.log(data.getUserById.Schedules, "ini data profile");
+  if (loading) return <Text>Loading...</Text>
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.profileContainer}>
@@ -50,13 +50,13 @@ const ProfileScreen = ({ navigation }) => {
         </TouchableOpacity>
         <Image
           source={{
-            uri: "https://cdn-icons-png.flaticon.com/512/2919/2919906.png",
+            uri: `${user?.imageUrl}`,
           }}
           style={styles.profileImage}
         />
         <View style={{ justifyContent: "center" }}>
           <Text style={styles.textName}>{user?.name}</Text>
-          <Text style={styles.textEmail}>{user?.email}</Text>
+          {/* <Text style={styles.textEmail}>{user?.email}</Text> */}
         </View>
       </View>
       <Text></Text>
@@ -66,22 +66,39 @@ const ProfileScreen = ({ navigation }) => {
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Image
               source={{
-                uri: `${el.imageUrl}`,
+                uri: `https://xsgames.co/randomusers/avatar.php?g=male`,
               }}
               style={styles.trainerImage}
             />
-            <Text>{el.name}</Text>
+            <Text style={{
+              fontSize: 18,
+              fontWeight: "bold",
+              color: "#fff",
+            }}>{el.name}</Text>
           </View>
 
           {/* INI KETGORINYA */}
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Image
+            {/* <Image
               source={{
                 uri: "https://www.kindpng.com/picc/m/244-2443827_transparent-sports-icon-png-soccer-app-icon-png.png",
               }}
               style={styles.trainerImage}
-            />
-            <Text>{el.sport}</Text>
+            /> */}
+            <View>
+
+            <Text style={{
+              fontSize: 18,
+              fontWeight: "bold",
+              color: "#fff",
+            }}>{el.sport}</Text>
+             <Text style={{
+              fontSize: 18,
+              fontWeight: "bold",
+              color: "#fff",
+            }}>Duration: 7 Day</Text>
+            </View>
+
           </View>
         </View>
       ))}
@@ -135,9 +152,8 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   containerStatus: {
-    backgroundColor: "#fff",
-    marginTop: 50,
-    marginBottom: 70,
+    backgroundColor: "#20488f",
+    marginVertical: 5,
     paddingVertical: 20,
     marginHorizontal: 10,
     borderRadius: 10,
@@ -147,7 +163,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 10,
-    gap: 10,
+    // gap: 10,
   },
   logout: {
     alignSelf: "flex-end",

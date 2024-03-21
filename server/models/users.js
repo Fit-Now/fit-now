@@ -18,8 +18,8 @@ const findAllUser = async () => {
 const addUser = async (payload) => {
   payload.password = hashPassword(payload.password);
   payload.role = "Trainee";
-  payload.imageUrl =
-    "https://static.vecteezy.com/system/resources/thumbnails/020/911/740/small/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png";
+  // payload.imageUrl =
+  //   "https://static.vecteezy.com/system/resources/thumbnails/020/911/740/small/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png";
 
   const userCollection = await getCollection();
   const newUsers = await userCollection.insertOne(payload);

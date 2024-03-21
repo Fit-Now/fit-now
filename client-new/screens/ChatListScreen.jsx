@@ -47,7 +47,7 @@ const ChatListScreen = ({ navigation }) => {
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Image
                   source={{
-                    uri: `${el.imageUrl}`,
+                    uri: `https://xsgames.co/randomusers/avatar.php?g=male`,
                   }}
                   style={styles.trainerImage}
                 />
@@ -109,9 +109,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
     height,
+    borderRadius: 10,
   },
   containerStatus: {
-    backgroundColor: "#fff",
+    backgroundColor: "#20488f",
     paddingVertical: 20,
     marginHorizontal: 10,
     borderRadius: 2,
@@ -121,6 +122,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 10,
+    borderRadius: 10,
   },
   trainerImage: {
     width: 60,
@@ -139,5 +141,6 @@ const styles = StyleSheet.create({
   textName: {
     fontSize: 18,
     fontWeight: "bold",
+    color: "#fff",
   },
 });

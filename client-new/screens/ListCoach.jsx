@@ -45,7 +45,7 @@ const ListCoach = ({ navigation, route }) => {
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Image
                   source={{
-                    uri: "https://cdn-icons-png.flaticon.com/512/2919/2919906.png",
+                    uri: `https://source.unsplash.com/100x100/?portrait`,
                   }}
                   style={styles.trainerImage}
                 />
