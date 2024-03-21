@@ -2,7 +2,6 @@ import { Dimensions, Image, Pressable, Text, View } from "react-native";
 
 
 export default function PlaceItem({ place, navigation }) {
-  console.log(place);
 
   return (
     <View style={{ width: Dimensions.get('screen').width * 0.9, backgroundColor: 'white', margin: 5, borderRadius: 10 }}>

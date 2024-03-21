@@ -25,13 +25,12 @@ const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [selectedId, setSelectedId] = useState("");
   const [registerDispatcher, { data, error, loading }] = useMutation(REGISTER, {
     onCompleted: (item) => {
       navigation.navigate("Login");
     },
   });
-  // INI DAPETIN VALUENYA ROLE
-  const [selectedId, setSelectedId] = useState();
 
   // INI DAPETIN AVATAR
   const [avatar, setAvatar] = useState(
@@ -47,6 +46,7 @@ const RegisterScreen = ({ navigation }) => {
             email,
             password,
             imageUrl: avatar,
+            status: selectedId,
           },
         },
       });
@@ -55,11 +55,11 @@ const RegisterScreen = ({ navigation }) => {
     }
   };
 
-  // const handleRole = (id) => {
-  //   // dapetin valuenya dari id di radiobutton
-  //   setSelectedId(id);
-  //   // console.log(selectedId, "<< di register");
-  // };
+  const handleRole = (id) => {
+    // dapetin valuenya dari id di radiobutton
+    setSelectedId(id);
+    // console.log(selectedId, "<< di register");
+  };
 
   const handleShowAvatar = () => {
     setShowModalAvatar(!showModalAvatar);
@@ -116,7 +116,7 @@ const RegisterScreen = ({ navigation }) => {
             onChangeText={setPassword}
           />
           {/* <TextInput style={styles.inputLabel} placeholder="Status" /> */}
-          {/* <RadioButton /> */}
+          <RadioButton handleRole={handleRole} selectedId={selectedId} />
         </View>
 
         <TouchableOpacity

@@ -18,9 +18,9 @@ import { GET_ALL_CATEGORY } from "../queries";
 
 const { width, height } = Dimensions.get("screen");
 const HomeScreen = ({ navigation }) => {
-  const {data, error, loading} = useQuery(GET_ALL_CATEGORY,{
-    fetchPolicy: "no-cache"
-  })
+  const { data, error, loading } = useQuery(GET_ALL_CATEGORY, {
+    fetchPolicy: "no-cache",
+  });
   const [showModal, setShowModal] = useState(false);
 
   const handleShowModal = () => {
@@ -28,7 +28,7 @@ const HomeScreen = ({ navigation }) => {
   };
 
   const categories = data?.getAllCategory;
-  const event = [1,2,3]
+  const event = [1, 2, 3];
   return (
     <SafeAreaView style={styles.container}>
       <Carousel />
@@ -43,7 +43,7 @@ const HomeScreen = ({ navigation }) => {
 
       <Text style={styles.textSubTitle}>Sports Category</Text>
       <View style={styles.categoryContainer}>
-        {categories?.slice(0,3).map((el, idx) => {
+        {categories?.slice(0, 3).map((el, idx) => {
           return (
             <Pressable
               key={idx}
@@ -82,7 +82,13 @@ const HomeScreen = ({ navigation }) => {
           <Text style={{ alignSelf: "center" }}>See All</Text>
         </Pressable>
       </View>
-      {showModal && <ModalCategory handleShowModal={handleShowModal} categories={categories} navigation={navigation} />}
+      {showModal && (
+        <ModalCategory
+          handleShowModal={handleShowModal}
+          categories={categories}
+          navigation={navigation}
+        />
+      )}
 
       <Text style={styles.textSubTitle}>Events</Text>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -161,8 +167,8 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   seeAllIcon: {
-    width: 70,
-    height: 70,
+    width: 80,
+    height: 80,
     borderRadius: 50,
     marginBottom: 5,
   },
@@ -191,6 +197,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginLeft: 10,
     marginBottom: 20,
-    marginTop: 45,
+    marginTop: 35,
   },
 });
