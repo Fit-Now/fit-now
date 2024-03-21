@@ -145,7 +145,7 @@ const getProfileOneCoach = async (id) => {
       }
     }, {
       '$lookup': {
-        'from': 'Users', 
+        'from': 'Coachs', 
         'localField': 'email', 
         'foreignField': 'email', 
         'as': 'coachUser'
@@ -169,16 +169,15 @@ const getProfileOneCoach = async (id) => {
         'foreignField': '_id', 
         'as': 'UsersJoin'
       }
-    },
-    {
+    }, {
       $match :  {
-        'coachUser._id': new ObjectId(id)
+        '_id': new ObjectId(id)
       }
     }
-  ];
+  ]
   
   const users = await getCollection().aggregate(agg).toArray();
-  console.log(users.UserSchedules);
+  console.log(users);
   return users[0]
 };
 

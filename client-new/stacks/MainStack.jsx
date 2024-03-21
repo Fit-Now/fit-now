@@ -17,7 +17,7 @@ const Stack = createNativeStackNavigator();
 import * as SecureStore from "expo-secure-store";
 
 const MainStack = () => {
-  const { isLoggedIn, setIsLoggedIn, setUser, setRole, role } = useContext(LoginContext);
+  const { isLoggedIn, setIsLoggedIn, setUser, setRole, role, user } = useContext(LoginContext);
   (async () => {
       const access_token = await SecureStore.getItemAsync("access_token");
       const userId = await SecureStore.getItemAsync("user_id");
@@ -26,7 +26,7 @@ const MainStack = () => {
       if(userId) setUser(userId)
       if(role) setRole(role)
   })();
-console.log(role)
+console.log(user, "ini user")
   return (
     <NavigationContainer>
       <Stack.Navigator>

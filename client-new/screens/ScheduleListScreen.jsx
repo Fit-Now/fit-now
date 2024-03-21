@@ -25,6 +25,7 @@ const ScheduleListScreen = ({ navigation, route }) => {
   }, {
     fetchPolicy: "no-cache"
   })
+  console.log(coachId, 'ini coach id');
   console.log(error);
   console.log(data?.getCoachById.usersCoach._id);
   const dummy = [1, 1, 1];

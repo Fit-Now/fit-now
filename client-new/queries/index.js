@@ -17,6 +17,7 @@ export const REGISTER = gql`
       name
       imageUrl
       email
+      status
       password
       role
       Coach {
@@ -28,12 +29,48 @@ export const REGISTER = gql`
           name
           imageUrl
           email
+          status
           password
           role
         }
         locationId
         email
-        imgUrl
+        imageUrl
+        usersCoach {
+          _id
+          name
+          imageUrl
+          email
+          status
+          password
+          role
+        }
+        Schedule {
+          _id
+          sport
+          duration
+          decription
+        }
+      }
+      Schedules {
+        _id
+        sport
+        duration
+        decription
+        Coachs {
+          _id
+          name
+          sport
+          locationId
+          email
+          imageUrl
+        }
+        Category {
+          _id
+          name
+          logo
+          marker
+        }
       }
     }
   }

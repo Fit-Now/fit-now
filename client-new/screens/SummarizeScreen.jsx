@@ -14,22 +14,43 @@ import { LoginContext } from "../contexts/LoginContext";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../connection/fireBaseConfig";
 import { useMutation } from "@apollo/client";
-import { ADD_USER_SCHEDULE } from "../queries";
+import {
+  ADD_USER_SCHEDULE,
+  GET_PROFILE_COACH,
+  GET_PROFILE_USER,
+} from "../queries";
 
 const { width, height } = Dimensions.get("screen");
 const SummarizeScreen = ({ route, navigation }) => {
-  const [userScheduleDispatcher, { data, error, loading }] = useMutation(ADD_USER_SCHEDULE)
+  const [userScheduleDispatcher, { data, error, loading }] = useMutation(
+    ADD_USER_SCHEDULE,
+    {
+      refetchQueries: [GET_PROFILE_USER],
+      fetchPolicy: "no-cache",
+    }
+  );
   const { user } = useContext(LoginContext);
-  const { week, category, schedule, chatCoachId, duration, coachId, scheduleId, locationId, categoryId } = route.params;
+  console.log(user, "ini user di summarize screen");
+  const {
+    week,
+    category,
+    schedule,
+    chatCoachId,
+    duration,
+    coachId,
+    scheduleId,
+    locationId,
+    categoryId,
+  } = route.params;
   const [summary, setSummary] = useState("");
   const [showModalEnd, setShowModalEnd] = useState(false);
   const [seeMore, setSeeMore] = useState(false);
 
-  let iniText = '';
+  let iniText = "";
   const dataText = schedule.map((txt, idx) => {
-    let num = idx + 1
-    iniText += JSON.stringify(num + '. ' + txt) + `\n` + `\n`
-  })
+    let num = idx + 1;
+    iniText += JSON.stringify(num + ". " + txt) + `\n` + `\n`;
+  });
   // console.log(iniText);
   const handleJoin = async () => {
     //check whether the group(chats in firestore) exists, if not create
@@ -41,12 +62,10 @@ const SummarizeScreen = ({ route, navigation }) => {
         //create a chat in chats collection
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
       }
-    } catch (err) { }
+    } catch (err) {}
   };
   const handleNavigateToChat = async () => {
-    console.log("ini handleNavgiation to chat di summarize screen");
-    handleJoin();
-    const combinedId = user + coachId;
+    await handleJoin();
 
     await userScheduleDispatcher({
       variables: {
@@ -56,20 +75,22 @@ const SummarizeScreen = ({ route, navigation }) => {
           ScheduleId: scheduleId,
           LocationId: locationId,
           CategoryId: categoryId,
-        }
-      }
-    })
+        },
+      },
+    });
     // navigation.reset({
     //   index: 0,
     //   routes: [{ name: "HomeScreen" }],
     // });
-    navigation.navigate("HomeScreen");
-    navigation.navigate("ChatRoom", {
-      couchId: chatCoachId,
-    });
-    setShowModalEnd(false);
+    setTimeout(() => {
+      navigation.navigate("HomeScreen");
+      navigation.navigate("ChatRoom", {
+        couchId: chatCoachId,
+      });
+      setShowModalEnd(false);
+    }, 100);
   };
-  const handleNavigateToHome =async () => {
+  const handleNavigateToHome = async () => {
     await userScheduleDispatcher({
       variables: {
         payload: {
@@ -78,9 +99,9 @@ const SummarizeScreen = ({ route, navigation }) => {
           ScheduleId: scheduleId,
           LocationId: locationId,
           CategoryId: categoryId,
-        }
-      }
-    })
+        },
+      },
+    });
     navigation.navigate("HomeScreen");
   };
 

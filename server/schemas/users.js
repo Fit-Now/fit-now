@@ -54,6 +54,7 @@ input RegisterInput {
   email: String!
   password: String!
   imageUrl: String
+  status: String
 }
 
 type LoginOutput {
@@ -118,6 +119,7 @@ const resolvers = {
       const {role, userId} = await contextValue.auth();
       console.log(userId);
       const user = await getProfileOneCoach(userId);
+      console.log(user);
       return user
     }
   },
