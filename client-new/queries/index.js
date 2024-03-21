@@ -64,7 +64,22 @@ export const GET_PROFILE_USER = gql`
         }
         locationId
         email
-        imgUrl
+        imageUrl
+      }
+      Schedules {
+        _id
+        sport
+        duration
+        decription
+        Coachs {
+          _id
+          name
+          sport
+          locationId
+          email
+          imageUrl
+        }
+        CategoryId
       }
     }
   }

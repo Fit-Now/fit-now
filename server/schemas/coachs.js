@@ -10,8 +10,7 @@ type Coach {
     Users: [User]
     locationId: ID
     email: String
-    imgUrl: String
-
+    imageUrl: String
 }
 
 input AddNewCoach {
@@ -19,6 +18,7 @@ input AddNewCoach {
     sport: String
     email: String
     locationId: ID
+    imageUrl: String
 }
 
 type Query {

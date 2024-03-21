@@ -19,11 +19,12 @@ import { useQuery } from "@apollo/client";
 
 const { height } = Dimensions.get("screen");
 const ProfileScreen = ({ navigation }) => {
-  const {data, error, loading} = useQuery(GET_PROFILE_USER, {
+  const { data, error, loading } = useQuery(GET_PROFILE_USER, {
     fetchPolicy: "no-cache",
-  })
+  });
   const { setIsLoggedIn } = useContext(LoginContext);
   let user = data?.getUserById;
+  console.log(user?.Coach[0]?.imageUrl);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.profileContainer}>
@@ -38,12 +39,12 @@ const ProfileScreen = ({ navigation }) => {
             navigation.navigate("Login");
           }}
         >
-            <MaterialIcons
-              name="logout"
-              size={30}
-              color="black"
-              style={{ alignSelf: "flex-end", color: "#fff", padding: 10 }}
-            />
+          <MaterialIcons
+            name="logout"
+            size={30}
+            color="black"
+            style={{ alignSelf: "flex-end", color: "#fff", padding: 10 }}
+          />
         </TouchableOpacity>
         <Image
           source={{
@@ -57,30 +58,31 @@ const ProfileScreen = ({ navigation }) => {
         </View>
       </View>
       <Text></Text>
+      {user?.Coach.map((el, idx) => (
+        <View key={el._id} style={styles.containerStatus}>
+          {/*  INI PUNYA TRAINER NYA */}
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Image
+              source={{
+                uri: `${el.imageUrl}`,
+              }}
+              style={styles.trainerImage}
+            />
+            <Text>{el.name}</Text>
+          </View>
 
-      <View style={styles.containerStatus}>
-        {/*  INI PUNYA TRAINER NYA */}
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Image
-            source={{
-              uri: "https://cdn-icons-png.flaticon.com/512/2919/2919906.png",
-            }}
-            style={styles.trainerImage}
-          />
-          <Text>{formatCapital("Trainer ganteng")}</Text>
+          {/* INI KETGORINYA */}
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Image
+              source={{
+                uri: "https://www.kindpng.com/picc/m/244-2443827_transparent-sports-icon-png-soccer-app-icon-png.png",
+              }}
+              style={styles.trainerImage}
+            />
+            <Text>{el.sport}</Text>
+          </View>
         </View>
-
-        {/* INI KETGORINYA */}
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Image
-            source={{
-              uri: "https://www.kindpng.com/picc/m/244-2443827_transparent-sports-icon-png-soccer-app-icon-png.png",
-            }}
-            style={styles.trainerImage}
-          />
-          <Text>{formatCapital("Tennis")}</Text>
-        </View>
-      </View>
+      ))}
     </SafeAreaView>
   );
 };

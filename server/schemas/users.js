@@ -31,7 +31,6 @@ type UserCoach {
     email: String!
     password: String
     role: String
-
     Description: Coach
 }
 
@@ -39,7 +38,6 @@ input RegisterInput {
   name: String!
   email: String!
   password: String!
-
   imageUrl: String
 }
 
