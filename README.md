@@ -38,7 +38,7 @@ Are you passionate about sports and looking for a convenient way to find coaches
 5. **Start Development Server:** Run the following command to start the development server:
 
    ```bash
-   nodemon app.js
+   npx nodemon app.js
    ```
 
 6. **Navigate to Client Directory:** Move into the client directory:
