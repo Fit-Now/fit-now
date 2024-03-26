@@ -1,4 +1,4 @@
-#FitNow: find coaches and places to practice the desired sport
+# FitNow: find coaches and places to practice the desired sport
 
 Are you passionate about sports and looking for a convenient way to find coaches and places to practice? Look no further than FixNow, the all-in-one sports coaching and practice app designed to enhance your athletic journey.
 
