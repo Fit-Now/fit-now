@@ -1,7 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 const API_KEY =
-  process.env.API_KEY_GOOGLE_AISTUDIO ||
-  "AIzaSyDXLgQbRGShwrTTPkk5-iZmxamCkptBUX8";
+  process.env.EXPO_PUBLIC_API_KEY_GOOGLE_AISTUDIO
 
 const summaryAi = async (category, month) => {
   const genAI = new GoogleGenerativeAI(API_KEY);
