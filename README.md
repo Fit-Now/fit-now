@@ -64,3 +64,5 @@ Are you passionate about sports and looking for a convenient way to find coaches
 10. **Run The App:** Run the app using Expo Go.
 
 Now your application should be running.
+
+![FitNow](asset/fitnow.gif)
